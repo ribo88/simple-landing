@@ -3,241 +3,761 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>후일담 - 실패를 줄이는 지도 리뷰 플랫폼</title>
-
+<title>필터링 리뷰 플랫폼</title>
 <style>
+:root{
+    --bg:#f4f8ff;
+    --surface:#ffffff;
+    --surface-muted:#f7faff;
+    --line:#dbe7ff;
+    --line-strong:#bfd4ff;
+    --text:#111827;
+    --muted:#5b6475;
+    --blue:#3182f6;
+    --blue-deep:#1b64da;
+    --shadow:0 30px 80px rgba(49, 130, 246, 0.12);
+    --shadow-soft:0 18px 40px rgba(17, 24, 39, 0.06);
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
 
 body{
     margin:0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    color:#222;
+    font-family:"Pretendard","Noto Sans KR","Segoe UI",sans-serif;
+    color:var(--text);
     line-height:1.6;
+    background:
+        radial-gradient(circle at top left, rgba(99, 167, 255, 0.26), transparent 28%),
+        radial-gradient(circle at top right, rgba(175, 214, 255, 0.48), transparent 24%),
+        linear-gradient(180deg, #f9fbff 0%, var(--bg) 44%, #eef4ff 100%);
 }
 
-header{
-    background:linear-gradient(135deg,#ff5f6d,#ffc371);
-    color:white;
-    text-align:center;
-    padding:120px 20px;
+a{
+    color:inherit;
 }
 
-header h1{
-    font-size:48px;
-    margin-bottom:20px;
+.page{
+    overflow:hidden;
 }
 
-header p{
-    font-size:20px;
-    opacity:0.9;
+.container{
+    width:min(1120px, calc(100% - 40px));
+    margin:0 auto;
+}
+
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:10;
+    backdrop-filter:blur(16px);
+    background:rgba(249, 251, 255, 0.82);
+    border-bottom:1px solid rgba(191, 212, 255, 0.45);
+}
+
+.topbar-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    min-height:72px;
+    gap:20px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-weight:800;
+    letter-spacing:-0.04em;
+}
+
+.brand-mark{
+    width:38px;
+    height:38px;
+    border-radius:14px;
+    display:grid;
+    place-items:center;
+    color:#fff;
+    background:linear-gradient(135deg, var(--blue), #6db4ff);
+    box-shadow:0 12px 30px rgba(49, 130, 246, 0.28);
+}
+
+.topbar nav{
+    display:flex;
+    gap:24px;
+    color:var(--muted);
+    font-size:15px;
+}
+
+.topbar nav a{
+    text-decoration:none;
 }
 
 .btn{
-    display:inline-block;
-    margin-top:30px;
-    padding:14px 28px;
-    background:white;
-    color:#ff5f6d;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    min-height:52px;
+    padding:0 22px;
+    border:none;
+    border-radius:18px;
+    font-weight:700;
     text-decoration:none;
-    border-radius:8px;
-    font-weight:bold;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
 
-section{
-    padding:80px 20px;
-    max-width:1000px;
-    margin:auto;
+.btn-primary{
+    color:#fff;
+    background:linear-gradient(135deg, var(--blue-deep), var(--blue));
+    box-shadow:0 18px 40px rgba(49, 130, 246, 0.28);
 }
 
-h2{
-    font-size:32px;
-    margin-bottom:20px;
+.btn-secondary{
+    color:var(--text);
+    background:rgba(255,255,255,0.82);
+    border:1px solid rgba(191, 212, 255, 0.72);
+    box-shadow:var(--shadow-soft);
 }
 
-.grid{
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.hero{
+    padding:52px 0 120px;
+}
+
+.hero-shell{
+    position:relative;
+    border-radius:40px;
+    padding:44px;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,0.92), rgba(244, 248, 255, 0.88));
+    border:1px solid rgba(191, 212, 255, 0.56);
+    box-shadow:var(--shadow);
+}
+
+.hero-shell::before{
+    content:"";
+    position:absolute;
+    inset:auto -120px -140px auto;
+    width:320px;
+    height:320px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(73, 164, 255, 0.26), transparent 70%);
+    pointer-events:none;
+}
+
+.hero-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:30px;
-    margin-top:30px;
+    grid-template-columns:minmax(0, 1.15fr) minmax(320px, 420px);
+    gap:36px;
+    align-items:center;
 }
 
-.card{
-    background:#f7f7f7;
-    padding:25px;
-    border-radius:10px;
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 14px;
+    border-radius:999px;
+    font-size:14px;
+    font-weight:700;
+    color:var(--blue-deep);
+    background:#eaf3ff;
+    border:1px solid #cfe1ff;
 }
 
-.highlight{
-    background:#fff3f4;
+.hero h1{
+    margin:18px 0 18px;
+    font-size:clamp(42px, 7vw, 72px);
+    line-height:1.08;
+    letter-spacing:-0.06em;
 }
 
-footer{
-    text-align:center;
-    padding:40px;
-    background:#f5f5f5;
+.hero .lead{
+    max-width:620px;
+    margin:0 0 32px;
+    font-size:20px;
+    line-height:1.7;
+    color:var(--muted);
+    letter-spacing:-0.02em;
+}
+
+.hero-actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-bottom:26px;
+}
+
+.hero-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.hero-meta span{
+    display:inline-flex;
+    align-items:center;
+    min-height:40px;
+    padding:0 14px;
+    border-radius:999px;
+    background:rgba(255,255,255,0.86);
+    border:1px solid rgba(191, 212, 255, 0.76);
+    color:var(--muted);
+    font-size:14px;
+    font-weight:600;
+}
+
+.dashboard{
+    position:relative;
+    display:grid;
+    gap:16px;
+}
+
+.panel{
+    border-radius:28px;
+    background:rgba(255,255,255,0.94);
+    border:1px solid rgba(191, 212, 255, 0.7);
+    box-shadow:var(--shadow-soft);
+}
+
+.dashboard-main{
+    padding:28px;
+}
+
+.panel-label{
+    display:inline-flex;
+    align-items:center;
+    min-height:30px;
+    padding:0 10px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:0.02em;
+    color:var(--blue-deep);
+    background:#edf5ff;
+}
+
+.score{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:16px;
+    margin-top:18px;
+}
+
+.score strong{
+    display:block;
+    font-size:54px;
+    line-height:1;
+    letter-spacing:-0.06em;
+}
+
+.score p{
+    margin:8px 0 0;
+    color:var(--muted);
     font-size:14px;
 }
 
+.bars{
+    margin-top:22px;
+    display:grid;
+    gap:12px;
+}
+
+.bar-row{
+    display:grid;
+    grid-template-columns:92px 1fr 46px;
+    align-items:center;
+    gap:12px;
+    font-size:14px;
+    color:var(--muted);
+}
+
+.bar{
+    height:10px;
+    border-radius:999px;
+    background:#e9f1ff;
+    overflow:hidden;
+}
+
+.bar-fill{
+    height:100%;
+    border-radius:999px;
+    background:linear-gradient(90deg, var(--blue), #7db9ff);
+}
+
+.dashboard-sub{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.mini-card{
+    padding:22px;
+}
+
+.mini-card strong{
+    display:block;
+    margin-top:14px;
+    font-size:24px;
+    letter-spacing:-0.04em;
+}
+
+.mini-card p{
+    margin:8px 0 0;
+    color:var(--muted);
+    font-size:14px;
+}
+
+.section{
+    padding:56px 0;
+}
+
+.section-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:24px;
+    margin-bottom:28px;
+}
+
+.section-head h2{
+    margin:0 0 10px;
+    font-size:clamp(30px, 4vw, 48px);
+    line-height:1.14;
+    letter-spacing:-0.05em;
+}
+
+.section-head p{
+    max-width:520px;
+    margin:0;
+    color:var(--muted);
+    font-size:18px;
+}
+
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:20px;
+}
+
+.feature-card{
+    padding:30px;
+}
+
+.feature-card strong{
+    display:block;
+    margin:18px 0 12px;
+    font-size:24px;
+    letter-spacing:-0.04em;
+}
+
+.feature-card p{
+    margin:0;
+    color:var(--muted);
+}
+
+.icon-chip{
+    width:52px;
+    height:52px;
+    border-radius:18px;
+    display:grid;
+    place-items:center;
+    color:var(--blue-deep);
+    background:linear-gradient(180deg, #edf5ff, #dfeeff);
+    font-weight:800;
+}
+
+.split{
+    display:grid;
+    grid-template-columns:minmax(0, 0.88fr) minmax(0, 1.12fr);
+    gap:24px;
+    align-items:stretch;
+}
+
+.story-card{
+    padding:34px;
+}
+
+.story-card h3{
+    margin:14px 0 10px;
+    font-size:30px;
+    line-height:1.2;
+    letter-spacing:-0.05em;
+}
+
+.story-card p{
+    margin:0;
+    color:var(--muted);
+}
+
+.stack{
+    display:grid;
+    gap:16px;
+}
+
+.detail-card{
+    padding:24px 26px;
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+}
+
+.detail-card strong{
+    display:block;
+    margin-bottom:6px;
+    font-size:20px;
+    letter-spacing:-0.03em;
+}
+
+.detail-card p{
+    margin:0;
+    color:var(--muted);
+}
+
+.cta{
+    padding:72px 0 120px;
+}
+
+.cta-shell{
+    position:relative;
+    padding:42px;
+    border-radius:36px;
+    color:#fff;
+    background:
+        linear-gradient(135deg, #0f4fbf 0%, #1b64da 48%, #4b9dff 100%);
+    box-shadow:0 30px 70px rgba(27, 100, 218, 0.3);
+}
+
+.cta-shell::after{
+    content:"";
+    position:absolute;
+    inset:auto 40px -50px auto;
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,0.28), transparent 72%);
+}
+
+.cta-shell h2{
+    margin:0 0 12px;
+    font-size:clamp(32px, 4vw, 52px);
+    line-height:1.12;
+    letter-spacing:-0.05em;
+}
+
+.cta-shell p{
+    max-width:620px;
+    margin:0 0 24px;
+    color:rgba(255,255,255,0.84);
+    font-size:18px;
+}
+
+.cta-shell .btn-primary{
+    background:#fff;
+    color:#1357ca;
+    box-shadow:none;
+}
+
+.footer{
+    padding:0 0 56px;
+}
+
+.footer-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    color:#6b7280;
+    font-size:14px;
+}
+
+@media (max-width: 960px){
+    .topbar nav{
+        display:none;
+    }
+
+    .hero-grid,
+    .split,
+    .feature-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section-head{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+}
+
+@media (max-width: 640px){
+    .container{
+        width:min(100% - 24px, 1120px);
+    }
+
+    .hero{
+        padding:28px 0 88px;
+    }
+
+    .hero-shell,
+    .cta-shell{
+        padding:28px;
+        border-radius:28px;
+    }
+
+    .topbar-inner{
+        min-height:64px;
+    }
+
+    .score{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .bar-row{
+        grid-template-columns:78px 1fr 38px;
+        gap:10px;
+        font-size:13px;
+    }
+
+    .dashboard-sub{
+        grid-template-columns:1fr;
+    }
+
+    .feature-card,
+    .story-card,
+    .detail-card,
+    .dashboard-main,
+    .mini-card{
+        padding:22px;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+}
 </style>
 </head>
-
 <body>
+<div class="page">
+    <header class="topbar">
+        <div class="container topbar-inner">
+            <div class="brand">
+                <div class="brand-mark">F</div>
+                <span>Filter Review</span>
+            </div>
+            <nav>
+                <a href="#problem">문제</a>
+                <a href="#solution">해결</a>
+                <a href="#features">기능</a>
+                <a href="#cta">사전 신청</a>
+            </nav>
+            <a class="btn btn-secondary" href="#cta">출시 알림 받기</a>
+        </div>
+    </header>
 
-<header>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-shell">
+                    <div class="hero-grid">
+                        <div>
+                            <span class="eyebrow">광고 말고, 실제 경험만 보세요</span>
+                            <h1>방문 전에<br>실패를 줄여주는<br>리뷰 탐색 경험</h1>
+                            <p class="lead">
+                                Filter Review는 광고성 후기보다 실제 불만과 솔직한 경험을 먼저 보여줘서,
+                                식당과 공간을 고를 때 더 빠르게 판단할 수 있게 돕는 리뷰 플랫폼입니다.
+                            </p>
+                            <div class="hero-actions">
+                                <a class="btn btn-primary" href="#cta">출시 알림 받기</a>
+                                <a class="btn btn-secondary" href="#features">핵심 기능 보기</a>
+                            </div>
+                            <div class="hero-meta">
+                                <span>실패 확률이 높은 포인트 먼저 확인</span>
+                                <span>불만 카테고리 중심 탐색</span>
+                                <span>검증된 리뷰만 우선 노출</span>
+                            </div>
+                        </div>
 
-<h1>후일담</h1>
+                        <div class="dashboard">
+                            <div class="panel dashboard-main">
+                                <span class="panel-label">REVIEW SNAPSHOT</span>
+                                <div class="score">
+                                    <div>
+                                        <strong>2.1</strong>
+                                        <p>광고성 리뷰 제외 후 체감 만족도</p>
+                                    </div>
+                                    <div>
+                                        <strong>68%</strong>
+                                        <p>대기, 응대, 위생 관련 불만 비중</p>
+                                    </div>
+                                </div>
+                                <div class="bars">
+                                    <div class="bar-row">
+                                        <span>응대</span>
+                                        <div class="bar"><div class="bar-fill" style="width:72%"></div></div>
+                                        <span>72%</span>
+                                    </div>
+                                    <div class="bar-row">
+                                        <span>대기</span>
+                                        <div class="bar"><div class="bar-fill" style="width:54%"></div></div>
+                                        <span>54%</span>
+                                    </div>
+                                    <div class="bar-row">
+                                        <span>위생</span>
+                                        <div class="bar"><div class="bar-fill" style="width:36%"></div></div>
+                                        <span>36%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-sub">
+                                <div class="panel mini-card">
+                                    <span class="panel-label">FILTER</span>
+                                    <strong>부정 리뷰 우선</strong>
+                                    <p>칭찬보다 불만을 먼저 보면 방문 실패를 줄이기 쉽습니다.</p>
+                                </div>
+                                <div class="panel mini-card">
+                                    <span class="panel-label">VERIFY</span>
+                                    <strong>리뷰 신뢰도 점검</strong>
+                                    <p>계정 이력과 패턴을 기준으로 의심 리뷰를 덜어냅니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<p>실패를 줄이는 지도 리뷰 플랫폼</p>
+        <section class="section" id="problem">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <span class="eyebrow">Problem</span>
+                        <h2>리뷰는 많은데,<br>판단은 더 어려워졌습니다</h2>
+                    </div>
+                    <p>
+                        높은 평점과 많은 후기만으로는 실제 방문 경험을 예상하기 어렵습니다.
+                        중요한 건 평균 점수보다 어떤 이유로 실망했는지입니다.
+                    </p>
+                </div>
+                <div class="feature-grid">
+                    <article class="panel feature-card">
+                        <div class="icon-chip">01</div>
+                        <strong>광고성 후기 과다</strong>
+                        <p>겉으로는 좋아 보이지만 실제 체감과 다른 리뷰가 섞여 있어 판단을 흐립니다.</p>
+                    </article>
+                    <article class="panel feature-card">
+                        <div class="icon-chip">02</div>
+                        <strong>불만 정보 부족</strong>
+                        <p>사용자는 실패를 피하고 싶지만, 기존 플랫폼은 부정 경험을 깊게 보여주지 않습니다.</p>
+                    </article>
+                    <article class="panel feature-card">
+                        <div class="icon-chip">03</div>
+                        <strong>탐색 시간이 김</strong>
+                        <p>수많은 리뷰를 직접 읽고 걸러야 해서 결정까지 불필요한 시간이 오래 걸립니다.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-<p>
-광고 리뷰 대신  
-<strong>실제 불만 경험</strong>을 기반으로  
-방문 실패를 줄여주는 서비스
-</p>
+        <section class="section" id="solution">
+            <div class="container">
+                <div class="split">
+                    <article class="panel story-card">
+                        <span class="eyebrow">Solution</span>
+                        <h3>좋은 말보다<br>문제가 된 경험을 먼저 보여줍니다</h3>
+                        <p>
+                            Filter Review는 방문 전에 알아야 할 핵심 불만을 우선 정리합니다.
+                            사용자는 한눈에 위험 요소를 파악하고, 매장은 반복되는 문제를 빠르게 읽을 수 있습니다.
+                        </p>
+                    </article>
+                    <div class="stack">
+                        <article class="panel detail-card">
+                            <div class="icon-chip">A</div>
+                            <div>
+                                <strong>리뷰 신뢰도 필터링</strong>
+                                <p>계정 이력, 작성 패턴, 유사 문장 분석으로 의심 리뷰를 우선 걸러냅니다.</p>
+                            </div>
+                        </article>
+                        <article class="panel detail-card">
+                            <div class="icon-chip">B</div>
+                            <div>
+                                <strong>부정 경험 자동 분류</strong>
+                                <p>응대, 대기, 위생, 가격, 소음처럼 실제 불만 포인트를 카테고리로 정리합니다.</p>
+                            </div>
+                        </article>
+                        <article class="panel detail-card">
+                            <div class="icon-chip">C</div>
+                            <div>
+                                <strong>결정에 필요한 정보만 압축</strong>
+                                <p>길게 읽지 않아도 방문 전에 확인해야 할 위험 신호를 빠르게 파악할 수 있습니다.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<a class="btn" href="#">앱 출시 알림 받기</a>
+        <section class="section" id="features">
+            <div class="container">
+                <div class="section-head">
+                    <div>
+                        <span class="eyebrow">Features</span>
+                        <h2>단순 검색이 아니라,<br>판단을 돕는 인터페이스</h2>
+                    </div>
+                    <p>
+                        사용자는 무엇이 문제였는지 빠르게 읽고, 매장은 어디서 신뢰를 잃는지 명확하게 볼 수 있습니다.
+                    </p>
+                </div>
+                <div class="feature-grid">
+                    <article class="panel feature-card">
+                        <div class="icon-chip">01</div>
+                        <strong>부정 리뷰 우선 보기</strong>
+                        <p>좋은 후기보다 먼저 실망 포인트를 노출해 실제 결정 흐름에 맞는 탐색을 제공합니다.</p>
+                    </article>
+                    <article class="panel feature-card">
+                        <div class="icon-chip">02</div>
+                        <strong>문제 카테고리별 탐색</strong>
+                        <p>응대, 맛, 가격, 위생, 대기 같은 주제 중심으로 리뷰를 묶어 비교할 수 있습니다.</p>
+                    </article>
+                    <article class="panel feature-card">
+                        <div class="icon-chip">03</div>
+                        <strong>매장 인사이트 요약</strong>
+                        <p>반복되는 불만 패턴을 요약해서 운영자가 개선 포인트를 바로 확인할 수 있습니다.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-</header>
+        <section class="cta" id="cta">
+            <div class="container">
+                <div class="cta-shell">
+                    <span class="eyebrow" style="background:rgba(255,255,255,0.16); border-color:rgba(255,255,255,0.22); color:#fff;">Early Access</span>
+                    <h2>광고를 거르고,<br>실패를 줄이는 리뷰 탐색을 시작하세요</h2>
+                    <p>
+                        첫 출시 알림을 신청하면 베타 오픈 소식과 초기 사용자 전용 기능 안내를 가장 먼저 받아볼 수 있습니다.
+                    </p>
+                    <a class="btn btn-primary" href="#">사전 신청하기</a>
+                </div>
+            </div>
+        </section>
+    </main>
 
-
-<section>
-
-<h2>문제</h2>
-
-<p>
-현재 지도 리뷰 플랫폼은 광고와 홍보성 후기 때문에
-실제 방문 경험을 파악하기 어렵습니다.
-</p>
-
-<div class="grid">
-
-<div class="card">
-<h3>광고 리뷰 증가</h3>
-<p>검색 광고 확대로 실제 이용자 리뷰의 신뢰도가 낮아짐</p>
+    <footer class="footer">
+        <div class="container footer-inner">
+            <div>Filter Review</div>
+            <div>실패를 줄여주는 리뷰 탐색 플랫폼</div>
+        </div>
+    </footer>
 </div>
-
-<div class="card">
-<h3>신뢰도 문제</h3>
-<p>많은 리뷰가 있어도 실제 의사결정에 활용하기 어려움</p>
-</div>
-
-<div class="card">
-<h3>필터 기능 부족</h3>
-<p>부정적인 리뷰만 선별해서 탐색하기 어려움</p>
-</div>
-
-</div>
-
-</section>
-
-
-<section class="highlight">
-
-<h2>해결 방법</h2>
-
-<p>
-후일담은 <strong>부정적 경험 리뷰만 구조화하여 제공</strong>합니다.
-</p>
-
-<div class="grid">
-
-<div class="card">
-<h3>본인 인증 리뷰</h3>
-<p>계정 인증 + 영수증 인증으로 리뷰 신뢰도 확보</p>
-</div>
-
-<div class="card">
-<h3>AI 리뷰 필터링</h3>
-<p>LLM 기반 필터링으로 악성 리뷰 제거</p>
-</div>
-
-<div class="card">
-<h3>부정 리뷰 탐색</h3>
-<p>불만 카테고리 기반 정렬 및 필터 기능</p>
-</div>
-
-</div>
-
-</section>
-
-
-<section>
-
-<h2>핵심 기능</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>악플 리뷰 전용</h3>
-<p>실제 불만 경험 리뷰만 작성 및 확인 가능</p>
-</div>
-
-<div class="card">
-<h3>좋담 / 싫담</h3>
-<p>리뷰에 대한 공감 표시로 객관성 확보</p>
-</div>
-
-<div class="card">
-<h3>메뉴 정보 제공</h3>
-<p>리뷰와 함께 매장 기본 정보 확인</p>
-</div>
-
-<div class="card">
-<h3>문제 카테고리</h3>
-<p>서비스 / 맛 / 가격 / 위생 등 불만 유형 분석</p>
-</div>
-
-</div>
-
-</section>
-
-
-<section class="highlight">
-
-<h2>누가 사용하나요?</h2>
-
-<div class="grid">
-
-<div class="card">
-<h3>2030 리뷰 탐색층</h3>
-<p>광고 리뷰에 피로감을 느끼는 사용자</p>
-</div>
-
-<div class="card">
-<h3>맛집 탐색 사용자</h3>
-<p>방문 실패를 줄이고 싶은 사람</p>
-</div>
-
-<div class="card">
-<h3>자영업자</h3>
-<p>실제 고객 불만을 분석하고 싶은 매장</p>
-</div>
-
-</div>
-
-</section>
-
-
-<section>
-
-<h2>최고의 선택보다</h2>
-
-<h3>실패하지 않는 선택</h3>
-
-<p>
-후일담은 광고와 홍보성 리뷰를 걸러내고  
-<strong>방문 실패를 줄이는 정보</strong>를 제공합니다.
-</p>
-
-<a class="btn" href="#">출시 알림 받기</a>
-
-</section>
-
-
-<footer>
-
-<p>후일담 | 실패를 줄이는 지도 리뷰 플랫폼</p>
-
-</footer>
-
 </body>
 </html>
