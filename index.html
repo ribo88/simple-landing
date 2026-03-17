@@ -1570,6 +1570,8 @@ body::before {
   font-size: 13px;
   color: var(--text-dim);
   margin-top: 16px;
+  padding-left: 1em;
+  text-indent: -1em;
 }
  
 /* ─── FOOTER ─── */
@@ -2507,7 +2509,7 @@ function closePanel(){
  
       <div class="wr-panel" id="wr-panel-2" style="display:none;">
         <div class="wr-sub">세부 항목을 골라주세요 <span style="font-size:11px;color:var(--text-dim);">(복수 선택 가능)</span></div>
-        <div style="margin-bottom:12px;"><div class="wr-cat active" id="cat-tag" style="display:inline-flex;flex-direction:row;gap:6px;font-size:13px;padding:7px 14px;cursor:default;width:auto;"></div></div>
+        <div style="margin-bottom:12px;"><div class="wr-cat active" id="cat-tag" style="display:inline-flex;flex-direction:row;gap:6px;font-size:13px;font-weight:700;padding:7px 14px;cursor:default;width:auto;color:#c84e10;"></div></div>
         <div class="wr-subs" id="wr-sub-list"></div>
         <button class="wr-next" id="wr-next-2" onclick="goStep(3)" disabled>다음</button>
       </div>
@@ -2644,7 +2646,7 @@ function goStep(step){
   if(step===2){
     selectedSubs.clear();
     const icons={'서비스':'😤','위생':'🪲','가격':'💸','퀄리티':'🍽️'};
-    document.getElementById('cat-tag').innerHTML=icons[selectedCat]+' '+selectedCat;
+    document.getElementById('cat-tag').innerHTML=icons[selectedCat]+' <span style="color:#c84e10;font-weight:800;">'+selectedCat+'</span>';
     document.getElementById('wr-sub-list').innerHTML=(subItems[selectedCat]||[]).map(s=>`<div class="wr-sub-item" onclick="toggleSub(this,'${s}')">${s}</div>`).join('');
     document.getElementById('wr-next-2').disabled=true;
   }
