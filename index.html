@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=375, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>악플지도 | 실패를 줄여주는 문제 지도</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,26 +36,7 @@
  
 html { scroll-behavior: smooth; }
  
-/* ─── SCROLL SNAP ─── */
-.snap-container {
-  height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-}
-.snap-section {
-  scroll-snap-align: start;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
  
-html, body {
-  width: 375px;
-  max-width: 375px;
-  overflow-x: hidden;
-}
 body {
   font-family: var(--font-body);
   background: var(--bg);
@@ -1770,8 +1751,6 @@ body::before {
 .pp strong { color: var(--orange); margin-left: 4px; }
  
 /* ─── SNAP SECTION HEIGHT ─── */
-.snap-section { min-height: 100vh; }
-.snap-container { scroll-snap-type: y mandatory; }
  
  
 /* ─── HERO SCROLL HINT ─── */
@@ -1869,36 +1848,64 @@ body::before {
   padding: 8px 0 0;
 }
  
-/* ─── SECTION PROGRESS DOTS ─── */
-.snap-dots {
-  position: fixed;
-  right: 24px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 200;
-}
-.snap-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255,124,53,0.25);
-  border: 1px solid rgba(255,124,53,0.3);
-  cursor: pointer;
-  transition: all .25s;
-}
-.snap-dot.active {
-  background: var(--orange);
-  transform: scale(1.5);
-  box-shadow: 0 0 8px rgba(255,100,30,0.5);
-}
- 
 @media (max-width:768px) {
   .problem-split { grid-template-columns:1fr; gap:32px; }
-  .snap-dots { display: none; }
 }
+ 
+ 
+/* ─── 상단 고정 CTA BAR ─── */
+.sticky-cta {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 300;
+  background: rgba(24, 20, 16, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,124,53,0.2);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.sticky-cta-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--text);
+  text-decoration: none;
+}
+.sticky-cta-brand-mark {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  background: #3a1800;
+  border: 1.5px solid var(--orange-deep);
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+}
+.sticky-cta-btn {
+  background: var(--orange);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 18px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px var(--orange-glow-strong);
+  transition: background .2s;
+}
+.sticky-cta-btn:hover { background: var(--orange-bright); }
+ 
+/* 히어로 상단 패딩 보정 */
+.hero { padding-top: 64px; }
  
 </style>
 </head>
@@ -1915,21 +1922,19 @@ body::before {
   <span class="toast-close">✕</span>
 </div>
  
-<!-- SCROLL PROGRESS DOTS -->
-<nav class="snap-dots" id="snapDots">
-  <div class="snap-dot active" data-target="hero" title="시작"></div>
-  <div class="snap-dot" data-target="problem" title="문제"></div>
-  <div class="snap-dot" data-target="hell" title="해결책"></div>
-  <div class="snap-dot" data-target="features" title="기능"></div>
-  <div class="snap-dot" data-target="preview" title="미리보기"></div>
-  <div class="snap-dot" data-target="faq" title="FAQ"></div>
-  <div class="snap-dot" data-target="cta" title="신청"></div>
-</nav>
  
-<div class="snap-container" id="snapContainer">
+ 
+<!-- 상단 고정 사전신청 버튼 -->
+<div class="sticky-cta">
+  <a class="sticky-cta-brand" href="#">
+    <div class="sticky-cta-brand-mark">😈</div>
+    악플지도
+  </a>
+  <a class="sticky-cta-btn" href="https://forms.gle/KnWyZCjEpoiUvGSu6" target="_blank" rel="noreferrer">사전 신청하기 →</a>
+</div>
  
 <!-- HERO -->
-<section class="hero snap-section">
+<section class="hero">
   <div class="grid-bg"></div>
   <div class="hero-glow"></div>
   <div class="hero-glow-left"></div>
@@ -1994,7 +1999,7 @@ body::before {
  
  
 <!-- PROBLEM -->
-<section class="section problem-section snap-section" id="problem">
+<section class="section problem-section" id="problem">
   <div class="container">
     <div class="problem-split">
  
@@ -2046,7 +2051,7 @@ body::before {
 </section>
  
 <!-- 🔥 REVIEW HELL MAP VISUAL SECTION -->
-<section class="review-hell snap-section" id="hell">
+<section class="review-hell" id="hell">
   <div class="hell-particles" aria-hidden="true">
     <div class="spark" style="left:10%; --dur:4s;  --delay:0s;   --drift:15px;  background:#ff5010;"></div>
     <div class="spark" style="left:25%; --dur:5s;  --delay:1s;   --drift:-20px; background:#ffaa40;"></div>
@@ -2168,7 +2173,7 @@ body::before {
 </section>
  
 <!-- FEATURES -->
-<section class="section snap-section" id="features">
+<section class="section" id="features">
   <div class="container">
     <div class="section-label">이렇게 달라집니다</div>
     <h2 class="section-title">3가지로<br>정리됩니다</h2>
@@ -2260,7 +2265,7 @@ body::before {
  
  
 <!-- PREVIEW -->
-<section class="section preview-section snap-section" id="preview">
+<section class="section preview-section" id="preview">
   <div class="container">
     <div class="preview-layout">
       <div class="preview-copy">
@@ -2489,16 +2494,11 @@ function closePanel(){
  
  
 <!-- FAQ -->
-<section class="section faq-section snap-section" id="faq">
+<section class="section faq-section" id="faq">
   <div class="container">
-    <div class="faq-layout">
-      <div>
-        <div class="section-label">FAQ</div>
-        <h2 class="section-title">자주<br>묻는<br>질문</h2>
-        <p class="section-desc" style="margin-top:16px;">더 궁금한 게 있으시면 사전 신청 폼에 남겨주세요.</p>
-      </div>
- 
-      <div class="faq-list">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title" style="margin-bottom:24px;">자주 묻는 질문</h2>
+    <div class="faq-list">
  
         <div class="faq-item">
           <div class="faq-q">
@@ -2536,13 +2536,12 @@ function closePanel(){
             <div class="faq-a-inner">아직 사장님 전용 기능은 열리지 않았지만, 추후 개선 인증 마크 등의 기능이 열릴 예정이에요.</div>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </section>
  
 <!-- CTA -->
-<section class="cta-section snap-section" id="cta">
+<section class="cta-section" id="cta">
   <div class="container">
     <div class="cta-shell">
       <div class="cta-border"></div>
@@ -2565,7 +2564,6 @@ function closePanel(){
   </div>
 </section>
  
-</div>
  
 <footer class="footer">
   <div class="container footer-inner">
@@ -2608,40 +2606,7 @@ document.querySelectorAll(
   observer.observe(el);
 });
 </script>
-<script>
-// Scroll progress dots
-const snapContainer = document.getElementById('snapContainer');
-const dots = document.querySelectorAll('.snap-dot');
-const sections = ['hero','problem','hell','features','preview','map-demo','faq','cta'];
- 
-function updateDots() {
-  const scrollTop = snapContainer.scrollTop;
-  const vh = window.innerHeight;
-  let active = 0;
-  sections.forEach((id, i) => {
-    const el = document.getElementById(id) || document.querySelector('.'+id) || document.querySelector('section.hero');
-    if (!el) return;
-    // For hero section (no id)
-    const sectionEl = id === 'hero'
-      ? document.querySelector('section.hero')
-      : document.getElementById(id);
-    if (!sectionEl) return;
-    if (sectionEl.offsetTop <= scrollTop + vh * 0.5) active = i;
-  });
-  dots.forEach((d, i) => d.classList.toggle('active', i === active));
-}
- 
-snapContainer.addEventListener('scroll', updateDots, { passive: true });
- 
-dots.forEach((dot, i) => {
-  dot.addEventListener('click', () => {
-    const id = sections[i];
-    const el = id === 'hero'
-      ? document.querySelector('section.hero')
-      : document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  });
-});
 </script>
 </body>
 </html>
+ 
