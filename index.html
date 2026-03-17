@@ -2,1277 +2,2646 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>필터리뷰 | 실패를 줄여주는 문제 지도</title>
+<meta name="viewport" content="width=375, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>악플지도 | 실패를 줄여주는 문제 지도</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{
-    --bg:#fff6ef;
-    --surface:#ffffff;
-    --surface-muted:#fffaf5;
-    --line:#ffe2c9;
-    --line-strong:#ffc995;
-    --text:#1c1611;
-    --muted:#6b5b4b;
-    --orange:#ff8a3d;
-    --orange-deep:#f06a1f;
-    --shadow:0 30px 80px rgba(240, 106, 31, 0.14);
-    --shadow-soft:0 18px 40px rgba(28, 22, 17, 0.08);
-}
-
-*{
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    margin:0;
-    font-family:"Pretendard","Noto Sans KR","Segoe UI",sans-serif;
-    color:var(--text);
-    line-height:1.6;
-    background:
-        radial-gradient(circle at top left, rgba(255, 173, 106, 0.24), transparent 28%),
-        radial-gradient(circle at top right, rgba(255, 214, 173, 0.42), transparent 24%),
-        linear-gradient(180deg, #fffdfb 0%, var(--bg) 44%, #fff3e8 100%);
-}
-
-a{
-    color:inherit;
-}
-
-.page{
-    overflow:hidden;
-}
-
-.container{
-    width:min(1120px, calc(100% - 40px));
-    margin:0 auto;
-}
-
-.topbar{
-    position:sticky;
-    top:0;
-    z-index:10;
-    backdrop-filter:blur(16px);
-    background:rgba(255, 252, 248, 0.84);
-    border-bottom:1px solid rgba(255, 201, 149, 0.5);
-}
-
-.topbar-inner{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    min-height:72px;
-    gap:20px;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    font-weight:800;
-    letter-spacing:-0.04em;
-}
-
-.brand-mark{
-    width:38px;
-    height:38px;
-    border-radius:14px;
-    display:grid;
-    place-items:center;
-    color:#fff;
-    background:linear-gradient(135deg, var(--orange-deep), #ffb067);
-    box-shadow:0 12px 30px rgba(240, 106, 31, 0.28);
-}
-
-.topbar nav{
-    display:flex;
-    gap:24px;
-    color:var(--muted);
-    font-size:15px;
-}
-
-.topbar nav a{
-    text-decoration:none;
-}
-
-.btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    min-height:52px;
-    padding:0 22px;
-    border:none;
-    border-radius:18px;
-    font-weight:700;
-    text-decoration:none;
-    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
-}
-
-.btn-primary{
-    color:#fff;
-    background:linear-gradient(135deg, var(--orange-deep), var(--orange));
-    box-shadow:0 18px 40px rgba(240, 106, 31, 0.26);
-}
-
-.btn-secondary{
-    color:var(--text);
-    background:rgba(255,255,255,0.86);
-    border:1px solid rgba(255, 201, 149, 0.8);
-    box-shadow:var(--shadow-soft);
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-.hero{
-    padding:52px 0 108px;
-}
-
-.hero-shell{
-    position:relative;
-    border-radius:40px;
-    padding:44px;
-    background:linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,248,240,0.92));
-    border:1px solid rgba(255, 201, 149, 0.64);
-    box-shadow:var(--shadow);
-}
-
-.hero-shell::before{
-    content:"";
-    position:absolute;
-    inset:auto -120px -140px auto;
-    width:320px;
-    height:320px;
-    border-radius:50%;
-    background:radial-gradient(circle, rgba(255, 167, 92, 0.24), transparent 70%);
-    pointer-events:none;
-}
-
-.hero-grid{
-    display:grid;
-    grid-template-columns:minmax(0, 1.1fr) minmax(320px, 430px);
-    gap:36px;
-    align-items:center;
-}
-
-.eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:10px 14px;
-    border-radius:999px;
-    font-size:14px;
-    font-weight:700;
-    color:var(--orange-deep);
-    background:#fff1e2;
-    border:1px solid #ffd5ad;
-}
-
-.hero h1{
-    margin:18px 0 18px;
-    font-size:clamp(42px, 7vw, 72px);
-    line-height:1.08;
-    letter-spacing:-0.06em;
-}
-
-.hero .lead{
-    max-width:620px;
-    margin:0 0 32px;
-    font-size:20px;
-    line-height:1.7;
-    color:var(--muted);
-    letter-spacing:-0.02em;
-}
-
-.hero-actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:14px;
-    margin-bottom:26px;
-}
-
-.hero-meta{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-}
-
-.hero-meta span{
-    display:inline-flex;
-    align-items:center;
-    min-height:40px;
-    padding:0 14px;
-    border-radius:999px;
-    background:rgba(255,255,255,0.88);
-    border:1px solid rgba(255, 201, 149, 0.76);
-    color:var(--muted);
-    font-size:14px;
-    font-weight:600;
-}
-
-.hero-peek{
-    margin-top:22px;
-    max-width:560px;
-    padding:18px;
-    display:grid;
-    grid-template-columns:160px minmax(0, 1fr);
-    gap:16px;
-    align-items:center;
-}
-
-.peek-thumb{
-    min-height:132px;
-    border-radius:22px;
-    padding:16px;
-    background:linear-gradient(180deg, #fff7ef, #ffe9d1);
-    border:1px solid #ffd8b3;
-    display:grid;
-    align-content:space-between;
-}
-
-.peek-thumb strong{
-    font-size:18px;
-    line-height:1.2;
-    letter-spacing:-0.04em;
-}
-
-.peek-bars{
-    display:grid;
-    gap:8px;
-}
-
-.peek-bars span{
-    height:8px;
-    border-radius:999px;
-    background:#ffd8b4;
-    overflow:hidden;
-}
-
-.peek-bars span::after{
-    content:"";
-    display:block;
-    height:100%;
-    border-radius:999px;
-    background:linear-gradient(90deg, var(--orange-deep), #ffb067);
-}
-
-.peek-bars span:nth-child(1)::after{
-    width:76%;
-}
-
-.peek-bars span:nth-child(2)::after{
-    width:58%;
-}
-
-.peek-bars span:nth-child(3)::after{
-    width:40%;
-}
-
-.peek-copy strong{
-    display:block;
-    margin-bottom:8px;
-    font-size:20px;
-    letter-spacing:-0.04em;
-}
-
-.peek-copy p{
-    margin:0 0 12px;
-    color:var(--muted);
-    font-size:14px;
-}
-
-.peek-copy span{
-    display:inline-flex;
-    align-items:center;
-    min-height:30px;
-    padding:0 12px;
-    border-radius:999px;
-    background:#fff3e7;
-    color:#8b613d;
-    font-size:12px;
-    font-weight:700;
-}
-
-.dashboard{
-    position:relative;
-    display:grid;
-    gap:16px;
-}
-
-.panel{
-    border-radius:28px;
-    background:rgba(255,255,255,0.95);
-    border:1px solid rgba(255, 201, 149, 0.74);
-    box-shadow:var(--shadow-soft);
-}
-
-.dashboard-main{
-    padding:28px;
-}
-
-.panel-label{
-    display:inline-flex;
-    align-items:center;
-    min-height:30px;
-    padding:0 10px;
-    border-radius:999px;
-    font-size:12px;
-    font-weight:800;
-    letter-spacing:0.02em;
-    color:var(--orange-deep);
-    background:#fff3e7;
-}
-
-.score{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    gap:16px;
-    margin-top:18px;
-}
-
-.score strong{
-    display:block;
-    font-size:54px;
-    line-height:1;
-    letter-spacing:-0.06em;
-}
-
-.score p{
-    margin:8px 0 0;
-    color:var(--muted);
-    font-size:14px;
-}
-
-.bars{
-    margin-top:22px;
-    display:grid;
-    gap:12px;
-}
-
-.bar-row{
-    display:grid;
-    grid-template-columns:92px 1fr 46px;
-    align-items:center;
-    gap:12px;
-    font-size:14px;
-    color:var(--muted);
-}
-
-.bar{
-    height:10px;
-    border-radius:999px;
-    background:#fff0e1;
-    overflow:hidden;
-}
-
-.bar-fill{
-    height:100%;
-    border-radius:999px;
-    background:linear-gradient(90deg, var(--orange-deep), #ffb067);
-}
-
-.dashboard-sub{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:16px;
-}
-
-.mini-card{
-    padding:22px;
-}
-
-.mini-card strong{
-    display:block;
-    margin-top:14px;
-    font-size:24px;
-    letter-spacing:-0.04em;
-}
-
-.mini-card p{
-    margin:8px 0 0;
-    color:var(--muted);
-    font-size:14px;
-}
-
-.section{
-    padding:56px 0;
-}
-
-.section-head{
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-between;
-    gap:24px;
-    margin-bottom:28px;
-}
-
-.section-head h2{
-    margin:0 0 10px;
-    font-size:clamp(30px, 4vw, 48px);
-    line-height:1.14;
-    letter-spacing:-0.05em;
-}
-
-.section-head p{
-    max-width:520px;
-    margin:0;
-    color:var(--muted);
-    font-size:18px;
-}
-
-.feature-grid{
-    display:grid;
-    grid-template-columns:repeat(3, minmax(0, 1fr));
-    gap:20px;
-}
-
-.feature-card{
-    padding:30px;
-}
-
-.feature-card strong{
-    display:block;
-    margin:18px 0 12px;
-    font-size:24px;
-    letter-spacing:-0.04em;
-}
-
-.feature-card p{
-    margin:0;
-    color:var(--muted);
-}
-
-.icon-chip{
-    width:52px;
-    height:52px;
-    border-radius:18px;
-    display:grid;
-    place-items:center;
-    color:var(--orange-deep);
-    background:linear-gradient(180deg, #fff2e4, #ffe5cb);
-    font-weight:800;
-}
-
-.flow-grid{
-    display:grid;
-    grid-template-columns:repeat(3, minmax(0, 1fr));
-    gap:20px;
-}
-
-.flow-card{
-    position:relative;
-    padding:32px;
-    overflow:hidden;
-}
-
-.flow-card::after{
-    content:"";
-    position:absolute;
-    inset:auto -20px -30px auto;
-    width:120px;
-    height:120px;
-    border-radius:50%;
-    background:radial-gradient(circle, rgba(255, 168, 94, 0.18), transparent 68%);
-}
-
-.flow-step{
-    display:inline-flex;
-    align-items:center;
-    min-height:34px;
-    padding:0 12px;
-    border-radius:999px;
-    background:#fff2e4;
-    color:var(--orange-deep);
-    font-size:13px;
-    font-weight:800;
-}
-
-.flow-card h3{
-    margin:18px 0 10px;
-    font-size:28px;
-    line-height:1.2;
-    letter-spacing:-0.05em;
-}
-
-.flow-card p{
-    margin:0 0 18px;
-    color:var(--muted);
-}
-
-.flow-kicker{
-    display:inline-flex;
-    align-items:center;
-    min-height:28px;
-    padding:0 10px;
-    border-radius:999px;
-    background:#fff8f2;
-    border:1px solid #ffe0c0;
-    color:#9a6437;
-    font-size:12px;
-    font-weight:700;
-}
-
-.flow-card ul{
-    margin:0;
-    padding:0;
-    list-style:none;
-    display:grid;
-    gap:10px;
-    color:var(--text);
-    font-size:15px;
-}
-
-.flow-card li{
-    padding-left:18px;
-    position:relative;
-}
-
-.flow-card li::before{
-    content:"";
-    position:absolute;
-    left:0;
-    top:11px;
-    width:8px;
-    height:8px;
-    border-radius:50%;
-    background:var(--orange);
-}
-
-.showcase{
-    display:grid;
-    grid-template-columns:minmax(0, 0.95fr) minmax(0, 1.05fr);
-    gap:24px;
-    align-items:center;
-}
-
-.showcase-copy{
-    padding:34px;
-}
-
-.showcase-copy h3{
-    margin:14px 0 10px;
-    font-size:34px;
-    line-height:1.18;
-    letter-spacing:-0.05em;
-}
-
-.showcase-copy p{
-    margin:0 0 22px;
-    color:var(--muted);
-}
-
-.showcase-points{
-    display:grid;
-    gap:14px;
-}
-
-.showcase-points div{
-    padding:18px 20px;
-    border-radius:20px;
-    background:var(--surface-muted);
-    border:1px solid var(--line);
-}
-
-.showcase-points strong{
-    display:block;
-    margin-bottom:4px;
-    font-size:18px;
-    letter-spacing:-0.03em;
-}
-
-.showcase-points span{
-    color:var(--muted);
-    font-size:15px;
-}
-
-.app-shot{
-    position:relative;
-    padding:24px;
-    background:linear-gradient(180deg, #fffaf4, #fff2e3);
-}
-
-.phone{
-    max-width:336px;
-    margin:0 auto;
-    padding:12px;
-    border-radius:34px;
-    background:#201711;
-    box-shadow:0 28px 60px rgba(28, 22, 17, 0.2);
-}
-
-.phone-screen{
-    overflow:hidden;
-    border-radius:26px;
-    background:#fffdfa;
-}
-
-.screen-top{
-    padding:16px 16px 12px;
-    background:linear-gradient(180deg, #fff5ea, #fffdfa);
-    border-bottom:1px solid #f4dcc5;
-}
-
-.screen-top strong{
-    display:block;
-    font-size:18px;
-    letter-spacing:-0.03em;
-}
-
-.screen-top p{
-    margin:4px 0 0;
-    color:var(--muted);
-    font-size:13px;
-}
-
-.tag-row{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    margin-top:12px;
-}
-
-.tag-row span{
-    min-height:30px;
-    padding:0 12px;
-    border-radius:999px;
-    display:inline-flex;
-    align-items:center;
-    background:#fff;
-    border:1px solid #f2d3b4;
-    color:#8a5b34;
-    font-size:12px;
-    font-weight:700;
-}
-
-.review-list{
-    padding:10px 12px 12px;
-    display:grid;
-    gap:10px;
-}
-
-.screen-summary{
-    padding:10px 12px;
-    display:grid;
-    grid-template-columns:repeat(2, minmax(0, 1fr));
-    gap:8px;
-    background:#fff7f0;
-    border-bottom:1px solid #f3dfcb;
-}
-
-.screen-summary div{
-    padding:10px;
-    border-radius:14px;
-    background:#fff;
-    border:1px solid #f3dfcb;
-}
-
-.screen-summary strong{
-    display:block;
-    font-size:16px;
-    line-height:1;
-    letter-spacing:-0.04em;
-}
-
-.screen-summary span{
-    display:block;
-    margin-top:4px;
-    color:var(--muted);
-    font-size:10px;
-    font-weight:700;
-}
-
-.map-area{
-    padding:10px;
-    background:linear-gradient(180deg, #fffaf4, #fff4e8);
-    border-bottom:1px solid #f3dfcb;
-}
-
-.map-board{
-    position:relative;
-    min-height:132px;
-    border-radius:20px;
-    overflow:hidden;
-    background:
-        linear-gradient(90deg, rgba(255, 219, 188, 0.8) 1px, transparent 1px),
-        linear-gradient(rgba(255, 219, 188, 0.8) 1px, transparent 1px),
-        radial-gradient(circle at 20% 20%, rgba(255, 173, 106, 0.12), transparent 28%),
-        linear-gradient(180deg, #fffdf9, #fff3e5);
-    background-size:32px 32px, 32px 32px, auto, auto;
-    border:1px solid #f2d8bc;
-}
-
-.map-route{
-    position:absolute;
-    inset:14px 10px auto 14px;
-    width:70%;
-    height:60px;
-    border:3px solid rgba(240, 106, 31, 0.28);
-    border-color:rgba(240, 106, 31, 0.28) transparent transparent transparent;
-    border-radius:80px 80px 0 0;
-    transform:rotate(-8deg);
-}
-
-.map-pin{
-    position:absolute;
-    min-width:92px;
-    padding:8px 10px;
-    border-radius:16px;
-    background:#fff;
-    border:1px solid #f3d8bc;
-    box-shadow:0 12px 24px rgba(28, 22, 17, 0.08);
-}
-
-.map-pin strong{
-    display:block;
-    font-size:12px;
-    letter-spacing:-0.03em;
-}
-
-.map-pin span{
-    display:block;
-    margin-top:4px;
-    color:var(--muted);
-    font-size:10px;
-}
-
-.map-pin.is-hot{
-    border-color:#ffbf8a;
-    box-shadow:0 14px 28px rgba(240, 106, 31, 0.14);
-}
-
-.map-pin-a{
-    top:20px;
-    left:18px;
-}
-
-.map-pin-b{
-    top:72px;
-    left:78px;
-}
-
-.map-pin-c{
-    top:36px;
-    right:14px;
-}
-
-.map-legend{
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    margin-top:8px;
-}
-
-.map-legend span{
-    min-height:24px;
-    padding:0 8px;
-    border-radius:999px;
-    display:inline-flex;
-    align-items:center;
-    background:#fff;
-    border:1px solid #f2d8bc;
-    color:#8b613d;
-    font-size:10px;
-    font-weight:700;
-}
-
-.review-item{
-    padding:11px 12px;
-    border-radius:16px;
-    background:#fff;
-    border:1px solid #f3dfcb;
-}
-
-.review-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom:8px;
-}
-
-.review-head strong{
-    font-size:14px;
-}
-
-.review-head span{
-    color:var(--orange-deep);
-    font-size:11px;
-    font-weight:800;
-}
-
-.review-item p{
-    margin:0;
-    color:var(--muted);
-    font-size:12px;
-}
-
-.review-meta{
-    display:flex;
-    gap:6px;
-    flex-wrap:wrap;
-    margin-top:6px;
-}
-
-.review-meta em{
-    min-height:24px;
-    padding:0 8px;
-    border-radius:999px;
-    display:inline-flex;
-    align-items:center;
-    background:#fff3e7;
-    color:#8b613d;
-    font-style:normal;
-    font-size:11px;
-    font-weight:700;
-}
-
-.cta{
-    padding:72px 0 120px;
-}
-
-.cta-shell{
-    position:relative;
-    padding:42px;
-    border-radius:36px;
-    color:#fff;
-    background:linear-gradient(135deg, #dd5d12 0%, #f06a1f 48%, #ff9c52 100%);
-    box-shadow:0 30px 70px rgba(240, 106, 31, 0.28);
-}
-
-.cta-shell::after{
-    content:"";
-    position:absolute;
-    inset:auto 40px -50px auto;
-    width:220px;
-    height:220px;
-    border-radius:50%;
-    background:radial-gradient(circle, rgba(255,255,255,0.28), transparent 72%);
-}
-
-.cta-shell h2{
-    margin:0 0 12px;
-    font-size:clamp(32px, 4vw, 52px);
-    line-height:1.12;
-    letter-spacing:-0.05em;
-}
-
-.cta-shell p{
-    max-width:620px;
-    margin:0 0 24px;
-    color:rgba(255,255,255,0.88);
-    font-size:18px;
-}
-
-.cta-shell .btn-primary{
-    background:#fff;
-    color:var(--orange-deep);
-    box-shadow:none;
-}
-
-.footer{
-    padding:0 0 56px;
-}
-
-.footer-inner{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:16px;
-    color:#7a6755;
-    font-size:14px;
-}
-
-@media (max-width: 960px){
-    .topbar nav{
-        display:none;
-    }
-
-    .hero-grid,
-    .feature-grid,
-    .flow-grid,
-    .showcase,
-    .dashboard-sub{
-        grid-template-columns:1fr;
-    }
-
-    .section-head{
-        align-items:flex-start;
-        flex-direction:column;
-    }
-}
-
-@media (max-width: 640px){
-    .container{
-        width:min(100% - 24px, 1120px);
-    }
-
-    .hero{
-        padding:28px 0 88px;
-    }
-
-    .hero-shell,
-    .cta-shell{
-        padding:24px;
-        border-radius:28px;
-    }
-
-    .hero h1{
-        font-size:clamp(34px, 13vw, 54px);
-    }
-
-    .hero .lead,
-    .section-head p,
-    .cta-shell p{
-        font-size:16px;
-    }
-
-    .hero-peek{
-        grid-template-columns:1fr;
-    }
-
-    .score{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    .bar-row{
-        grid-template-columns:78px 1fr 38px;
-        gap:10px;
-        font-size:13px;
-    }
-
-    .feature-card,
-    .flow-card,
-    .showcase-copy,
-    .dashboard-main,
-    .mini-card,
-    .app-shot{
-        padding:22px;
-    }
-
-    .phone{
-        border-radius:28px;
-        padding:12px;
-    }
-
-    .phone-screen{
-        border-radius:22px;
-    }
-
-    .screen-summary{
-        grid-template-columns:1fr;
-    }
-
-    .footer-inner{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-}
+:root {
+  --bg: #181410;
+  --surface: #211d18;
+  --surface-2: #2a241e;
+  --surface-3: #322c24;
+  --line: rgba(255,150,70,0.15);
+  --line-strong: rgba(255,130,50,0.3);
+  --text: #f5ede4;
+  --text-muted: #8a7060;
+  --text-dim: #5a4a3a;
+  --orange: #ff7c35;
+  --orange-bright: #ff9a5a;
+  --orange-deep: #e85f15;
+  --orange-glow: rgba(255,124,53,0.22);
+  --orange-glow-strong: rgba(255,124,53,0.38);
+  --cream: #fff5eb;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Noto Sans KR', sans-serif;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 40px;
+}
+ 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+html { scroll-behavior: smooth; }
+ 
+/* ─── SCROLL SNAP ─── */
+.snap-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+.snap-section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+ 
+html, body {
+  width: 375px;
+  max-width: 375px;
+  overflow-x: hidden;
+}
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+ 
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--orange-deep); border-radius: 2px; }
+ 
+a { color: inherit; text-decoration: none; }
+ 
+/* ─── NOISE OVERLAY ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9999;
+}
+ 
+/* ─── GRID BACKGROUND ─── */
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,120,50,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,120,50,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+ 
+/* ─── HELL FIRE PARTICLES ─── */
+.hell-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+ 
+.spark {
+  position: absolute;
+  bottom: -20px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--orange);
+  animation: sparkRise var(--dur, 4s) var(--delay, 0s) infinite ease-in;
+  opacity: 0;
+}
+ 
+@keyframes sparkRise {
+  0%   { transform: translateY(0) scale(1);   opacity: 0; }
+  10%  { opacity: 1; }
+  80%  { opacity: 0.6; }
+  100% { transform: translateY(-600px) translateX(var(--drift, 0px)) scale(0); opacity: 0; }
+}
+ 
+/* ─── FLOATING DEMONS ─── */
+.floating-demon {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  animation: demonFloat var(--fdur, 6s) var(--fdelay, 0s) ease-in-out infinite alternate;
+  opacity: var(--fopa, 0.18);
+  font-size: var(--fsz, 48px);
+  filter: drop-shadow(0 0 12px rgba(255,80,20,0.5));
+  user-select: none;
+}
+ 
+@keyframes demonFloat {
+  from { transform: translateY(0px) rotate(var(--frot, -4deg)); }
+  to   { transform: translateY(-22px) rotate(var(--frot2, 4deg)); }
+}
+ 
+/* ─── DEMON SKULL SVG ELEMENT ─── */
+.demon-svg-wrap {
+  position: absolute;
+  pointer-events: none;
+  animation: demonFloat 7s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 24px rgba(255,80,10,0.4));
+}
+ 
+/* ─── LAVA DRIP ─── */
+.lava-drip {
+  position: absolute;
+  top: 0;
+  width: 3px;
+  border-radius: 0 0 99px 99px;
+  background: linear-gradient(180deg, var(--orange-deep), transparent);
+  animation: drip var(--ddur, 3s) var(--ddelay, 0s) ease-in infinite;
+  opacity: 0;
+}
+ 
+@keyframes drip {
+  0%   { height: 0;    opacity: 0; top: 0; }
+  20%  { opacity: 0.9; }
+  100% { height: 80px; opacity: 0; top: 60px; }
+}
+ 
+/* ─── CRACK LINES ─── */
+.crack-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.07;
+}
+ 
+/* ─── HELL BADGE ON HERO ─── */
+.hell-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 60, 10, 0.4);
+  background: rgba(255, 40, 0, 0.08);
+  color: #ff6030;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 18px;
+  animation: hellPulse 2.5s ease-in-out infinite;
+}
+ 
+.hell-badge .fire-icon {
+  animation: fireWiggle 0.6s ease-in-out infinite alternate;
+  display: inline-block;
+}
+ 
+@keyframes hellPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,60,10,0); }
+  50%       { box-shadow: 0 0 18px 4px rgba(255,60,10,0.18); }
+}
+ 
+@keyframes fireWiggle {
+  from { transform: rotate(-8deg) scale(1); }
+  to   { transform: rotate(8deg) scale(1.15); }
+}
+ 
+/* ─── GHOST REVIEW FLOATERS ─── */
+.ghost-reviews {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+ 
+.ghost-review {
+  position: absolute;
+  padding: 10px 14px;
+  background: rgba(255, 50, 10, 0.06);
+  border: 1px solid rgba(255, 80, 20, 0.14);
+  border-radius: 12px;
+  font-size: 11px;
+  color: rgba(255, 150, 80, 0.55);
+  font-weight: 600;
+  white-space: nowrap;
+  animation: ghostDrift var(--gdur, 18s) var(--gdelay, 0s) linear infinite;
+  backdrop-filter: blur(4px);
+}
+ 
+@keyframes ghostDrift {
+  0%   { transform: translateX(0) translateY(var(--gy, 0px)); opacity: 0; }
+  8%   { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateX(-110vw) translateY(var(--gy2, -30px)); opacity: 0; }
+}
+ 
+/* ─── PROBLEM CARD HELL THEME ─── */
+.problem-card .hell-num {
+  font-family: var(--font-display);
+  font-size: 100px;
+  line-height: 1;
+  color: rgba(255,60,10,0.06);
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+ 
+/* ─── DEMON MASCOT ─── */
+.demon-mascot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: mascotBob 3s ease-in-out infinite alternate;
+}
+ 
+@keyframes mascotBob {
+  from { transform: translateY(0) rotate(-1deg); }
+  to   { transform: translateY(-12px) rotate(1deg); }
+}
+ 
+.demon-mascot svg {
+  filter: drop-shadow(0 0 20px rgba(255,80,10,0.5));
+}
+ 
+.demon-speech {
+  background: rgba(255,60,10,0.1);
+  border: 1px solid rgba(255,60,10,0.25);
+  border-radius: 14px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--orange-bright);
+  position: relative;
+  text-align: center;
+  animation: speechPop 2s ease-in-out infinite alternate;
+}
+ 
+.demon-speech::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 8px solid transparent;
+  border-bottom-color: rgba(255,60,10,0.25);
+  width: 0; height: 0;
+  border-top: none;
+}
+ 
+@keyframes speechPop {
+  from { transform: scale(1); }
+  to   { transform: scale(1.04); }
+}
+ 
+/* ─── HELL ZONE LABEL ─── */
+.hell-zone {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: rgba(255,30,0,0.1);
+  border: 1px solid rgba(255,40,0,0.2);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #ff5030;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+ 
+/* ─── FIRE UNDERLINE on SECTION TITLE ─── */
+.fire-underline {
+  position: relative;
+  display: inline-block;
+}
+ 
+.fire-underline::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -4px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange-deep), var(--orange), transparent);
+  border-radius: 2px;
+  animation: fireUnderline 2s ease-in-out infinite alternate;
+}
+ 
+@keyframes fireUnderline {
+  from { opacity: 0.6; transform: scaleX(0.85); }
+  to   { opacity: 1;   transform: scaleX(1); }
+}
+ 
+/* ─── ROTATING SKULL ICON ─── */
+.skull-spin {
+  display: inline-block;
+  animation: skullSpin 8s linear infinite;
+}
+ 
+@keyframes skullSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+ 
+/* ─── LAVA BORDER ─── */
+.lava-border {
+  position: relative;
+}
+ 
+.lava-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg,
+    rgba(255,60,10,0.6) 0%,
+    rgba(255,120,50,0.2) 40%,
+    rgba(255,60,10,0.5) 70%,
+    rgba(220,40,0,0.7) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: lavaBorderFlow 3s linear infinite;
+  background-size: 200% 200%;
+}
+ 
+@keyframes lavaBorderFlow {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 200% 200%; }
+}
+ 
+/* ─── WARNING TOAST ─── */
+.hell-toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 200;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  background: rgba(20,10,5,0.96);
+  border: 1px solid rgba(255,60,10,0.4);
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,60,10,0.1);
+  backdrop-filter: blur(16px);
+  max-width: 280px;
+  animation: toastIn .5s 2s both cubic-bezier(0.34,1.56,0.64,1);
+  cursor: pointer;
+  transition: transform .2s;
+}
+ 
+.hell-toast:hover { transform: translateY(-2px); }
+ 
+@keyframes toastIn {
+  from { transform: translateX(120%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+ 
+.toast-icon { font-size: 28px; flex-shrink: 0; animation: fireWiggle 0.7s ease-in-out infinite alternate; }
+ 
+.toast-body strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--orange-bright);
+  margin-bottom: 4px;
+}
+ 
+.toast-body p {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+ 
+.toast-close {
+  position: absolute;
+  top: 10px; right: 12px;
+  font-size: 14px;
+  color: var(--text-dim);
+  cursor: pointer;
+}
+ 
+/* ─── REVIEW HELL SECTION ─── */
+.review-hell {
+  position: relative;
+  overflow: hidden;
+  padding: 40px 0;
+  background: linear-gradient(180deg, var(--bg) 0%, #110800 50%, var(--bg) 100%);
+}
+ 
+.hell-map-visual {
+  position: relative;
+  margin-top: 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255,60,10,0.25);
+  background: radial-gradient(ellipse at 50% 80%, rgba(255,60,10,0.08), transparent 65%), var(--surface);
+  padding: 16px;
+  overflow: hidden;
+}
+ 
+.hell-map-visual::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 80px;
+  background: linear-gradient(0deg, rgba(255,40,0,0.08), transparent);
+  pointer-events: none;
+}
+ 
+.hell-zones {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+}
+ 
+.hell-zone-card {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 14px 12px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all .25s;
+  cursor: default;
+}
+ 
+.hell-zone-card:hover {
+  border-color: rgba(255,80,20,0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(255,60,10,0.15);
+}
+ 
+.hell-zone-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--zone-color, var(--orange)), transparent);
+  animation: zoneGlow 2s ease-in-out infinite alternate;
+}
+ 
+@keyframes zoneGlow {
+  from { opacity: 0.4; }
+  to   { opacity: 1; }
+}
+ 
+.hell-zone-emoji {
+  font-size: 28px;
+  display: block;
+  margin-bottom: 6px;
+  animation: demonFloat 4s ease-in-out infinite alternate;
+}
+ 
+.hell-zone-card h4 {
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+ 
+.hell-zone-card p {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+ 
+.hell-zone-temp {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  background: rgba(255,60,10,0.1);
+  color: var(--orange);
+  border: 1px solid rgba(255,60,10,0.2);
+}
+ 
+/* ─── CONTAINER ─── */
+.container {
+  width: min(375px, calc(100% - 32px));
+  margin: 0 auto;
+}
+ 
+/* ─── TOPBAR ─── */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  backdrop-filter: blur(20px) saturate(1.4);
+  background: rgba(13, 11, 9, 0.88);
+  border-bottom: 1px solid var(--line);
+}
+ 
+.topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 68px;
+  gap: 20px;
+}
+ 
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: 16px;
+}
+ 
+.brand-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: #3a1800;
+  border: 2px solid var(--orange-deep);
+  font-size: 18px;
+}
+ 
+.topbar nav {
+  display: flex;
+  gap: 28px;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+ 
+.topbar nav a:hover { color: var(--text); transition: color .2s; }
+ 
+/* ─── BUTTON ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 0 22px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all .22s ease;
+  white-space: nowrap;
+}
+ 
+.btn-primary {
+  background: var(--orange);
+  color: #fff;
+  box-shadow: 0 8px 28px var(--orange-glow-strong), 0 0 0 0 var(--orange-glow);
+}
+ 
+.btn-primary:hover {
+  background: var(--orange-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px var(--orange-glow-strong);
+}
+ 
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--line-strong);
+}
+ 
+.btn-ghost:hover {
+  color: var(--text);
+  border-color: var(--orange);
+  transform: translateY(-1px);
+}
+ 
+/* ─── EYEBROW ─── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: rgba(255,124,53,0.1);
+  border: 1px solid rgba(255,124,53,0.25);
+}
+ 
+.eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 8px var(--orange);
+  animation: pulse 2s infinite;
+}
+ 
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+ 
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  padding: 0 0 100px;
+  overflow: hidden;
+}
+ 
+.hero-glow {
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 600px;
+  background: radial-gradient(ellipse at center top, rgba(255,100,30,0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+ 
+.hero-glow-left {
+  position: absolute;
+  top: 200px;
+  left: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255,80,20,0.08), transparent 60%);
+  pointer-events: none;
+}
+ 
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  padding-top: 120px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+ 
+/* BIG number counter */
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+/* HERO HEADLINE */
+.hero-headline {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 9vw, 128px);
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  opacity: 0;
+  animation: fadeUp .7s .2s forwards;
+  text-align: center;
+}
+ 
+.hero-headline .accent {
+  color: var(--orange);
+  display: inline-block;
+  position: relative;
+}
+ 
+.hero-headline .accent::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--orange);
+  opacity: 0.4;
+  border-radius: 2px;
+}
+ 
+.hero-sub-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  margin-top: 40px;
+  opacity: 0;
+  animation: fadeUp .7s .35s forwards;
+  width: 100%;
+  max-width: 680px;
+}
+ 
+.hero-lead {
+  font-size: 18px;
+  color: var(--text-muted);
+  line-height: 1.85;
+  font-weight: 400;
+  text-align: center;
+  max-width: 580px;
+}
+ 
+.hero-lead strong {
+  color: var(--text);
+  font-weight: 700;
+}
+ 
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+ 
+.hero-form-note {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 14px;
+  text-align: center;
+}
+ 
+/* HERO CARD */
+.hero-card {
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,124,53,0.1);
+}
+ 
+.hero-card-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+ 
+.hero-card-header strong {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+ 
+.hero-card-header span {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--orange);
+  background: rgba(255,124,53,0.1);
+  border: 1px solid rgba(255,124,53,0.2);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+ 
+.score-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line);
+}
+ 
+.score-cell {
+  padding: 18px 22px;
+  background: var(--surface-2);
+}
+ 
+.score-cell .num {
+  font-family: var(--font-display);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+ 
+.score-cell .num.bad {
+  color: var(--orange);
+}
+ 
+.score-cell .label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  font-weight: 600;
+}
+ 
+.bar-section {
+  padding: 18px 22px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 12px;
+}
+ 
+.bar-item {
+  display: grid;
+  grid-template-columns: 64px 1fr 40px;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+ 
+.bar-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--surface-3);
+  overflow: hidden;
+}
+ 
+.bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--orange-deep), var(--orange-bright));
+  animation: barGrow 1.2s .8s both;
+  transform-origin: left;
+}
+ 
+@keyframes barGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+ 
+.bar-val { text-align: right; color: var(--text); font-weight: 700; }
+ 
+.hero-card-review {
+  padding: 14px 22px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+ 
+.review-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--orange);
+  margin-top: 6px;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px var(--orange);
+}
+ 
+.review-text strong {
+  font-size: 13px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+ 
+.review-text p {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+ 
+.review-tags {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+ 
+.review-tags span {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--orange);
+  background: rgba(255,124,53,0.1);
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,124,53,0.2);
+}
+ 
+/* ─── FADEUP ANIMATION ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+ 
+/* ─── SECTION ─── */
+.section {
+  padding: 80px 0;
+  position: relative;
+}
+ 
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 14px;
+}
+ 
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 8vw, 40px);
+  line-height: 1.0;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+ 
+.section-desc {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 100%;
+  margin-top: 12px;
+}
+ 
+/* ─── PROBLEM SECTION ─── */
+.problem-section {
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+ 
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: 48px;
+}
+ 
+.problem-card {
+  background: var(--surface-2);
+  padding: 36px 32px;
+  position: relative;
+  transition: background .2s;
+}
+ 
+.problem-card:hover {
+  background: var(--surface-3);
+}
+ 
+.problem-num {
+  font-family: var(--font-display);
+  font-size: 80px;
+  color: rgba(255,124,53,0.08);
+  line-height: 1;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  letter-spacing: 0.04em;
+}
+ 
+.problem-card h3 {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  margin-top: 8px;
+}
+ 
+.problem-card p {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+ 
+.problem-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+ 
+/* ─── FEATURES SECTION ─── */
+.features-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-top: 52px;
+}
+ 
+.feature-big {
+  grid-column: 1 / -1;
+  background: var(--surface-2);
+  padding: 52px 48px;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 48px;
+  align-items: center;
+}
+ 
+.feature-big:hover { background: var(--surface-3); }
+ 
+.feature-small {
+  background: var(--surface-2);
+  padding: 40px 36px;
+  transition: background .2s;
+}
+ 
+.feature-small:hover { background: var(--surface-3); }
+ 
+.feature-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--orange);
+  border: 1px solid rgba(255,124,53,0.25);
+  background: rgba(255,124,53,0.08);
+  margin-bottom: 18px;
+}
+ 
+.feature-title {
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  margin-bottom: 14px;
+}
+ 
+.feature-desc {
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 22px;
+}
+ 
+.feature-list {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+ 
+.feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--text-muted);
+}
+ 
+.feature-list li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+ 
+/* Feature mini-viz */
+.feature-viz {
+  background: var(--surface-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  overflow: hidden;
+}
+ 
+.mini-issue-map {
+  display: grid;
+  gap: 10px;
+}
+ 
+.issue-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+ 
+.issue-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  width: 52px;
+  flex-shrink: 0;
+}
+ 
+.issue-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--surface);
+  border-radius: 999px;
+  overflow: hidden;
+}
+ 
+.issue-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--orange-deep), var(--orange-bright));
+}
+ 
+.issue-pct {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--orange);
+  width: 36px;
+  text-align: right;
+}
+ 
+.mini-reviews {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+ 
+.mini-review-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+}
+ 
+.mini-review-row .text {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+ 
+.badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+ 
+.badge-ok {
+  color: #5cf890;
+  background: rgba(92,248,144,0.1);
+  border: 1px solid rgba(92,248,144,0.2);
+}
+ 
+.badge-warn {
+  color: var(--orange);
+  background: rgba(255,124,53,0.1);
+  border: 1px solid rgba(255,124,53,0.2);
+}
+ 
+.badge-bad {
+  color: #ff5f5f;
+  background: rgba(255,95,95,0.1);
+  border: 1px solid rgba(255,95,95,0.2);
+}
+ 
+/* ─── PREVIEW / APP SECTION ─── */
+.preview-section {}
+ 
+.preview-layout {
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  gap: 52px;
+  align-items: center;
+  margin-top: 52px;
+}
+ 
+.preview-copy .section-label { margin-bottom: 10px; }
+ 
+.preview-points {
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
+}
+ 
+.preview-point {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 18px 20px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  transition: all .2s;
+}
+ 
+.preview-point:hover {
+  border-color: var(--line-strong);
+  transform: translateX(4px);
+}
+ 
+.preview-point-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background: rgba(255,124,53,0.12);
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+ 
+.preview-point-text strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+ 
+.preview-point-text span {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+ 
+/* PHONE MOCKUP */
+.phone-wrap {
+  perspective: 1200px;
+}
+ 
+.phone {
+  max-width: 320px;
+  margin: 0 auto;
+  background: var(--surface-3);
+  border-radius: 40px;
+  padding: 14px;
+  border: 1px solid var(--line-strong);
+  box-shadow:
+    0 40px 100px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(255,124,53,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+  transform: rotateY(-4deg) rotateX(2deg);
+  transition: transform .4s ease;
+}
+ 
+.phone:hover {
+  transform: rotateY(0deg) rotateX(0deg);
+}
+ 
+.phone-screen {
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--bg);
+}
+ 
+.ps-header {
+  padding: 18px 16px 12px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+ 
+.ps-header strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 2px;
+}
+ 
+.ps-header span {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+ 
+.ps-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+ 
+.ps-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: var(--orange);
+  background: rgba(255,124,53,0.1);
+  border: 1px solid rgba(255,124,53,0.2);
+}
+ 
+.ps-map {
+  position: relative;
+  height: 128px;
+  background:
+    linear-gradient(90deg, rgba(255,100,30,0.04) 1px, transparent 1px),
+    linear-gradient(rgba(255,100,30,0.04) 1px, transparent 1px),
+    var(--surface-2);
+  background-size: 24px 24px, 24px 24px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+ 
+.ps-pin {
+  position: absolute;
+  padding: 7px 10px;
+  border-radius: 12px;
+  background: var(--surface-3);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+ 
+.ps-pin.hot {
+  border-color: rgba(255,124,53,0.5);
+  box-shadow: 0 8px 24px rgba(255,124,53,0.2);
+}
+ 
+.ps-pin strong {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+ 
+.ps-pin span {
+  display: block;
+  font-size: 9px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+ 
+.ps-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line);
+}
+ 
+.ps-stat {
+  background: var(--surface);
+  padding: 12px 14px;
+}
+ 
+.ps-stat strong {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--orange);
+  letter-spacing: 0.02em;
+}
+ 
+.ps-stat span {
+  display: block;
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-top: 2px;
+}
+ 
+.ps-review {
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+ 
+.ps-review-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 6px var(--orange);
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+ 
+.ps-review strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+ 
+.ps-review p {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+ 
+/* ─── FAQ ─── */
+.faq-section {
+  background: var(--surface);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+ 
+.faq-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 60px;
+  margin-top: 52px;
+  align-items: start;
+}
+ 
+.faq-list {
+  display: grid;
+  gap: 2px;
+}
+ 
+.faq-item {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+ 
+.faq-q {
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 700;
+  font-size: 15px;
+  transition: background .2s;
+}
+ 
+.faq-q:hover { background: var(--surface-3); }
+ 
+.faq-q-arrow {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255,124,53,0.1);
+  border: 1px solid rgba(255,124,53,0.2);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: transform .25s;
+  color: var(--orange);
+  font-size: 14px;
+}
+ 
+.faq-item.open .faq-q-arrow {
+  transform: rotate(45deg);
+}
+ 
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s cubic-bezier(0.4,0,0.2,1);
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.75;
+}
+ 
+.faq-item.open .faq-a {
+  max-height: 400px;
+}
+ 
+.faq-a-inner {
+  padding: 16px 22px 22px;
+  border-top: 1px solid var(--line);
+}
+ 
+/* ─── CTA ─── */
+.cta-section {
+  padding: 100px 0 120px;
+}
+ 
+.cta-shell {
+  position: relative;
+  border-radius: var(--radius-xl);
+  padding: 72px 60px;
+  overflow: hidden;
+  text-align: center;
+}
+ 
+.cta-shell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1a0e06 0%, #0d0b09 50%, #1a0e06 100%);
+}
+ 
+.cta-shell::after {
+  content: '';
+  position: absolute;
+  top: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(255,100,30,0.22), transparent 65%);
+  pointer-events: none;
+}
+ 
+.cta-border {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255,124,53,0.3);
+  box-shadow: inset 0 0 80px rgba(255,100,30,0.06);
+}
+ 
+.cta-content {
+  position: relative;
+  z-index: 2;
+}
+ 
+.cta-shell .eyebrow { margin-bottom: 24px; }
+ 
+.cta-shell h2 {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 8vw, 100px);
+  line-height: 0.97;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+ 
+.cta-shell p {
+  font-size: 18px;
+  color: var(--text-muted);
+  max-width: 520px;
+  margin: 0 auto 36px;
+  line-height: 1.75;
+}
+ 
+.cta-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+ 
+.cta-actions .btn-primary {
+  min-height: 54px;
+  padding: 0 32px;
+  font-size: 15px;
+}
+ 
+.cta-footnote {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin-top: 16px;
+}
+ 
+/* ─── FOOTER ─── */
+.footer {
+  padding: 0 0 48px;
+  border-top: 1px solid var(--line);
+}
+ 
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 32px;
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 600;
+}
+ 
+/* ─── RESPONSIVE ─── */
+@media (max-width: 960px) {
+  .preview-layout,
+  .faq-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .feature-big {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .features-layout,
+  .problem-grid,  
+  .feature-big { grid-column: 1; }
+  .topbar nav { display: none; }
+  .hero-headline { font-size: clamp(60px, 14vw, 100px); }
+}
+ 
+@media (max-width: 640px) {
+  .container { width: calc(100% - 32px); }
+  .cta-shell { padding: 48px 28px; }
+  .hero { padding: 0 0 80px; }
+  .hero-inner { padding-top: 60px; }
+  .feature-big,
+  .feature-small { padding: 30px 24px; }
+  .section-title { font-size: clamp(24px, 7vw, 32px); }
+  
+  
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .phone { transform: none; }
+}
+ 
+/* ─── HERO COMPARE ─── */
+.hero-compare {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.hero-compare-col {
+  flex: 1;
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid;
+}
+.hero-compare-col.bad {
+  background: rgba(80,20,10,0.35);
+  border-color: rgba(255,60,20,0.2);
+}
+.hero-compare-col.good {
+  background: rgba(20,50,20,0.35);
+  border-color: rgba(60,200,100,0.2);
+}
+.hero-compare-label {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--text-muted);
+}
+.hero-compare-reviews { display: flex; flex-direction: column; gap: 7px; }
+.hcr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  color: var(--text-muted);
+}
+.hcr-ad { background: rgba(255,50,20,0.08); }
+.hcr-real { background: rgba(60,200,100,0.08); }
+.hcr-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 99px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.hcr-tag.ad { background: rgba(255,50,20,0.2); color: #ff7050; }
+.hcr-tag.real { background: rgba(60,200,100,0.2); color: #5cf890; }
+.hero-compare-arrow {
+  font-size: 28px;
+  color: var(--orange);
+  flex-shrink: 0;
+  font-weight: 900;
+}
+.hero-compare-bars { display: flex; flex-direction: column; gap: 10px; }
+.hcb-row { display: flex; align-items: center; gap: 10px; }
+.hcb-label { font-size: 12px; color: var(--text-muted); width: 60px; flex-shrink: 0; }
+.hcb-track { flex: 1; height: 8px; background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden; }
+.hcb-fill { height: 100%; border-radius: 99px; transition: width 1s ease; }
+.hcb-val { font-size: 12px; font-weight: 700; color: var(--text); width: 32px; text-align: right; }
+.hcb-verdict {
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #5cf890;
+  text-align: center;
+}
+ 
+/* ─── PROBLEM FLOW ─── */
+.problem-flow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.pf-step {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 28px 24px;
+  width: 160px;
+  text-align: center;
+  transition: transform .2s, border-color .2s;
+}
+.pf-step:hover { transform: translateY(-4px); border-color: var(--line-strong); }
+.pf-step-solution {
+  border-color: rgba(255,124,53,0.4);
+  background: rgba(255,124,53,0.06);
+  box-shadow: 0 0 24px rgba(255,100,30,0.1);
+}
+.pf-icon { font-size: 40px; margin-bottom: 8px; }
+.pf-num {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--orange);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.pf-title { font-size: 14px; font-weight: 800; margin-bottom: 6px; color: var(--text); }
+.pf-desc { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+.pf-arrow {
+  font-size: 28px;
+  color: var(--orange-deep);
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+.pf-arrow-down { width: 100%; text-align: center; font-size: 32px; margin: -4px 0; }
+ 
+.problem-pills {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.pp {
+  padding: 10px 20px;
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  border-radius: 99px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.pp strong { color: var(--orange); margin-left: 4px; }
+ 
+/* ─── SNAP SECTION HEIGHT ─── */
+.snap-section { min-height: 100vh; }
+.snap-container { scroll-snap-type: y mandatory; }
+ 
+ 
+/* ─── HERO SCROLL HINT ─── */
+.hero-scroll-hint {
+  margin-top: 48px;
+  font-size: 13px;
+  color: var(--text-dim);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  animation: hintBob 2s ease-in-out infinite;
+}
+@keyframes hintBob {
+  0%,100% { transform: translateY(0); opacity: 0.5; }
+  50%      { transform: translateY(6px); opacity: 1; }
+}
+ 
+/* ─── PROBLEM SPLIT ─── */
+.problem-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+  min-height: 70vh;
+}
+.problem-copy { }
+.problem-feed {
+  position: relative;
+}
+.pf-feed-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+.feed-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  position: relative;
+  flex-wrap: wrap;
+}
+.feed-item.feed-ad {
+  background: rgba(255,50,10,0.06);
+  border: 1px solid rgba(255,50,10,0.15);
+}
+.feed-item.feed-real {
+  background: rgba(60,200,100,0.05);
+  border: 1px solid rgba(60,200,100,0.15);
+}
+.feed-stars { font-size: 11px; flex-shrink: 0; }
+.feed-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  flex: 1;
+  line-height: 1.5;
+}
+.feed-text.real { color: var(--text); }
+.feed-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 99px;
+  flex-shrink: 0;
+}
+.feed-badge.ad {
+  background: rgba(255,50,10,0.15);
+  color: #ff7050;
+  border: 1px solid rgba(255,50,10,0.3);
+}
+.feed-badge.real {
+  background: rgba(60,200,100,0.12);
+  color: #5cf890;
+  border: 1px solid rgba(60,200,100,0.25);
+}
+.feed-buried {
+  animation: buriedPulse 3s ease-in-out infinite;
+}
+@keyframes buriedPulse {
+  0%,100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+.feed-buried-overlay {
+  position: absolute;
+  bottom: -4px;
+  left: 0; right: 0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--orange);
+  padding: 8px 0 0;
+}
+ 
+/* ─── SECTION PROGRESS DOTS ─── */
+.snap-dots {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 200;
+}
+.snap-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,124,53,0.25);
+  border: 1px solid rgba(255,124,53,0.3);
+  cursor: pointer;
+  transition: all .25s;
+}
+.snap-dot.active {
+  background: var(--orange);
+  transform: scale(1.5);
+  box-shadow: 0 0 8px rgba(255,100,30,0.5);
+}
+ 
+@media (max-width:768px) {
+  .problem-split { grid-template-columns:1fr; gap:32px; }
+  .snap-dots { display: none; }
+}
+ 
 </style>
 </head>
 <body>
-<div class="page">
-    <header class="topbar">
-        <div class="container topbar-inner">
-            <div class="brand">
-                <div class="brand-mark">F</div>
-                <span>Filter Review</span>
-            </div>
-            <nav>
-                <a href="#problem">문제</a>
-                <a href="#features">기능</a>
-                <a href="#preview">서비스 화면</a>
-                <a href="#cta">사전 신청</a>
-            </nav>
-            <a class="btn btn-secondary" href="https://forms.gle/KnWyZCjEpoiUvGSu6" target="_blank" rel="noreferrer">사전 신청</a>
-        </div>
-    </header>
-
-    <main>
-        <section class="hero">
-            <div class="container">
-                <div class="hero-shell">
-                    <div class="hero-grid">
-                        <div>
-                            <span class="eyebrow">광고 말고, 실패한 경험부터 보세요</span>
-                            <h1>방문 전에<br>실패 포인트를 읽는<br>문제 지도</h1>
-                            <p class="lead">
-                                필터리뷰는 흩어진 리뷰를 문제 지도처럼 정리해,
-                                어디에서 자주 실망이 발생하는지 한눈에 읽고 더 빠르게 판단하게 돕습니다.
-                            </p>
-                            <div class="hero-actions">
-                                <a class="btn btn-primary" href="https://forms.gle/KnWyZCjEpoiUvGSu6" target="_blank" rel="noreferrer">사전 신청</a>
-                                <a class="btn btn-secondary" href="#features">핵심 기능 보기</a>
-                            </div>
-                            <div class="hero-meta">
-                                <span>실패 원인을 먼저 확인</span>
-                                <span>문제 지도로 탐색</span>
-                                <span>검증 리뷰 우선 노출</span>
-                            </div>
-                            <div class="panel hero-peek">
-                                <div class="peek-thumb">
-                                    <strong>한눈에 보는<br>이슈 지도</strong>
-                                    <div class="peek-bars">
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </div>
-                                </div>
-                                <div class="peek-copy">
-                                    <strong>방문 전 10초 요약</strong>
-                                    <p>대기, 응대, 광고 의심 여부를 작은 지도 썸네일처럼 먼저 보여줘 서비스 구조가 바로 읽히게 했습니다.</p>
-                                    <span>핫스팟 먼저 확인</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="dashboard">
-                            <div class="panel dashboard-main">
-                                <span class="panel-label">REVIEW SNAPSHOT</span>
-                                <div class="score">
-                                    <div>
-                                        <strong>2.1</strong>
-                                        <p>광고성 후기 제외 후 체감 만족도</p>
-                                    </div>
-                                    <div>
-                                        <strong>68%</strong>
-                                        <p>대기, 위생, 응대 관련 불만 비중</p>
-                                    </div>
-                                </div>
-                                <div class="bars">
-                                    <div class="bar-row">
-                                        <span>응대</span>
-                                        <div class="bar"><div class="bar-fill" style="width:72%"></div></div>
-                                        <span>72%</span>
-                                    </div>
-                                    <div class="bar-row">
-                                        <span>대기</span>
-                                        <div class="bar"><div class="bar-fill" style="width:54%"></div></div>
-                                        <span>54%</span>
-                                    </div>
-                                    <div class="bar-row">
-                                        <span>위생</span>
-                                        <div class="bar"><div class="bar-fill" style="width:36%"></div></div>
-                                        <span>36%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="dashboard-sub">
-                                <div class="panel mini-card">
-                                    <span class="panel-label">FILTER</span>
-                                    <strong>불만 리뷰 우선</strong>
-                                    <p>좋은 말보다 실수와 불편을 먼저 보면 방문 실패를 줄일 수 있습니다.</p>
-                                </div>
-                                <div class="panel mini-card">
-                                    <span class="panel-label">VERIFY</span>
-                                    <strong>의심 리뷰 걸러내기</strong>
-                                    <p>계정 이력과 문장 패턴을 기준으로 신뢰도 낮은 리뷰를 분리합니다.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="problem">
-            <div class="container">
-                <div class="section-head">
-                    <div>
-                        <span class="eyebrow">Problem</span>
-                        <h2>리뷰는 많은데<br>결정은 더 어려워집니다</h2>
-                    </div>
-                    <p>
-                        별점과 칭찬이 많아도 실제로는 어디서 불편했는지 알기 어렵습니다.
-                        사용자는 실패 원인을 찾느라 시간을 쓰고, 매장은 반복되는 문제를 놓칩니다.
-                    </p>
-                </div>
-                <div class="feature-grid">
-                    <article class="panel feature-card">
-                        <div class="icon-chip">01</div>
-                        <strong>좋은 말이 너무 많습니다</strong>
-                        <p>광고성 후기와 짧은 칭찬이 상단을 채우면 실제 방문 경험을 가늠하기 어려워집니다.</p>
-                    </article>
-                    <article class="panel feature-card">
-                        <div class="icon-chip">02</div>
-                        <strong>불만은 흩어져 있습니다</strong>
-                        <p>응대, 대기, 가격 같은 문제는 리뷰 곳곳에 섞여 있어 핵심만 빠르게 읽기 어렵습니다.</p>
-                    </article>
-                    <article class="panel feature-card">
-                        <div class="icon-chip">03</div>
-                        <strong>결정 전에 너무 오래 찾습니다</strong>
-                        <p>리뷰를 직접 읽고 비교하다 보면 방문 전 판단에 드는 시간이 과하게 길어집니다.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="features">
-            <div class="container">
-                <div class="section-head">
-                    <div>
-                        <span class="eyebrow">핵심 기능</span>
-                        <h2>흩어진 리뷰를<br>한 장의 문제 지도로 바꿉니다</h2>
-                    </div>
-                    <p>
-                        사용자는 어디에서 문제가 반복되는지 먼저 보고, 이슈별로 탐색한 뒤,
-                        신뢰도 낮은 후기를 걸러내며 더 빠르게 방문 결정을 내릴 수 있습니다.
-                    </p>
-                </div>
-                <div class="flow-grid">
-                    <article class="panel flow-card">
-                        <span class="flow-step">기능 1</span>
-                        <span class="flow-kicker">문제 핫스팟</span>
-                        <h3>어디가 문제인지 먼저 보입니다</h3>
-                        <p>좋은 후기보다 실제로 실망이 몰리는 지점을 먼저 드러내 빠르게 위험 구간을 읽게 합니다.</p>
-                        <ul>
-                            <li>정보량 적은 칭찬 후기는 뒤로 배치</li>
-                            <li>구체적인 불만 사례를 상단에 정렬</li>
-                            <li>방문 전에 피해야 할 지점을 먼저 확인</li>
-                        </ul>
-                    </article>
-                    <article class="panel flow-card">
-                        <span class="flow-step">기능 2</span>
-                        <span class="flow-kicker">이슈 레이어</span>
-                        <h3>문제를 지도처럼 겹쳐 봅니다</h3>
-                        <p>응대, 대기, 위생, 가격처럼 비슷한 불만을 레이어처럼 분류해 취약한 패턴을 한눈에 보여줍니다.</p>
-                        <ul>
-                            <li>카테고리별 탭으로 빠르게 이동</li>
-                            <li>반복 언급이 많은 이슈를 자동 강조</li>
-                            <li>매장별 취약 지점을 한 번에 비교</li>
-                        </ul>
-                    </article>
-                    <article class="panel flow-card">
-                        <span class="flow-step">기능 3</span>
-                        <span class="flow-kicker">신뢰 필터</span>
-                        <h3>지도를 흐리는 리뷰는 걷어냅니다</h3>
-                        <p>의심 계정과 반복 패턴을 걸러내 실제 의사결정에 도움이 되는 후기 밀도를 높입니다.</p>
-                        <ul>
-                            <li>계정 이력과 작성 패턴 기반 필터링</li>
-                            <li>중복 문장과 비정상 활동을 탐지</li>
-                            <li>신뢰 가능한 후기 중심으로 다시 정렬</li>
-                        </ul>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="preview">
-            <div class="container">
-                <div class="showcase">
-                    <article class="panel showcase-copy">
-                        <span class="eyebrow">미리보기</span>
-                        <h3>리뷰 리스트가 아니라<br>문제 지도로 읽히게 만듭니다</h3>
-                        <p>
-                            사용자는 첫 화면에서 이슈 지도를 보고, 어느 지점에서 문제가 몰리는지 확인한 뒤,
-                            아래에서 실제 리뷰 근거를 읽는 흐름으로 서비스 구조를 이해하게 됩니다.
-                        </p>
-                        <div class="showcase-points">
-                            <div>
-                                <strong>핫스팟 우선 확인</strong>
-                                <span>응대, 대기, 위생 같은 실패 포인트가 먼저 눈에 들어옵니다.</span>
-                            </div>
-                            <div>
-                                <strong>레이어별 탐색</strong>
-                                <span>문제를 종류별로 겹쳐 보며 어떤 이슈가 반복되는지 바로 읽을 수 있습니다.</span>
-                            </div>
-                            <div>
-                                <strong>신뢰도 태그</strong>
-                                <span>리뷰 품질을 구분해 어떤 후기를 믿어야 할지 더 쉽게 파악할 수 있습니다.</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <div class="panel app-shot">
-                        <div class="phone">
-                            <div class="phone-screen">
-                                <div class="screen-top">
-                                    <strong>성수동 브런치 카페</strong>
-                                    <p>문제 지도로 읽는 리뷰 요약 화면</p>
-                                    <div class="tag-row">
-                                        <span>응대 불만 72%</span>
-                                        <span>대기 길이 54%</span>
-                                        <span>광고 의심 낮음</span>
-                                    </div>
-                                </div>
-                                <div class="map-area">
-                                    <div class="map-board">
-                                        <div class="map-route"></div>
-                                        <div class="map-pin map-pin-a is-hot">
-                                            <strong>응대 핫스팟</strong>
-                                            <span>주말 오후 반복</span>
-                                        </div>
-                                        <div class="map-pin map-pin-b">
-                                            <strong>대기 이슈</strong>
-                                            <span>안내 부족</span>
-                                        </div>
-                                        <div class="map-pin map-pin-c">
-                                            <strong>광고 밀도 낮음</strong>
-                                            <span>검증 리뷰 우세</span>
-                                        </div>
-                                    </div>
-                                    <div class="map-legend">
-                                        <span>핫스팟: 응대</span>
-                                        <span>신뢰 필터 적용</span>
-                                    </div>
-                                </div>
-                                <div class="screen-summary">
-                                    <div>
-                                        <strong>2.1</strong>
-                                        <span>체감 만족도</span>
-                                    </div>
-                                    <div>
-                                        <strong>14분</strong>
-                                        <span>평균 대기</span>
-                                    </div>
-                                </div>
-                                <div class="review-list">
-                                    <article class="review-item">
-                                        <div class="review-head">
-                                            <strong>직원 응대가 들쭉날쭉했어요</strong>
-                                            <span>신뢰도 높음</span>
-                                        </div>
-                                        <p>주말 오후 안내 지연과 주문 누락이 반복된다는 후기가 집중됩니다.</p>
-                                        <div class="review-meta">
-                                            <em>응대</em>
-                                            <em>주말</em>
-                                            <em>반복 언급</em>
-                                        </div>
-                                    </article>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="cta" id="cta">
-            <div class="container">
-                <div class="cta-shell">
-                    <span class="eyebrow" style="background:rgba(255,255,255,0.16); border-color:rgba(255,255,255,0.22); color:#fff;">Early Access</span>
-                    <h2>좋은 말보다 먼저<br>문제 지도를 읽는 탐색을 시작하세요</h2>
-                    <p>
-                        첫 출시 알림을 신청하면 베타 오픈 소식과 초기 사용자 전용 안내를 가장 먼저 받아볼 수 있습니다.
-                    </p>
-                    <a class="btn btn-primary" href="https://forms.gle/KnWyZCjEpoiUvGSu6" target="_blank" rel="noreferrer">사전 신청</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container footer-inner">
-            <div>Filter Review</div>
-            <div>실패를 줄여주는 리뷰 문제 지도</div>
-        </div>
-    </footer>
+ 
+ 
+<!-- 🔥 HELL TOAST NOTIFICATION -->
+<div class="hell-toast" id="hellToast" onclick="this.style.display='none'" role="alert">
+  <div class="toast-icon">😈</div>
+  <div class="toast-body">
+    <strong>악플 지옥에 오신 걸 환영합니다</strong>
+    <p>광고 리뷰 92%를 탐지하고 진짜 불만을 먼저 보여드립니다.</p>
+  </div>
+  <span class="toast-close">✕</span>
 </div>
+ 
+<!-- SCROLL PROGRESS DOTS -->
+<nav class="snap-dots" id="snapDots">
+  <div class="snap-dot active" data-target="hero" title="시작"></div>
+  <div class="snap-dot" data-target="problem" title="문제"></div>
+  <div class="snap-dot" data-target="hell" title="해결책"></div>
+  <div class="snap-dot" data-target="features" title="기능"></div>
+  <div class="snap-dot" data-target="preview" title="미리보기"></div>
+  <div class="snap-dot" data-target="faq" title="FAQ"></div>
+  <div class="snap-dot" data-target="cta" title="신청"></div>
+</nav>
+ 
+<div class="snap-container" id="snapContainer">
+ 
+<!-- HERO -->
+<section class="hero snap-section">
+  <div class="grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-left"></div>
+ 
+  <!-- 🔥 FIRE SPARKS -->
+  <div class="hell-particles" aria-hidden="true">
+    <div class="spark" style="left:8%;  --dur:5s;  --delay:0s;   --drift:20px;  width:3px; height:3px; background:#ff5010;"></div>
+    <div class="spark" style="left:15%; --dur:4s;  --delay:1.2s; --drift:-15px; background:#ffaa40;"></div>
+    <div class="spark" style="left:23%; --dur:6s;  --delay:0.4s; --drift:30px;  width:5px; height:5px; background:#ff7030;"></div>
+    <div class="spark" style="left:34%; --dur:3.5s;--delay:2s;   --drift:-8px;  background:#ff4010;"></div>
+    <div class="spark" style="left:47%; --dur:5.5s;--delay:0.8s; --drift:18px;  background:#ffa030;"></div>
+    <div class="spark" style="left:56%; --dur:4.2s;--delay:1.5s; --drift:-22px; width:3px; height:3px;"></div>
+    <div class="spark" style="left:64%; --dur:6.5s;--delay:0.2s; --drift:12px;  background:#ff6020;"></div>
+    <div class="spark" style="left:72%; --dur:3.8s;--delay:2.4s; --drift:-30px; width:5px; height:5px; background:#ffb050;"></div>
+    <div class="spark" style="left:80%; --dur:5.2s;--delay:0.6s; --drift:25px;  background:#ff3010;"></div>
+    <div class="spark" style="left:88%; --dur:4.8s;--delay:1.8s; --drift:-10px; background:#ff8040;"></div>
+    <div class="spark" style="left:93%; --dur:5.8s;--delay:0.3s; --drift:8px;"></div>
+  </div>
+ 
+  <!-- 👻 FLOATING GHOST REVIEWS (악플들이 유령처럼 흘러다님) -->
+  <div class="ghost-reviews" aria-hidden="true">
+    <div class="ghost-review" style="right:-5%; top:18%; --gdur:22s; --gdelay:0s;   --gy:0px;   --gy2:-40px;">😤 응대가 너무 불친절해요...</div>
+    <div class="ghost-review" style="right:-5%; top:32%; --gdur:18s; --gdelay:3s;   --gy:0px;   --gy2:20px;">💀 완전 사기 맛집 ㅠㅠ</div>
+    <div class="ghost-review" style="right:-5%; top:55%; --gdur:25s; --gdelay:6s;   --gy:0px;   --gy2:-20px;">🔥 별점 4.9가 말이 되냐고요</div>
+    <div class="ghost-review" style="right:-5%; top:70%; --gdur:20s; --gdelay:1.5s; --gy:0px;   --gy2:15px;">☠️ 대기만 40분... 다시는 안 가요</div>
+    <div class="ghost-review" style="right:-5%; top:82%; --gdur:16s; --gdelay:9s;   --gy:0px;   --gy2:-10px;">👿 광고 리뷰에 낚였습니다</div>
+  </div>
+ 
+  <!-- 😈 FLOATING DEMON EMOJI DECORATIONS -->
+  <div class="floating-demon" style="top:12%; left:3%;  --fdur:5s;  --fdelay:0s;   --fopa:0.12; --fsz:56px; --frot:-6deg;  --frot2:4deg;">😈</div>
+  <div class="floating-demon" style="top:28%; right:4%; --fdur:7s;  --fdelay:1s;   --fopa:0.10; --fsz:42px; --frot:5deg;   --frot2:-3deg;">👿</div>
+  <div class="floating-demon" style="top:65%; left:2%;  --fdur:6s;  --fdelay:2.5s; --fopa:0.09; --fsz:36px; --frot:-3deg;  --frot2:6deg;">🔥</div>
+  <div class="floating-demon" style="top:80%; right:5%; --fdur:8s;  --fdelay:0.5s; --fopa:0.10; --fsz:48px; --frot:4deg;   --frot2:-5deg;">💀</div>
+  <div class="floating-demon" style="top:45%; left:1%;  --fdur:9s;  --fdelay:3s;   --fopa:0.08; --fsz:32px; --frot:-8deg;  --frot2:2deg;">☠️</div>
+ 
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hell-badge">
+        <span class="fire-icon">🔥</span>
+        광고 리뷰를 걷어낸 진짜 불만 지도
+        <span class="fire-icon">🔥</span>
+      </div>
+ 
+      <h1 class="hero-headline">
+        악플<br>
+        <span class="accent">지도</span>
+      </h1>
+ 
+      <p class="hero-lead">
+        별점 4.8인데 막상 가면 실망한 적 있으신가요?
+      </p>
+ 
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://forms.gle/KnWyZCjEpoiUvGSu6" target="_blank" rel="noreferrer">무료로 사전 신청하기 →</a>
+        <a class="btn btn-ghost" href="#problem">왜 필요한가요?</a>
+      </div>
+ 
+      <div class="hero-scroll-hint">스크롤해서 알아보기 ↓</div>
+    </div>
+  </div>
+</section>
+ 
+ 
+<!-- PROBLEM -->
+<section class="section problem-section snap-section" id="problem">
+  <div class="container">
+    <div class="problem-split">
+ 
+      <!-- 왼쪽: 감정 카피 -->
+      <div class="problem-copy">
+        <div class="section-label">당신만의 문제가 아닙니다</div>
+        <h2 class="section-title">리뷰를 읽는데<br>왜 이렇게<br>피곤할까요</h2>
+        <p class="section-desc">광고 리뷰가 상단을 채우고,<br>진짜 불만은 수십 개 사이에 흩어져 있습니다.</p>
+      </div>
+ 
+      <!-- 오른쪽: 리뷰 피드 시각화 (광고가 진짜를 덮는 모습) -->
+      <div class="problem-feed">
+        <div class="pf-feed-label">📱 실제 리뷰 피드</div>
+        <div class="feed-item feed-ad">
+          <span class="feed-stars">⭐⭐⭐⭐⭐</span>
+          <span class="feed-text">강추강추!! 완전 맛집 💕💕</span>
+          <span class="feed-badge ad">광고 의심</span>
+        </div>
+        <div class="feed-item feed-ad">
+          <span class="feed-stars">⭐⭐⭐⭐⭐</span>
+          <span class="feed-text">분위기 최고~ 사장님 친절해요!</span>
+          <span class="feed-badge ad">광고 의심</span>
+        </div>
+        <div class="feed-item feed-ad">
+          <span class="feed-stars">⭐⭐⭐⭐⭐</span>
+          <span class="feed-text">여기 진짜 맛있어요 또 올게요 ㅎ</span>
+          <span class="feed-badge ad">광고 의심</span>
+        </div>
+        <div class="feed-item feed-real feed-buried">
+          <span class="feed-text real">대기가 너무 길었어요. 40분 넘게 서 있었는데 안내도 없고...</span>
+          <span class="feed-badge real">진짜 후기</span>
+        </div>
+        <div class="feed-item feed-ad">
+          <span class="feed-stars">⭐⭐⭐⭐⭐</span>
+          <span class="feed-text">인생 카페 찾았다! 무조건 가세요!!</span>
+          <span class="feed-badge ad">광고 의심</span>
+        </div>
+        <div class="feed-item feed-real feed-buried">
+          <span class="feed-text real">직원 응대가 불친절했어요. 주문 누락도 있었고요.</span>
+          <span class="feed-badge real">진짜 후기</span>
+        </div>
+        <div class="feed-buried-overlay">
+          <span>진짜 후기는 여기 묻혀있어요 👆</span>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</section>
+ 
+<!-- 🔥 REVIEW HELL MAP VISUAL SECTION -->
+<section class="review-hell snap-section" id="hell">
+  <div class="hell-particles" aria-hidden="true">
+    <div class="spark" style="left:10%; --dur:4s;  --delay:0s;   --drift:15px;  background:#ff5010;"></div>
+    <div class="spark" style="left:25%; --dur:5s;  --delay:1s;   --drift:-20px; background:#ffaa40;"></div>
+    <div class="spark" style="left:40%; --dur:3.5s;--delay:0.5s; --drift:25px;  background:#ff7030; width:5px; height:5px;"></div>
+    <div class="spark" style="left:60%; --dur:6s;  --delay:1.8s; --drift:-10px; background:#ff4010;"></div>
+    <div class="spark" style="left:75%; --dur:4.5s;--delay:0.3s; --drift:18px;  background:#ffa030;"></div>
+    <div class="spark" style="left:88%; --dur:5.5s;--delay:2.2s; --drift:-25px; background:#ff6020;"></div>
+  </div>
+ 
+  <div class="container" style="position:relative; z-index:3;">
+    <div style="display:grid; grid-template-columns:1fr; gap:16px; align-items:center; margin-bottom:16px;">
+      <div>
+        <div class="hell-zone" style="margin-bottom:16px;">😈 악플지도의 해결책</div>
+        <h2 class="section-title">흩어진 불만을<br>카테고리로<br>정리해드립니다</h2>
+        <p class="section-desc" style="margin-top:16px;">응대·대기·위생·광고 — 어떤 문제가 얼마나 반복되는지, 한눈에 보여드립니다.</p>
+      </div>
+ 
+      <!-- DEMON MASCOT SVG -->
+      <div class="demon-mascot">
+        <svg width="140" height="160" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Body -->
+          <ellipse cx="70" cy="110" rx="38" ry="42" fill="#1a0a04"/>
+          <ellipse cx="70" cy="108" rx="34" ry="38" fill="#2a1008"/>
+          <!-- Horns left -->
+          <path d="M38 72 Q28 44 36 30 Q42 52 50 68Z" fill="#e85f15"/>
+          <path d="M38 72 Q32 50 38 38 Q42 56 50 68Z" fill="#ff7c35"/>
+          <!-- Horns right -->
+          <path d="M102 72 Q112 44 104 30 Q98 52 90 68Z" fill="#e85f15"/>
+          <path d="M102 72 Q108 50 102 38 Q98 56 90 68Z" fill="#ff7c35"/>
+          <!-- Face -->
+          <ellipse cx="70" cy="80" rx="32" ry="30" fill="#3a1a08"/>
+          <ellipse cx="70" cy="78" rx="29" ry="27" fill="#4a2010"/>
+          <!-- Eyes -->
+          <ellipse cx="57" cy="72" rx="9" ry="9" fill="#ff3010"/>
+          <ellipse cx="83" cy="72" rx="9" ry="9" fill="#ff3010"/>
+          <ellipse cx="57" cy="72" rx="5" ry="6" fill="#ff6030"/>
+          <ellipse cx="83" cy="72" rx="5" ry="6" fill="#ff6030"/>
+          <circle cx="58" cy="71" r="2" fill="#fff" opacity=".7"/>
+          <circle cx="84" cy="71" r="2" fill="#fff" opacity=".7"/>
+          <!-- Pupils -->
+          <ellipse cx="57" cy="73" rx="3" ry="4" fill="#1a0800"/>
+          <ellipse cx="83" cy="73" rx="3" ry="4" fill="#1a0800"/>
+          <!-- Evil brows -->
+          <path d="M48 62 Q57 57 66 61" stroke="#ff4010" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M74 61 Q83 57 92 62" stroke="#ff4010" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Mouth / evil grin -->
+          <path d="M52 88 Q60 98 70 100 Q80 98 88 88" stroke="#ff5020" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M56 88 Q60 94 70 96 Q80 94 84 88" fill="#1a0400"/>
+          <!-- Fangs -->
+          <path d="M62 95 L59 104 L65 97Z" fill="#f5ede4"/>
+          <path d="M74 95 L71 104 L77 97Z" fill="#f5ede4"/>
+          <!-- Tail -->
+          <path d="M104 130 Q130 110 122 90 Q116 75 108 88 Q102 98 110 105 Q118 112 106 128Z" fill="#e85f15"/>
+          <path d="M110 122 L118 118 L114 130Z" fill="#e85f15"/>
+          <!-- Arms / claws -->
+          <path d="M36 100 Q20 108 18 120" stroke="#3a1a08" stroke-width="10" stroke-linecap="round"/>
+          <path d="M18 120 L12 116 M18 120 L14 126 M18 120 L22 127" stroke="#e85f15" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M104 100 Q120 108 122 120" stroke="#3a1a08" stroke-width="10" stroke-linecap="round"/>
+          <path d="M122 120 L128 116 M122 120 L126 126 M122 120 L118 127" stroke="#e85f15" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Glow ring under -->
+          <ellipse cx="70" cy="148" rx="30" ry="6" fill="#ff5010" opacity=".18"/>
+        </svg>
+        <div class="demon-speech">😈 "내 리뷰는 광고가 아니야!"</div>
+      </div>
+    </div>
+ 
+    <!-- HELL ZONE CARDS -->
+    <div class="hell-map-visual">
+      <!-- Lava drips at top -->
+      <div style="position:absolute; top:0; left:0; right:0; display:flex; gap:60px; padding:0 40px; pointer-events:none;">
+        <div class="lava-drip" style="--ddur:3.2s; --ddelay:0s;   left:8%;"></div>
+        <div class="lava-drip" style="--ddur:4s;   --ddelay:1.2s; left:22%;"></div>
+        <div class="lava-drip" style="--ddur:2.8s; --ddelay:0.6s; left:38%;"></div>
+        <div class="lava-drip" style="--ddur:3.8s; --ddelay:2s;   left:55%;"></div>
+        <div class="lava-drip" style="--ddur:3.1s; --ddelay:0.4s; left:70%;"></div>
+        <div class="lava-drip" style="--ddur:4.5s; --ddelay:1.8s; left:85%;"></div>
+      </div>
+ 
+      <div class="hell-zones">
+        <div class="hell-zone-card" style="--zone-color:#ff3010;">
+          <span class="hell-zone-emoji" style="--fdur:3s;">😤</span>
+          <h4>응대 지옥</h4>
+          <p>불친절, 무시, 주문 누락이 반복되는 뜨거운 구역</p>
+          <div class="hell-zone-temp">😤 불만 비중 72%</div>
+        </div>
+        <div class="hell-zone-card" style="--zone-color:#ff6010;">
+          <span class="hell-zone-emoji" style="--fdur:4s; animation-delay:.5s;">⏳</span>
+          <h4>대기 지옥</h4>
+          <p>안내도 없이 30~40분 기다리는 지루한 연옥</p>
+          <div class="hell-zone-temp">⏱ 불만 비중 54%</div>
+        </div>
+        <div class="hell-zone-card" style="--zone-color:#ffaa20;">
+          <span class="hell-zone-emoji" style="--fdur:5s; animation-delay:1s;">🪲</span>
+          <h4>위생 지옥</h4>
+          <p>테이블, 화장실, 식기에서 반복 발견되는 문제</p>
+          <div class="hell-zone-temp">🪲 불만 비중 36%</div>
+        </div>
+        <div class="hell-zone-card" style="--zone-color:#ff4040;">
+          <span class="hell-zone-emoji" style="--fdur:3.5s; animation-delay:.3s;">💸</span>
+          <h4>가격 지옥</h4>
+          <p>광고 속 모습과 실제 가격표의 차이에서 오는 배신감</p>
+          <div class="hell-zone-temp">💸 불만 비중 28%</div>
+        </div>
+        <div class="hell-zone-card" style="--zone-color:#aa20ff;">
+          <span class="hell-zone-emoji" style="--fdur:6s; animation-delay:.8s;">👻</span>
+          <h4>광고 지옥</h4>
+          <p>체험단·협찬 리뷰가 진짜를 덮어버리는 유령 구역</p>
+          <div class="hell-zone-temp">👻 광고 의심 92%</div>
+        </div>
+        <div class="hell-zone-card" style="--zone-color:#20aaff; background:linear-gradient(180deg, var(--surface-2), rgba(0,100,255,0.04));">
+          <span class="hell-zone-emoji" style="--fdur:4.5s; animation-delay:1.2s;">😇</span>
+          <h4>천국 (드물지만)</h4>
+          <p>악플지도가 걷어낸 뒤 남는 진짜 좋은 곳들</p>
+          <div class="hell-zone-temp" style="color:#5cf890; background:rgba(92,248,144,0.08); border-color:rgba(92,248,144,0.2);">✨ 검증됨</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- FEATURES -->
+<section class="section snap-section" id="features">
+  <div class="container">
+    <div class="section-label">이렇게 달라집니다</div>
+    <h2 class="section-title">3가지로<br>정리됩니다</h2>
+ 
+    <div class="feat-cards">
+ 
+      <!-- 기능 1 -->
+      <div class="feat-card">
+        <div class="feat-icon">🔥</div>
+        <div class="feat-body">
+          <div class="feat-title">불만 핫스팟</div>
+          <div class="feat-desc">어디가 문제인지 먼저 보입니다</div>
+          <div class="feat-bars">
+            <div class="fb-row"><span>응대</span><div class="fb-track"><div class="fb-fill" style="width:72%;background:#ff5030;"></div></div><span>72%</span></div>
+            <div class="fb-row"><span>대기</span><div class="fb-track"><div class="fb-fill" style="width:54%;background:#ff8030;"></div></div><span>54%</span></div>
+            <div class="fb-row"><span>위생</span><div class="fb-track"><div class="fb-fill" style="width:36%;background:#ffaa30;"></div></div><span>36%</span></div>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- 기능 2 -->
+      <div class="feat-card">
+        <div class="feat-icon">🗂️</div>
+        <div class="feat-body">
+          <div class="feat-title">이슈 레이어</div>
+          <div class="feat-desc">카테고리별로 겹쳐서 봅니다</div>
+          <div class="feat-chips">
+            <span class="fc active">응대</span>
+            <span class="fc">대기</span>
+            <span class="fc">위생</span>
+            <span class="fc">광고</span>
+          </div>
+        </div>
+      </div>
+ 
+      <!-- 기능 3 -->
+      <div class="feat-card">
+        <div class="feat-icon">🛡️</div>
+        <div class="feat-body">
+          <div class="feat-title">신뢰 필터</div>
+          <div class="feat-desc">광고 리뷰를 걷어냅니다</div>
+          <div class="feat-reviews">
+            <div class="fr-row"><span class="fr-text">대기 40분... 안내도 없어요</span><span class="fr-badge ok">검증</span></div>
+            <div class="fr-row muted"><span class="fr-text">완전 강추!! 최고!!</span><span class="fr-badge warn">광고</span></div>
+            <div class="fr-row"><span class="fr-text">직원이 너무 불친절해요</span><span class="fr-badge ok">검증</span></div>
+          </div>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</section>
+ 
+<style>
+.feat-cards { display:flex; flex-direction:column; gap:12px; margin-top:24px; }
+.feat-card {
+  display:flex; align-items:flex-start; gap:14px;
+  background:var(--surface-2);
+  border:1px solid var(--line);
+  border-radius:var(--radius-sm);
+  padding:16px;
+}
+.feat-icon { font-size:28px; flex-shrink:0; margin-top:2px; }
+.feat-body { flex:1; min-width:0; }
+.feat-title { font-size:14px; font-weight:800; color:var(--text); margin-bottom:3px; }
+.feat-desc { font-size:12px; color:var(--text-muted); margin-bottom:10px; }
+.feat-bars { display:flex; flex-direction:column; gap:6px; }
+.fb-row { display:flex; align-items:center; gap:8px; font-size:11px; color:var(--text-muted); }
+.fb-row span:first-child { width:26px; flex-shrink:0; }
+.fb-row span:last-child { width:28px; text-align:right; flex-shrink:0; color:var(--text); font-weight:700; }
+.fb-track { flex:1; height:6px; background:rgba(255,255,255,0.06); border-radius:99px; overflow:hidden; }
+.fb-fill { height:100%; border-radius:99px; }
+.feat-chips { display:flex; gap:6px; flex-wrap:wrap; }
+.fc {
+  font-size:11px; font-weight:700;
+  padding:4px 10px; border-radius:99px;
+  background:var(--surface-3); border:1px solid var(--line);
+  color:var(--text-muted);
+}
+.fc.active { background:rgba(255,124,53,0.15); border-color:var(--orange); color:var(--orange-bright); }
+.feat-reviews { display:flex; flex-direction:column; gap:5px; }
+.fr-row { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.fr-row.muted .fr-text { opacity:0.4; text-decoration:line-through; }
+.fr-text { font-size:11px; color:var(--text-muted); flex:1; }
+.fr-badge { font-size:10px; font-weight:700; padding:2px 7px; border-radius:99px; flex-shrink:0; }
+.fr-badge.ok { background:rgba(60,200,100,0.12); color:#5cf890; border:1px solid rgba(60,200,100,0.25); }
+.fr-badge.warn { background:rgba(200,80,255,0.1); color:#cc70ff; border:1px solid rgba(200,80,255,0.25); }
+</style>
+ 
+ 
+<!-- PREVIEW -->
+<section class="section preview-section snap-section" id="preview">
+  <div class="container">
+    <div class="preview-layout">
+      <div class="preview-copy">
+        <div class="section-label">실제 화면</div>
+        <h2 class="section-title">앱이 보여주는<br>지도는 이렇습니다</h2>
+        <p class="section-desc">지도에서 문제 핀을 누르면 — 해당 매장의 불만 요약이 바로 펼쳐집니다.</p>
+ 
+        <div class="preview-points">
+          <div class="preview-point">
+            <div class="preview-point-icon">🔥</div>
+            <div class="preview-point-text">
+              <strong>핫스팟 우선 확인</strong>
+              <span>응대, 대기, 위생 같은 실패 포인트가 먼저 눈에 들어옵니다.</span>
+            </div>
+          </div>
+          <div class="preview-point">
+            <div class="preview-point-icon">🗂️</div>
+            <div class="preview-point-text">
+              <strong>레이어별 탐색</strong>
+              <span>문제를 종류별로 겹쳐 보며 어떤 이슈가 반복되는지 바로 읽을 수 있습니다.</span>
+            </div>
+          </div>
+          <div class="preview-point">
+            <div class="preview-point-icon">✅</div>
+            <div class="preview-point-text">
+              <strong>신뢰도 태그</strong>
+              <span>리뷰 품질을 구분해 어떤 후기를 믿어야 할지 더 쉽게 파악할 수 있습니다.</span>
+            </div>
+          </div>
+        </div>
+ 
+        <div style="margin-top:28px; padding-top:24px; border-top:1px solid var(--line);">
+          <div class="section-label" style="margin-bottom:8px;">지금 체험해보세요</div>
+          <h3 style="font-family:var(--font-display); font-size:22px; line-height:1.1; color:var(--text); margin-bottom:8px;">핀을 눌러<br>직접 확인해보세요</h3>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">실제 서비스와 동일한 방식입니다.<br>가고 싶은 동네 핀을 눌러보세요.</p>
+        </div>
+      </div>
+ 
+      <div class="phone-wrap">
+        <div class="phone" id="appPhone">
+          <div class="phone-screen" id="appScreen">
+ 
+            <!-- STATUS BAR -->
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 18px 6px;background:#0d0b09;font-size:11px;font-weight:700;color:#f5ede4;">
+              <span>9:41</span><span>▲▲▲ 🔋</span>
+            </div>
+ 
+            <!-- SEARCH BAR -->
+            <div style="padding:8px 12px;background:#161310;border-bottom:1px solid rgba(255,120,50,0.15);">
+              <div style="display:flex;align-items:center;gap:8px;background:#252018;border:1px solid rgba(255,120,50,0.2);border-radius:10px;padding:8px 12px;">
+                <span style="font-size:13px;color:#5a4a3a;">🔍</span>
+                <span style="font-size:12px;color:#5a4a3a;flex:1;">검색어를 입력해주세요.</span>
+              </div>
+              <div style="display:flex;gap:6px;margin-top:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;">
+                <span id="chip-위생" onclick="setFilter('위생')" style="flex-shrink:0;font-size:10px;font-weight:700;padding:4px 10px;border-radius:999px;background:rgba(255,120,50,0.15);border:1px solid rgba(255,120,50,0.3);color:#ff9a5a;cursor:pointer;">위생 불만</span>
+                <span id="chip-대기" onclick="setFilter('대기')" style="flex-shrink:0;font-size:10px;font-weight:700;padding:4px 10px;border-radius:999px;background:#252018;border:1px solid rgba(255,120,50,0.15);color:#8a7060;cursor:pointer;">대기 시간 불만</span>
+                <span id="chip-응대" onclick="setFilter('응대')" style="flex-shrink:0;font-size:10px;font-weight:700;padding:4px 10px;border-radius:999px;background:#252018;border:1px solid rgba(255,120,50,0.15);color:#8a7060;cursor:pointer;">응대 불만</span>
+                <span id="chip-광고" onclick="setFilter('광고')" style="flex-shrink:0;font-size:10px;font-weight:700;padding:4px 10px;border-radius:999px;background:#252018;border:1px solid rgba(255,120,50,0.15);color:#8a7060;cursor:pointer;">광고 의심</span>
+              </div>
+            </div>
+ 
+            <!-- MAP AREA -->
+            <div id="mapArea" style="position:relative;height:200px;overflow:hidden;background:#1a1410;cursor:grab;">
+              <div id="mapCanvas" style="position:absolute;inset:0;transition:transform .3s ease;transform-origin:center center;">
+                <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="320" height="200" fill="#1e1a14"/>
+                  <rect x="20"  y="20"  width="60" height="40" rx="3" fill="#252018" opacity=".9"/>
+                  <rect x="90"  y="10"  width="50" height="30" rx="3" fill="#2a2010" opacity=".8"/>
+                  <rect x="150" y="15"  width="70" height="45" rx="3" fill="#252018" opacity=".9"/>
+                  <rect x="230" y="20"  width="70" height="35" rx="3" fill="#2a2010" opacity=".8"/>
+                  <rect x="10"  y="80"  width="55" height="50" rx="3" fill="#2a2010" opacity=".8"/>
+                  <rect x="75"  y="70"  width="65" height="55" rx="3" fill="#252018" opacity=".9"/>
+                  <rect x="150" y="75"  width="45" height="40" rx="3" fill="#2a2010" opacity=".8"/>
+                  <rect x="205" y="65"  width="80" height="55" rx="3" fill="#252018" opacity=".9"/>
+                  <rect x="15"  y="145" width="70" height="45" rx="3" fill="#2a2010" opacity=".8"/>
+                  <rect x="95"  y="140" width="55" height="50" rx="3" fill="#252018" opacity=".9"/>
+                  <rect x="160" y="130" width="60" height="60" rx="3" fill="#2a2010" opacity=".8"/>
+                  <rect x="230" y="135" width="75" height="55" rx="3" fill="#252018" opacity=".9"/>
+                  <rect x="0"   y="60"  width="320" height="10" fill="#151210" opacity=".9"/>
+                  <rect x="0"   y="120" width="320" height="10" fill="#151210" opacity=".9"/>
+                  <rect x="80"  y="0"   width="10"  height="200" fill="#151210" opacity=".9"/>
+                  <rect x="145" y="0"   width="10"  height="200" fill="#151210" opacity=".9"/>
+                  <rect x="225" y="0"   width="10"  height="200" fill="#151210" opacity=".9"/>
+                  <path d="M0 180 L120 60" stroke="#151210" stroke-width="8" opacity=".7"/>
+                  <path d="M200 200 L320 80" stroke="#151210" stroke-width="6" opacity=".6"/>
+                  <text x="28"  y="57"  font-size="5" fill="#5a4a3a" font-family="sans-serif">성수로</text>
+                  <text x="90"  y="57"  font-size="5" fill="#5a4a3a" font-family="sans-serif">뚝섬로</text>
+                  <text x="155" y="57"  font-size="5" fill="#5a4a3a" font-family="sans-serif">서울숲길</text>
+                  <text x="83"  y="110" font-size="4" fill="#5a4a3a" font-family="sans-serif" writing-mode="tb">왕십리로</text>
+                  <text x="100" y="95"  font-size="7" fill="#3a2a1a" font-family="sans-serif" font-weight="bold">성수 2가 3동</text>
+                  <text x="170" y="100" font-size="6" fill="#3a2a1a" font-family="sans-serif">서울숲</text>
+                </svg>
+                <!-- 핀 0: 루프루프 HOT -->
+                <div id="pin-0" onclick="selectPin(0)" style="position:absolute;top:62px;left:96px;cursor:pointer;z-index:10;transform:translate(-50%,-100%);">
+                  <div style="display:flex;flex-direction:column;align-items:center;">
+                    <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#e85f15,#ff7c35);border:2px solid #ff9a5a;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 0 14px rgba(255,80,10,0.7);animation:pinPulse 2s ease-in-out infinite;">😤</div>
+                    <div style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:8px solid #e85f15;margin-top:-1px;"></div>
+                  </div>
+                </div>
+                <!-- 핀 1: 어퍼컷커피 -->
+                <div id="pin-1" onclick="selectPin(1)" style="position:absolute;top:145px;left:108px;cursor:pointer;z-index:10;transform:translate(-50%,-100%);">
+                  <div style="display:flex;flex-direction:column;align-items:center;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#c45010,#ff6020);border:2px solid #ff8040;display:flex;align-items:center;justify-content:center;font-size:12px;box-shadow:0 0 10px rgba(200,80,10,0.5);">⏳</div>
+                    <div style="width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:7px solid #c45010;margin-top:-1px;"></div>
+                  </div>
+                </div>
+                <!-- 핀 2: ABC SEOUL 광고 -->
+                <div id="pin-2" onclick="selectPin(2)" style="position:absolute;top:48px;left:168px;cursor:pointer;z-index:10;transform:translate(-50%,-100%);">
+                  <div style="display:flex;flex-direction:column;align-items:center;">
+                    <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#7a10cc,#aa40ff);border:2px solid #cc70ff;display:flex;align-items:center;justify-content:center;font-size:11px;box-shadow:0 0 10px rgba(150,30,220,0.5);">👻</div>
+                    <div style="width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:7px solid #7a10cc;margin-top:-1px;"></div>
+                  </div>
+                </div>
+                <!-- 핀 3: 지우관 위생 -->
+                <div id="pin-3" onclick="selectPin(3)" style="position:absolute;top:110px;left:180px;cursor:pointer;z-index:10;transform:translate(-50%,-100%);">
+                  <div style="display:flex;flex-direction:column;align-items:center;">
+                    <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#10803a,#20c060);border:2px solid #40e080;display:flex;align-items:center;justify-content:center;font-size:11px;box-shadow:0 0 8px rgba(20,180,60,0.4);">🪲</div>
+                    <div style="width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:7px solid #10803a;margin-top:-1px;"></div>
+                  </div>
+                </div>
+                <!-- 핀 4: 바오서울 천국 -->
+                <div id="pin-4" onclick="selectPin(4)" style="position:absolute;top:85px;left:258px;cursor:pointer;z-index:10;transform:translate(-50%,-100%);">
+                  <div style="display:flex;flex-direction:column;align-items:center;">
+                    <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#0a60c0,#2090ff);border:2px solid #50b0ff;display:flex;align-items:center;justify-content:center;font-size:11px;box-shadow:0 0 8px rgba(20,120,255,0.4);">😊</div>
+                    <div style="width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:7px solid #0a60c0;margin-top:-1px;"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- ZOOM -->
+              <div style="position:absolute;right:10px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:3px;z-index:20;">
+                <button onclick="zoomIn()" style="width:26px;height:26px;background:#252018;border:1px solid rgba(255,120,50,0.3);border-radius:6px;color:#ff9a5a;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
+                <button onclick="zoomOut()" style="width:26px;height:26px;background:#252018;border:1px solid rgba(255,120,50,0.3);border-radius:6px;color:#ff9a5a;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;">−</button>
+              </div>
+              <!-- LEGEND -->
+              <div style="position:absolute;bottom:6px;left:8px;display:flex;gap:4px;z-index:20;">
+                <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(13,11,9,0.85);border:1px solid rgba(255,80,10,0.3);color:#ff7040;">😤 응대</span>
+                <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(13,11,9,0.85);border:1px solid rgba(150,30,220,0.3);color:#cc70ff;">👻 광고</span>
+                <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(13,11,9,0.85);border:1px solid rgba(20,180,60,0.3);color:#40e080;">✅ 검증</span>
+              </div>
+            </div>
+ 
+            <!-- BOTTOM PANEL -->
+            <div id="storePanel" style="background:#161310;border-top:1px solid rgba(255,120,50,0.15);">
+              <div id="defaultPanel" style="padding:14px;text-align:center;">
+                <span style="font-size:11px;color:#5a4a3a;font-weight:600;">📍 핀을 눌러 리뷰를 확인하세요</span>
+              </div>
+              <div id="storeDetail" style="display:none;">
+                <div style="padding:12px 14px 8px;border-bottom:1px solid rgba(255,120,50,0.1);">
+                  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                    <strong id="storeName" style="font-size:14px;font-weight:800;"></strong>
+                    <button onclick="closePanel()" style="background:none;border:none;color:#5a4a3a;font-size:14px;cursor:pointer;padding:0;">✕</button>
+                  </div>
+                  <div id="storeTags" style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;"></div>
+                  <div style="background:#1e1a16;border:1px solid rgba(255,120,50,0.12);border-radius:10px;padding:10px 12px;margin-bottom:8px;">
+                    <div style="font-size:10px;font-weight:700;color:#5a4a3a;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em;">이슈 분포</div>
+                    <div id="issueBarList" style="display:grid;gap:6px;"></div>
+                  </div>
+                </div>
+                <div id="reviewList" style="max-height:110px;overflow-y:auto;padding:8px 14px 10px;display:grid;gap:6px;scrollbar-width:thin;scrollbar-color:rgba(255,120,50,0.2) transparent;"></div>
+              </div>
+            </div>
+ 
+          </div>
+        </div>
+      </div>
+ 
+<style>
+@keyframes pinPulse {
+  0%,100%{box-shadow:0 0 14px rgba(255,80,10,0.7);transform:scale(1);}
+  50%{box-shadow:0 0 26px rgba(255,80,10,1);transform:scale(1.12);}
+}
+</style>
+<script>
+const pins=[
+  {name:'루프루프',tags:['응대 불만 72%','대기 30분','광고 낮음'],tagColors:['#ff5030','#ff8040','#40c080'],
+   issues:[{label:'응대',pct:72,color:'#ff5030'},{label:'대기',pct:54,color:'#ff8040'},{label:'위생',pct:22,color:'#ffaa30'}],
+   reviews:[{title:'직원 응대가 너무 불친절해요',body:'주말 오후 안내 지연·주문 누락 반복. 14건 공통 언급.',badge:'신뢰도 높음',bc:'#40e080'},
+            {title:'대기 안내가 전혀 없어요',body:'30분 넘게 서 있었는데 직원이 아무 말도 없었습니다.',badge:'신뢰도 높음',bc:'#40e080'}]},
+  {name:'어퍼컷커피',tags:['대기 불만 68%','위생 의심','광고 낮음'],tagColors:['#ff8040','#ffcc30','#40c080'],
+   issues:[{label:'대기',pct:68,color:'#ff8040'},{label:'위생',pct:41,color:'#ffcc30'},{label:'응대',pct:28,color:'#ff6030'}],
+   reviews:[{title:'웨이팅이 너무 길어요',body:'평일에도 40분 이상. 진동벨도 없고 안내도 없습니다.',badge:'신뢰도 높음',bc:'#40e080'},
+            {title:'테이블이 끈적거렸어요',body:'청소 상태가 아쉬웠습니다. 2건 이상 동일 언급.',badge:'검증됨',bc:'#40e080'}]},
+  {name:'ABC SEOUL',tags:['광고 의심 88%','응대 불만','진짜 리뷰 적음'],tagColors:['#cc70ff','#ff5030','#5a4a3a'],
+   issues:[{label:'광고 의심',pct:88,color:'#cc70ff'},{label:'응대',pct:44,color:'#ff5030'},{label:'가격',pct:33,color:'#ffaa30'}],
+   reviews:[{title:'리뷰가 전부 광고 같아요',body:'계정 패턴 분석 결과 88%가 의심 리뷰로 분류됩니다.',badge:'⚠️ 광고 의심',bc:'#cc70ff'},
+            {title:'실제 가보니 달랐어요',body:'사진이랑 완전 달라요. 체험단 리뷰에 낚인 것 같아요.',badge:'신뢰도 높음',bc:'#40e080'}]},
+  {name:'지우관',tags:['위생 불만 61%','응대 보통','광고 낮음'],tagColors:['#20c060','#ff8040','#40c080'],
+   issues:[{label:'위생',pct:61,color:'#20c060'},{label:'응대',pct:38,color:'#ff6030'},{label:'대기',pct:20,color:'#ffaa30'}],
+   reviews:[{title:'화장실 청결 문제가 반복돼요',body:'여러 리뷰에서 같은 구역 위생 문제를 지적합니다.',badge:'신뢰도 높음',bc:'#40e080'},
+            {title:'식기가 깨끗하지 않았어요',body:'식기 위생 관련 불만 5건 이상 집중.',badge:'검증됨',bc:'#40e080'}]},
+  {name:'바오 서울',tags:['불만 낮음 12%','광고 의심 낮음','추천'],tagColors:['#40e080','#50b0ff','#50b0ff'],
+   issues:[{label:'응대',pct:12,color:'#40e080'},{label:'대기',pct:18,color:'#50b0ff'},{label:'위생',pct:8,color:'#40e080'}],
+   reviews:[{title:'진짜 친절한 곳이에요',body:'불만 비중 12% — 필터 적용 후에도 좋은 후기가 유지됩니다.',badge:'✅ 검증됨',bc:'#40e080'},
+            {title:'대기 안내도 잘 해줘요',body:'웨이팅이 있어도 직원이 적극 안내해줍니다.',badge:'신뢰도 높음',bc:'#40e080'}]},
+];
+let zoom=1;
+function setFilter(f){
+  ['위생','대기','응대','광고'].forEach(k=>{
+    const el=document.getElementById('chip-'+k);if(!el)return;
+    el.style.background=k===f?'rgba(255,120,50,0.15)':'#252018';
+    el.style.borderColor=k===f?'rgba(255,120,50,0.3)':'rgba(255,120,50,0.15)';
+    el.style.color=k===f?'#ff9a5a':'#8a7060';
+  });
+}
+function zoomIn(){if(zoom>=1.6)return;zoom=+(zoom+0.2).toFixed(1);document.getElementById('mapCanvas').style.transform=`scale(${zoom})`;}
+function zoomOut(){if(zoom<=0.8)return;zoom=+(zoom-0.2).toFixed(1);document.getElementById('mapCanvas').style.transform=`scale(${zoom})`;}
+function selectPin(i){
+  const p=pins[i];
+  for(let j=0;j<5;j++){const el=document.getElementById('pin-'+j);if(el)el.style.filter=j===i?'brightness(1.3) drop-shadow(0 0 8px rgba(255,120,50,0.9))':'brightness(0.55)';}
+  document.getElementById('defaultPanel').style.display='none';
+  document.getElementById('storeDetail').style.display='block';
+  document.getElementById('storeName').textContent=p.name;
+  document.getElementById('storeTags').innerHTML=p.tags.map((t,k)=>`<span style="font-size:10px;font-weight:700;padding:3px 8px;border-radius:999px;background:rgba(13,11,9,0.8);border:1px solid ${p.tagColors[k]}44;color:${p.tagColors[k]};">${t}</span>`).join('');
+  document.getElementById('issueBarList').innerHTML=p.issues.map(is=>`<div style="display:grid;grid-template-columns:42px 1fr 30px;align-items:center;gap:8px;"><span style="font-size:10px;font-weight:700;color:#8a7060;">${is.label}</span><div style="height:5px;border-radius:999px;background:#252018;overflow:hidden;"><div style="width:${is.pct}%;height:100%;border-radius:999px;background:${is.color};"></div></div><span style="font-size:10px;font-weight:700;color:${is.color};text-align:right;">${is.pct}%</span></div>`).join('');
+  document.getElementById('reviewList').innerHTML=p.reviews.map(r=>`<div style="background:#1e1a16;border:1px solid rgba(255,120,50,0.12);border-radius:10px;padding:9px 11px;"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:6px;margin-bottom:4px;"><strong style="font-size:11px;font-weight:800;color:#f5ede4;line-height:1.3;">${r.title}</strong><span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;border:1px solid ${r.bc}44;color:${r.bc};background:${r.bc}14;white-space:nowrap;flex-shrink:0;">${r.badge}</span></div><p style="font-size:11px;color:#8a7060;line-height:1.5;margin:0;">${r.body}</p></div>`).join('');
+}
+function closePanel(){
+  document.getElementById('defaultPanel').style.display='block';
+  document.getElementById('storeDetail').style.display='none';
+  for(let j=0;j<5;j++){const el=document.getElementById('pin-'+j);if(el)el.style.filter='';}
+}
+</script>
+    </div>
+  </div>
+</section>
+ 
+ 
+<!-- FAQ -->
+<section class="section faq-section snap-section" id="faq">
+  <div class="container">
+    <div class="faq-layout">
+      <div>
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title">자주<br>묻는<br>질문</h2>
+        <p class="section-desc" style="margin-top:16px;">더 궁금한 게 있으시면 사전 신청 폼에 남겨주세요.</p>
+      </div>
+ 
+      <div class="faq-list">
+ 
+        <div class="faq-item">
+          <div class="faq-q">
+            <span>광고 리뷰는 어떻게 탐지하나요?</span>
+            <div class="faq-q-arrow">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">계정 활동 이력, 리뷰 작성 패턴, 문장 유사도, 작성 시간대 등 다양한 신호를 종합해 신뢰도를 평가합니다. 단순 알고리즘이 아닌 복합 모델을 사용해 정확도를 높입니다.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            <span>사전 신청하면 무엇을 받나요?</span>
+            <div class="faq-q-arrow">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">일명 "체험 실패단" 참여가 가능해요. 블로그 체험단처럼 특정 장소에 방문 후 실망했던 경험을 공유해주시면 소정의 금액을 드려요.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            <span>언제 출시되나요?</span>
+            <div class="faq-q-arrow">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">2026년 하반기 출시 예정이에요.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">
+            <span>매장 사장님도 사용할 수 있나요?</span>
+            <div class="faq-q-arrow">+</div>
+          </div>
+          <div class="faq-a">
+            <div class="faq-a-inner">아직 사장님 전용 기능은 열리지 않았지만, 추후 개선 인증 마크 등의 기능이 열릴 예정이에요.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- CTA -->
+<section class="cta-section snap-section" id="cta">
+  <div class="container">
+    <div class="cta-shell">
+      <div class="cta-border"></div>
+      <div class="cta-content">
+        <div style="font-size:52px; margin-bottom:16px; display:flex; align-items:center; justify-content:center; gap:16px;">
+          <span style="animation: demonFloat 3s ease-in-out infinite alternate; display:inline-block; filter:drop-shadow(0 0 16px rgba(255,80,10,0.6));">🔥</span>
+          <span style="animation: demonFloat 4s ease-in-out infinite alternate-reverse; animation-delay:.5s; display:inline-block; filter:drop-shadow(0 0 16px rgba(255,30,0,0.5));">😈</span>
+          <span style="animation: demonFloat 3.5s ease-in-out infinite alternate; animation-delay:1s; display:inline-block; filter:drop-shadow(0 0 16px rgba(255,80,10,0.6));">🔥</span>
+        </div>
+        <span class="eyebrow">Early Access · 무료</span>
+        <h2>이제 리뷰에<br>속지 마세요</h2>
+        <p>출시 알림 신청하면, 악플지도가 열리는 날 가장 먼저 알려드립니다.</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="https://forms.gle/KnWyZCjEpoiUvGSu6" target="_blank" rel="noreferrer">지금 사전 신청하기 →</a>
+          <a class="btn btn-ghost" href="#features">기능 다시 보기</a>
+        </div>
+        <p class="cta-footnote">이메일 하나만 입력하면 끝 · 언제든 취소 가능</p>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+</div>
+ 
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>악플지도</div>
+    <div>진짜 불만을 먼저 보여주는 리뷰 지도 · 2025</div>
+  </div>
+</footer>
+ 
+<script>
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+ 
+// Make sure FAQ items start closed
+document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+ 
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+ 
+document.querySelectorAll(
+  '.problem-card, .feature-big, .feature-small, .preview-point, .faq-item'
+).forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity .5s ease, transform .5s ease';
+  observer.observe(el);
+});
+</script>
+<script>
+// Scroll progress dots
+const snapContainer = document.getElementById('snapContainer');
+const dots = document.querySelectorAll('.snap-dot');
+const sections = ['hero','problem','hell','features','preview','map-demo','faq','cta'];
+ 
+function updateDots() {
+  const scrollTop = snapContainer.scrollTop;
+  const vh = window.innerHeight;
+  let active = 0;
+  sections.forEach((id, i) => {
+    const el = document.getElementById(id) || document.querySelector('.'+id) || document.querySelector('section.hero');
+    if (!el) return;
+    // For hero section (no id)
+    const sectionEl = id === 'hero'
+      ? document.querySelector('section.hero')
+      : document.getElementById(id);
+    if (!sectionEl) return;
+    if (sectionEl.offsetTop <= scrollTop + vh * 0.5) active = i;
+  });
+  dots.forEach((d, i) => d.classList.toggle('active', i === active));
+}
+ 
+snapContainer.addEventListener('scroll', updateDots, { passive: true });
+ 
+dots.forEach((dot, i) => {
+  dot.addEventListener('click', () => {
+    const id = sections[i];
+    const el = id === 'hero'
+      ? document.querySelector('section.hero')
+      : document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
 </body>
 </html>
