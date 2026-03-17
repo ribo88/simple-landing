@@ -435,7 +435,7 @@ body::before {
 .hell-zones {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 12px;
   position: relative;
   z-index: 2;
 }
@@ -444,7 +444,7 @@ body::before {
   background: var(--surface-2);
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
-  padding: 14px 12px;
+  padding: 16px 14px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -1188,14 +1188,13 @@ body::before {
 }
  
 /* ─── PREVIEW / APP SECTION ─── */
-.preview-section {}
+.preview-section { padding-top: 0; }
  
 .preview-layout {
-  display: grid;
-  grid-template-columns: 1fr 440px;
-  gap: 52px;
-  align-items: center;
-  margin-top: 52px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 32px;
 }
  
 .preview-copy .section-label { margin-bottom: 10px; }
@@ -2178,7 +2177,7 @@ body::before {
 <section class="section" id="features">
   <div class="container">
     <div class="section-label">이렇게 달라집니다</div>
-    <h2 class="section-title">3가지로<br>정리됩니다</h2>
+    <h2 class="section-title">4가지로<br>정리됩니다</h2>
  
     <div class="feat-cards">
  
@@ -2225,6 +2224,21 @@ body::before {
         </div>
       </div>
  
+      <!-- 기능 4: 악플 쓰기 -->
+      <div class="feat-card">
+        <div class="feat-icon">✍️</div>
+        <div class="feat-body">
+          <div class="feat-title">직접 악플 쓰기</div>
+          <div class="feat-desc">카테고리 선택만으로 간단하게 불만 등록</div>
+          <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:2px;">
+            <span style="font-size:10px; font-weight:700; padding:3px 9px; border-radius:99px; background:rgba(255,124,53,0.1); border:1px solid rgba(255,124,53,0.25); color:var(--orange-bright);">😤 서비스</span>
+            <span style="font-size:10px; font-weight:700; padding:3px 9px; border-radius:99px; background:var(--surface-3); border:1px solid var(--line); color:var(--text-muted);">🪲 위생</span>
+            <span style="font-size:10px; font-weight:700; padding:3px 9px; border-radius:99px; background:var(--surface-3); border:1px solid var(--line); color:var(--text-muted);">💸 가격</span>
+            <span style="font-size:10px; font-weight:700; padding:3px 9px; border-radius:99px; background:var(--surface-3); border:1px solid var(--line); color:var(--text-muted);">🍽️ 퀄리티</span>
+          </div>
+        </div>
+      </div>
+ 
     </div>
   </div>
 </section>
@@ -2266,6 +2280,7 @@ body::before {
 </style>
  
  
+ 
 <!-- PREVIEW -->
 <section class="section preview-section" id="preview">
   <div class="container">
@@ -2297,15 +2312,23 @@ body::before {
               <span>리뷰 품질을 구분해 어떤 후기를 믿어야 할지 더 쉽게 파악할 수 있습니다.</span>
             </div>
           </div>
+          <div class="preview-point">
+            <div class="preview-point-icon">✍️</div>
+            <div class="preview-point-text">
+              <strong>직접 악플 쓰기</strong>
+              <span>영수증 인증 후 카테고리 선택만으로 불만을 등록할 수 있습니다.</span>
+            </div>
+          </div>
         </div>
  
         <div style="margin-top:28px; padding-top:24px; border-top:1px solid var(--line);">
           <div class="section-label" style="margin-bottom:8px;">지금 체험해보세요</div>
-          <h3 style="font-family:var(--font-display); font-size:22px; line-height:1.1; color:var(--text); margin-bottom:8px;">핀을 눌러<br>직접 확인해보세요</h3>
-          <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">실제 서비스와 동일한 방식입니다.<br>가고 싶은 동네 핀을 눌러보세요.</p>
+          <h3 style="font-family:var(--font-display); font-size:32px; font-weight:900; line-height:1.1; color:var(--text); margin-bottom:10px;">핀을 눌러<br>직접 확인해보세요</h3>
+          <p style="font-size:14px; font-weight:600; color:var(--text-muted); line-height:1.6;">실제 서비스와 동일한 방식입니다.<br>가고 싶은 동네 핀을 눌러보세요.</p>
         </div>
       </div>
  
+      <div class="phone-demo-wrap">
       <div class="phone-wrap">
         <div class="phone" id="appPhone">
           <div class="phone-screen" id="appScreen">
@@ -2433,6 +2456,7 @@ body::before {
           </div>
         </div>
       </div>
+      </div>
  
 <style>
 @keyframes pinPulse {
@@ -2491,6 +2515,153 @@ function closePanel(){
 }
 </script>
     </div>
+ 
+      <!-- 핸드폰 아래: 악플 쓰기 위저드 (흰 배경) -->
+      <div class="wr-demo-wrap" style="margin-top:52px; background:#fff; border-radius:20px; padding:28px 22px;">
+        <div class="wr-demo-label" style="font-size:26px; font-weight:900; color:#e85f15; margin-bottom:8px; letter-spacing:-0.02em; line-height:1.15;">✍️ 직접 악플 써보기</div>
+        <div class="wr-demo-sublabel" style="font-size:14px; font-weight:600; color:#666; margin-bottom:24px; line-height:1.5;">카테고리만 골라도 불만이 등록됩니다. 지금 바로 해보세요!</div>
+    <div class="wr-steps">
+      <div class="wr-step active" id="step-ind-1"><span>01</span> 카테고리</div>
+      <div class="wr-step-arrow">→</div>
+      <div class="wr-step" id="step-ind-2"><span>02</span> 세부 항목</div>
+      <div class="wr-step-arrow">→</div>
+      <div class="wr-step" id="step-ind-3"><span>03</span> 작성 완료</div>
+    </div>
+ 
+    <div class="wr-card">
+      <div class="wr-question">어떤 점이 불만이었나요?</div>
+ 
+      <div class="wr-panel" id="wr-panel-1">
+        <div class="wr-sub">대표 카테고리를 골라주세요</div>
+        <div class="wr-cats">
+          <div class="wr-cat" data-cat="서비스" onclick="selectCat(this)">😤<span>서비스</span></div>
+          <div class="wr-cat" data-cat="위생" onclick="selectCat(this)">🪲<span>위생</span></div>
+          <div class="wr-cat" data-cat="가격" onclick="selectCat(this)">💸<span>가격</span></div>
+          <div class="wr-cat" data-cat="퀄리티" onclick="selectCat(this)">🍽️<span>퀄리티</span></div>
+        </div>
+        <button class="wr-next" id="wr-next-1" onclick="goStep(2)" disabled>다음</button>
+      </div>
+ 
+      <div class="wr-panel" id="wr-panel-2" style="display:none;">
+        <div class="wr-sub">세부 항목을 골라주세요 <span style="font-size:11px;color:var(--text-dim);">(복수 선택 가능)</span></div>
+        <div style="margin-bottom:12px;"><div class="wr-cat active" id="cat-tag" style="display:inline-flex;flex-direction:row;gap:6px;font-size:13px;padding:7px 14px;cursor:default;width:auto;"></div></div>
+        <div class="wr-subs" id="wr-sub-list"></div>
+        <button class="wr-next" id="wr-next-2" onclick="goStep(3)" disabled>다음</button>
+      </div>
+ 
+      <div class="wr-panel" id="wr-panel-3" style="display:none;">
+        <div class="wr-sub">선택한 불만 항목</div>
+        <div class="wr-selected-list" id="wr-selected-list"></div>
+        <div class="wr-sub" style="margin-top:16px;">추가로 하고 싶은 말 <span style="font-size:11px;color:var(--text-dim);">(선택)</span></div>
+        <textarea class="wr-textarea" placeholder="자세한 상황을 적어주세요..." rows="3"></textarea>
+        <div class="wr-llm-note">😈 LLM이 진짜 불만인지 검토 후 게시됩니다</div>
+        <button class="wr-next wr-submit" onclick="submitReview()">악플 제출하기 🔥</button>
+      </div>
+ 
+      <div class="wr-panel" id="wr-panel-done" style="display:none; text-align:center; padding:32px 0;">
+        <div style="font-size:48px; margin-bottom:12px;">😈</div>
+        <div style="font-size:16px; font-weight:800; color:var(--orange); margin-bottom:8px;">제출 완료!</div>
+        <div style="font-size:13px; color:var(--text-muted); margin-bottom:20px;">LLM 검토 후 악플지도에 반영됩니다.</div>
+        <button class="wr-next" onclick="resetReview()" style="background:transparent;border:1px solid var(--line-strong);color:var(--text-muted);">다시 작성하기</button>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<style>
+.wr-steps { display:flex; align-items:center; gap:6px; margin-bottom:20px; flex-wrap:wrap; }
+.wr-step { font-size:11px; font-weight:700; color:var(--text-dim); display:flex; align-items:center; gap:5px; padding:5px 10px; border-radius:99px; border:1px solid var(--line); background:var(--surface-2); transition:all .2s; }
+.wr-step span { font-family:var(--font-display); font-size:14px; color:var(--text-dim); }
+.wr-step.active { border-color:var(--orange); color:var(--orange-bright); background:rgba(255,124,53,0.08); }
+.wr-step.active span { color:var(--orange); }
+.wr-step.done { border-color:rgba(92,248,144,0.3); color:#5cf890; background:rgba(92,248,144,0.06); }
+.wr-step.done span { color:#5cf890; }
+.wr-step-arrow { font-size:14px; color:var(--text-dim); }
+.wr-card { background:var(--surface-2); border:1px solid var(--line-strong); border-radius:var(--radius-md); padding:20px; }
+.wr-question { font-size:15px; font-weight:800; color:var(--text); margin-bottom:14px; }
+.wr-sub { font-size:12px; font-weight:600; color:var(--text-muted); margin-bottom:10px; }
+.wr-cats { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px; }
+.wr-cat { display:flex; flex-direction:column; align-items:center; gap:6px; padding:14px 8px; border-radius:var(--radius-sm); border:1px solid var(--line); background:var(--surface-3); cursor:pointer; font-size:22px; transition:all .15s; }
+.wr-cat span { font-size:12px; font-weight:700; color:var(--text-muted); }
+.wr-cat.active { border-color:var(--orange); background:rgba(255,124,53,0.1); box-shadow:0 0 12px rgba(255,100,30,0.2); }
+.wr-cat.active span { color:var(--orange-bright); }
+.wr-subs { display:flex; flex-direction:column; gap:7px; margin-bottom:16px; }
+.wr-sub-item { display:flex; align-items:center; gap:10px; padding:11px 14px; border-radius:var(--radius-sm); border:1px solid var(--line); background:var(--surface-3); font-size:13px; color:var(--text-muted); cursor:pointer; transition:all .15s; }
+.wr-sub-item.active { border-color:var(--orange); background:rgba(255,124,53,0.08); color:var(--text); }
+.wr-selected-list { display:flex; flex-direction:column; gap:6px; margin-bottom:4px; }
+.wr-selected-item { display:flex; align-items:center; gap:8px; padding:9px 12px; border-radius:8px; background:rgba(255,124,53,0.08); border:1px solid rgba(255,124,53,0.2); font-size:13px; color:var(--orange-bright); font-weight:600; }
+.wr-textarea { width:100%; background:var(--surface-3); border:1px solid var(--line); border-radius:var(--radius-sm); color:var(--text); font-family:var(--font-body); font-size:13px; padding:12px; resize:none; margin-bottom:10px; margin-top:8px; line-height:1.6; outline:none; transition:border-color .2s; box-sizing:border-box; }
+.wr-textarea:focus { border-color:var(--orange); }
+.wr-llm-note { font-size:11px; color:var(--text-dim); margin-bottom:14px; text-align:center; }
+.wr-next { width:100%; padding:13px; border-radius:var(--radius-sm); background:var(--orange); color:#fff; border:none; font-family:var(--font-body); font-size:14px; font-weight:700; cursor:pointer; transition:all .2s; }
+.wr-next:hover:not(:disabled) { background:var(--orange-bright); }
+.wr-next:disabled { background:var(--surface-3); color:var(--text-dim); cursor:not-allowed; }
+.wr-submit { background:linear-gradient(135deg,var(--orange-deep),var(--orange)); box-shadow:0 4px 16px var(--orange-glow); }
+</style>
+ 
+<script>
+const subItems={
+  '서비스':['😤 직원이 불친절해요','😞 직원 응대를 안해요','😡 직원이 차별적으로 대해요','🙄 주문이 자꾸 누락돼요'],
+  '위생':['🪲 테이블이 더러워요','🚽 화장실 위생이 불량해요','🍽️ 식기가 깨끗하지 않아요','🦟 벌레가 나왔어요'],
+  '가격':['💸 가격 대비 양이 너무 적어요','🤥 광고랑 실제가 달라요','📋 메뉴판 가격이 불명확해요','💳 추가 요금이 있어요'],
+  '퀄리티':['😔 맛이 기대에 못 미쳐요','📸 사진이랑 실제가 달라요','🌡️ 음식이 너무 차갑게 나왔어요','⏱️ 음식이 너무 늦게 나왔어요'],
+};
+let selectedCat=null, selectedSubs=new Set();
+ 
+function selectCat(el){
+  document.querySelectorAll('.wr-cat').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  selectedCat=el.dataset.cat;
+  document.getElementById('wr-next-1').disabled=false;
+}
+function goStep(step){
+  [1,2,3].forEach(i=>{
+    const ind=document.getElementById('step-ind-'+i);
+    ind.classList.remove('active','done');
+    if(i<step) ind.classList.add('done');
+    else if(i===step) ind.classList.add('active');
+    const panel=document.getElementById('wr-panel-'+i);
+    if(panel) panel.style.display=i===step?'block':'none';
+  });
+  if(step===2){
+    selectedSubs.clear();
+    const icons={'서비스':'😤','위생':'🪲','가격':'💸','퀄리티':'🍽️'};
+    document.getElementById('cat-tag').innerHTML=icons[selectedCat]+' '+selectedCat;
+    document.getElementById('wr-sub-list').innerHTML=(subItems[selectedCat]||[]).map(s=>`<div class="wr-sub-item" onclick="toggleSub(this,'${s}')">${s}</div>`).join('');
+    document.getElementById('wr-next-2').disabled=true;
+  }
+  if(step===3){
+    document.getElementById('wr-selected-list').innerHTML=[...selectedSubs].map(s=>`<div class="wr-selected-item">🔥 ${s}</div>`).join('');
+  }
+}
+function toggleSub(el,val){
+  if(selectedSubs.has(val)){selectedSubs.delete(val);el.classList.remove('active');}
+  else{selectedSubs.add(val);el.classList.add('active');}
+  document.getElementById('wr-next-2').disabled=selectedSubs.size===0;
+}
+function submitReview(){
+  [1,2,3].forEach(i=>{
+    document.getElementById('wr-panel-'+i).style.display='none';
+    document.getElementById('step-ind-'+i).classList.remove('active');
+    document.getElementById('step-ind-'+i).classList.add('done');
+  });
+  document.getElementById('wr-panel-done').style.display='block';
+}
+function resetReview(){
+  selectedCat=null; selectedSubs.clear();
+  document.querySelectorAll('#wr-panel-1 .wr-cat').forEach(c=>c.classList.remove('active'));
+  document.getElementById('wr-next-1').disabled=true;
+  document.getElementById('wr-panel-done').style.display='none';
+  document.getElementById('wr-panel-1').style.display='block';
+  [2,3].forEach(i=>document.getElementById('wr-panel-'+i).style.display='none');
+  [1,2,3].forEach(i=>{
+    const ind=document.getElementById('step-ind-'+i);
+    ind.classList.remove('active','done');
+    if(i===1) ind.classList.add('active');
+  });
+}
+</script>
+      </div>
   </div>
 </section>
  
