@@ -1253,7 +1253,7 @@ body::before {
 .phone {
   max-width: 320px;
   margin: 0 auto;
-  background: var(--surface-3);
+  background: #e8e8e8;
   border-radius: 40px;
   padding: 14px;
   border: 1px solid var(--line-strong);
@@ -1272,7 +1272,7 @@ body::before {
 .phone-screen {
   border-radius: 28px;
   overflow: hidden;
-  background: var(--bg);
+  background: #fff;
 }
  
 .ps-header {
@@ -2286,46 +2286,9 @@ body::before {
   <div class="container">
     <div class="preview-layout">
       <div class="preview-copy">
-        <div class="section-label">실제 화면</div>
-        <h2 class="section-title">앱이 보여주는<br>지도는 이렇습니다</h2>
-        <p class="section-desc">지도에서 문제 핀을 누르면 — 해당 매장의 불만 요약이 바로 펼쳐집니다.</p>
- 
-        <div class="preview-points">
-          <div class="preview-point">
-            <div class="preview-point-icon">🔥</div>
-            <div class="preview-point-text">
-              <strong>핫스팟 우선 확인</strong>
-              <span>응대, 대기, 위생 같은 실패 포인트가 먼저 눈에 들어옵니다.</span>
-            </div>
-          </div>
-          <div class="preview-point">
-            <div class="preview-point-icon">🗂️</div>
-            <div class="preview-point-text">
-              <strong>레이어별 탐색</strong>
-              <span>문제를 종류별로 겹쳐 보며 어떤 이슈가 반복되는지 바로 읽을 수 있습니다.</span>
-            </div>
-          </div>
-          <div class="preview-point">
-            <div class="preview-point-icon">✅</div>
-            <div class="preview-point-text">
-              <strong>신뢰도 태그</strong>
-              <span>리뷰 품질을 구분해 어떤 후기를 믿어야 할지 더 쉽게 파악할 수 있습니다.</span>
-            </div>
-          </div>
-          <div class="preview-point">
-            <div class="preview-point-icon">✍️</div>
-            <div class="preview-point-text">
-              <strong>직접 악플 쓰기</strong>
-              <span>영수증 인증 후 카테고리 선택만으로 불만을 등록할 수 있습니다.</span>
-            </div>
-          </div>
-        </div>
- 
-        <div style="margin-top:28px; padding-top:24px; border-top:1px solid var(--line);">
-          <div class="section-label" style="margin-bottom:8px;">지금 체험해보세요</div>
-          <h3 style="font-family:var(--font-display); font-size:32px; font-weight:900; line-height:1.1; color:var(--text); margin-bottom:10px;">핀을 눌러<br>직접 확인해보세요</h3>
-          <p style="font-size:14px; font-weight:600; color:var(--text-muted); line-height:1.6;">실제 서비스와 동일한 방식입니다.<br>가고 싶은 동네 핀을 눌러보세요.</p>
-        </div>
+        <div class="section-label">지금 체험해보세요</div>
+        <h2 class="section-title">핀을 눌러<br>직접 확인해보세요</h2>
+        <p class="section-desc">실제 서비스와 동일한 방식입니다. 가고 싶은 동네 핀을 눌러보세요.</p>
       </div>
  
       <div class="phone-demo-wrap">
@@ -2334,54 +2297,54 @@ body::before {
           <div class="phone-screen" id="appScreen">
  
             <!-- STATUS BAR -->
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 18px 6px;background:#0d0b09;font-size:11px;font-weight:700;color:#f5ede4;">
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 18px 6px;background:#f5f5f5;font-size:11px;font-weight:700;color:#111;">
               <span>9:41</span><span>▲▲▲ 🔋</span>
             </div>
  
             <!-- SEARCH BAR -->
-            <div style="padding:8px 12px;background:#161310;border-bottom:1px solid rgba(255,120,50,0.15);">
-              <div style="display:flex;align-items:center;gap:8px;background:#252018;border:1px solid rgba(255,120,50,0.2);border-radius:10px;padding:8px 12px;">
-                <span style="font-size:13px;color:#5a4a3a;">🔍</span>
-                <span style="font-size:12px;color:#5a4a3a;flex:1;">검색어를 입력해주세요.</span>
+            <div style="padding:8px 12px;background:#f5f5f5;border-bottom:1px solid #e0e0e0;">
+              <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #ddd;border-radius:10px;padding:8px 12px;">
+                <span style="font-size:13px;color:#aaa;">🔍</span>
+                <span style="font-size:12px;color:#bbb;flex:1;">검색어를 입력해주세요.</span>
               </div>
               <div style="display:flex;gap:6px;margin-top:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;">
-                <span id="chip-위생" onclick="setFilter('위생')" style="flex-shrink:0;font-size:10px;font-weight:700;padding:4px 10px;border-radius:999px;background:rgba(255,120,50,0.15);border:1px solid rgba(255,120,50,0.3);color:#ff9a5a;cursor:pointer;">위생 불만</span>
-                <span id="chip-대기" onclick="setFilter('대기')" style="flex-shrink:0;font-size:10px;font-weight:700;padding:4px 10px;border-radius:999px;background:#252018;border:1px solid rgba(255,120,50,0.15);color:#8a7060;cursor:pointer;">대기 시간 불만</span>
-                <span id="chip-응대" onclick="setFilter('응대')" style="flex-shrink:0;font-size:10px;font-weight:700;padding:4px 10px;border-radius:999px;background:#252018;border:1px solid rgba(255,120,50,0.15);color:#8a7060;cursor:pointer;">응대 불만</span>
-                <span id="chip-광고" onclick="setFilter('광고')" style="flex-shrink:0;font-size:10px;font-weight:700;padding:4px 10px;border-radius:999px;background:#252018;border:1px solid rgba(255,120,50,0.15);color:#8a7060;cursor:pointer;">광고 의심</span>
+                <span id="chip-위생" onclick="setFilter('위생')" style="flex-shrink:0;font-size:10px;font-weight:700;padding:4px 10px;border-radius:999px;background:rgba(232,95,21,0.12);border:1px solid rgba(232,95,21,0.35);color:#c84e10;cursor:pointer;">위생 불만</span>
+                <span id="chip-대기" onclick="setFilter('대기')" style="flex-shrink:0;font-size:10px;font-weight:700;padding:4px 10px;border-radius:999px;background:#f0f0f0;border:1px solid #ddd;color:#666;cursor:pointer;">대기 시간 불만</span>
+                <span id="chip-응대" onclick="setFilter('응대')" style="flex-shrink:0;font-size:10px;font-weight:700;padding:4px 10px;border-radius:999px;background:#f0f0f0;border:1px solid #ddd;color:#666;cursor:pointer;">응대 불만</span>
+                <span id="chip-광고" onclick="setFilter('광고')" style="flex-shrink:0;font-size:10px;font-weight:700;padding:4px 10px;border-radius:999px;background:#f0f0f0;border:1px solid #ddd;color:#666;cursor:pointer;">광고 의심</span>
               </div>
             </div>
  
             <!-- MAP AREA -->
-            <div id="mapArea" style="position:relative;height:200px;overflow:hidden;background:#1a1410;cursor:grab;">
+            <div id="mapArea" style="position:relative;height:200px;overflow:hidden;background:#e8ede8;cursor:grab;">
               <div id="mapCanvas" style="position:absolute;inset:0;transition:transform .3s ease;transform-origin:center center;">
                 <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
-                  <rect width="320" height="200" fill="#1e1a14"/>
-                  <rect x="20"  y="20"  width="60" height="40" rx="3" fill="#252018" opacity=".9"/>
-                  <rect x="90"  y="10"  width="50" height="30" rx="3" fill="#2a2010" opacity=".8"/>
-                  <rect x="150" y="15"  width="70" height="45" rx="3" fill="#252018" opacity=".9"/>
-                  <rect x="230" y="20"  width="70" height="35" rx="3" fill="#2a2010" opacity=".8"/>
-                  <rect x="10"  y="80"  width="55" height="50" rx="3" fill="#2a2010" opacity=".8"/>
-                  <rect x="75"  y="70"  width="65" height="55" rx="3" fill="#252018" opacity=".9"/>
-                  <rect x="150" y="75"  width="45" height="40" rx="3" fill="#2a2010" opacity=".8"/>
-                  <rect x="205" y="65"  width="80" height="55" rx="3" fill="#252018" opacity=".9"/>
-                  <rect x="15"  y="145" width="70" height="45" rx="3" fill="#2a2010" opacity=".8"/>
-                  <rect x="95"  y="140" width="55" height="50" rx="3" fill="#252018" opacity=".9"/>
-                  <rect x="160" y="130" width="60" height="60" rx="3" fill="#2a2010" opacity=".8"/>
-                  <rect x="230" y="135" width="75" height="55" rx="3" fill="#252018" opacity=".9"/>
-                  <rect x="0"   y="60"  width="320" height="10" fill="#151210" opacity=".9"/>
-                  <rect x="0"   y="120" width="320" height="10" fill="#151210" opacity=".9"/>
-                  <rect x="80"  y="0"   width="10"  height="200" fill="#151210" opacity=".9"/>
-                  <rect x="145" y="0"   width="10"  height="200" fill="#151210" opacity=".9"/>
-                  <rect x="225" y="0"   width="10"  height="200" fill="#151210" opacity=".9"/>
-                  <path d="M0 180 L120 60" stroke="#151210" stroke-width="8" opacity=".7"/>
-                  <path d="M200 200 L320 80" stroke="#151210" stroke-width="6" opacity=".6"/>
-                  <text x="28"  y="57"  font-size="5" fill="#5a4a3a" font-family="sans-serif">성수로</text>
-                  <text x="90"  y="57"  font-size="5" fill="#5a4a3a" font-family="sans-serif">뚝섬로</text>
-                  <text x="155" y="57"  font-size="5" fill="#5a4a3a" font-family="sans-serif">서울숲길</text>
+                  <rect width="320" height="200" fill="#e8ede8"/>
+                  <rect x="20"  y="20"  width="60" height="40" rx="3" fill="#d4d9d4" opacity=".9"/>
+                  <rect x="90"  y="10"  width="50" height="30" rx="3" fill="#c8cec8" opacity=".8"/>
+                  <rect x="150" y="15"  width="70" height="45" rx="3" fill="#d4d9d4" opacity=".9"/>
+                  <rect x="230" y="20"  width="70" height="35" rx="3" fill="#c8cec8" opacity=".8"/>
+                  <rect x="10"  y="80"  width="55" height="50" rx="3" fill="#c8cec8" opacity=".8"/>
+                  <rect x="75"  y="70"  width="65" height="55" rx="3" fill="#d4d9d4" opacity=".9"/>
+                  <rect x="150" y="75"  width="45" height="40" rx="3" fill="#c8cec8" opacity=".8"/>
+                  <rect x="205" y="65"  width="80" height="55" rx="3" fill="#d4d9d4" opacity=".9"/>
+                  <rect x="15"  y="145" width="70" height="45" rx="3" fill="#c8cec8" opacity=".8"/>
+                  <rect x="95"  y="140" width="55" height="50" rx="3" fill="#d4d9d4" opacity=".9"/>
+                  <rect x="160" y="130" width="60" height="60" rx="3" fill="#c8cec8" opacity=".8"/>
+                  <rect x="230" y="135" width="75" height="55" rx="3" fill="#d4d9d4" opacity=".9"/>
+                  <rect x="0"   y="60"  width="320" height="10" fill="#f5f5f0" opacity=".9"/>
+                  <rect x="0"   y="120" width="320" height="10" fill="#f5f5f0" opacity=".9"/>
+                  <rect x="80"  y="0"   width="10"  height="200" fill="#f5f5f0" opacity=".9"/>
+                  <rect x="145" y="0"   width="10"  height="200" fill="#f5f5f0" opacity=".9"/>
+                  <rect x="225" y="0"   width="10"  height="200" fill="#f5f5f0" opacity=".9"/>
+                  <path d="M0 180 L120 60" stroke="#f0f0ea" stroke-width="8" opacity=".7"/>
+                  <path d="M200 200 L320 80" stroke="#f0f0ea" stroke-width="6" opacity=".6"/>
+                  <text x="28"  y="57"  font-size="5" fill="#999" font-family="sans-serif">성수로</text>
+                  <text x="90"  y="57"  font-size="5" fill="#999" font-family="sans-serif">뚝섬로</text>
+                  <text x="155" y="57"  font-size="5" fill="#999" font-family="sans-serif">서울숲길</text>
                   <text x="83"  y="110" font-size="4" fill="#5a4a3a" font-family="sans-serif" writing-mode="tb">왕십리로</text>
-                  <text x="100" y="95"  font-size="7" fill="#3a2a1a" font-family="sans-serif" font-weight="bold">성수 2가 3동</text>
-                  <text x="170" y="100" font-size="6" fill="#3a2a1a" font-family="sans-serif">서울숲</text>
+                  <text x="100" y="95"  font-size="7" fill="#aaa" font-family="sans-serif" font-weight="bold">성수 2가 3동</text>
+                  <text x="170" y="100" font-size="6" fill="#aaa" font-family="sans-serif">서울숲</text>
                 </svg>
                 <!-- 핀 0: 루프루프 HOT -->
                 <div id="pin-0" onclick="selectPin(0)" style="position:absolute;top:62px;left:96px;cursor:pointer;z-index:10;transform:translate(-50%,-100%);">
@@ -2426,26 +2389,26 @@ body::before {
               </div>
               <!-- LEGEND -->
               <div style="position:absolute;bottom:6px;left:8px;display:flex;gap:4px;z-index:20;">
-                <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(13,11,9,0.85);border:1px solid rgba(255,80,10,0.3);color:#ff7040;">😤 응대</span>
-                <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(13,11,9,0.85);border:1px solid rgba(150,30,220,0.3);color:#cc70ff;">👻 광고</span>
-                <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(13,11,9,0.85);border:1px solid rgba(20,180,60,0.3);color:#40e080;">✅ 검증</span>
+                <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(255,255,255,0.9);border:1px solid rgba(200,60,0,0.2);color:#c84e10;">😤 응대</span>
+                <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(255,255,255,0.9);border:1px solid rgba(150,30,220,0.2);color:#9030cc;">👻 광고</span>
+                <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(255,255,255,0.9);border:1px solid rgba(20,150,60,0.2);color:#2a9a50;">✅ 검증</span>
               </div>
             </div>
  
             <!-- BOTTOM PANEL -->
-            <div id="storePanel" style="background:#161310;border-top:1px solid rgba(255,120,50,0.15);">
+            <div id="storePanel" style="background:#f5f5f5;border-top:1px solid #e0e0e0;">
               <div id="defaultPanel" style="padding:14px;text-align:center;">
-                <span style="font-size:11px;color:#5a4a3a;font-weight:600;">📍 핀을 눌러 리뷰를 확인하세요</span>
+                <span style="font-size:11px;color:#aaa;font-weight:600;">📍 핀을 눌러 리뷰를 확인하세요</span>
               </div>
               <div id="storeDetail" style="display:none;">
-                <div style="padding:12px 14px 8px;border-bottom:1px solid rgba(255,120,50,0.1);">
+                <div style="padding:12px 14px 8px;border-bottom:1px solid #e0e0e0;">
                   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-                    <strong id="storeName" style="font-size:14px;font-weight:800;"></strong>
-                    <button onclick="closePanel()" style="background:none;border:none;color:#5a4a3a;font-size:14px;cursor:pointer;padding:0;">✕</button>
+                    <strong id="storeName" style="font-size:14px;font-weight:800;color:#111;"></strong>
+                    <button onclick="closePanel()" style="background:none;border:none;color:#999;font-size:14px;cursor:pointer;padding:0;">✕</button>
                   </div>
                   <div id="storeTags" style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;"></div>
-                  <div style="background:#1e1a16;border:1px solid rgba(255,120,50,0.12);border-radius:10px;padding:10px 12px;margin-bottom:8px;">
-                    <div style="font-size:10px;font-weight:700;color:#5a4a3a;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em;">이슈 분포</div>
+                  <div style="background:#f0f0f0;border:1px solid #e0e0e0;border-radius:10px;padding:10px 12px;margin-bottom:8px;">
+                    <div style="font-size:10px;font-weight:700;color:#999;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em;">이슈 분포</div>
                     <div id="issueBarList" style="display:grid;gap:6px;"></div>
                   </div>
                 </div>
@@ -2517,9 +2480,9 @@ function closePanel(){
     </div>
  
       <!-- 핸드폰 아래: 악플 쓰기 위저드 (흰 배경) -->
-      <div class="wr-demo-wrap" style="margin-top:52px; background:#fff; border-radius:20px; padding:28px 22px;">
+      <div class="wr-demo-wrap wr-demo-bg">
         <div class="wr-demo-label" style="font-size:26px; font-weight:900; color:#e85f15; margin-bottom:8px; letter-spacing:-0.02em; line-height:1.15;">✍️ 직접 악플 써보기</div>
-        <div class="wr-demo-sublabel" style="font-size:14px; font-weight:600; color:#666; margin-bottom:24px; line-height:1.5;">카테고리만 골라도 불만이 등록됩니다. 지금 바로 해보세요!</div>
+        <div class="wr-demo-sublabel" style="font-size:14px; font-weight:600; color:var(--text-muted); margin-bottom:24px; line-height:1.5;">카테고리만 골라도 불만이 등록됩니다. 지금 바로 해보세요!</div>
     <div class="wr-steps">
       <div class="wr-step active" id="step-ind-1"><span>01</span> 카테고리</div>
       <div class="wr-step-arrow">→</div>
@@ -2528,7 +2491,7 @@ function closePanel(){
       <div class="wr-step" id="step-ind-3"><span>03</span> 작성 완료</div>
     </div>
  
-    <div class="wr-card">
+    <div class="wr-card wr-card-white">
       <div class="wr-question">어떤 점이 불만이었나요?</div>
  
       <div class="wr-panel" id="wr-panel-1">
@@ -2597,6 +2560,61 @@ function closePanel(){
 .wr-next:hover:not(:disabled) { background:var(--orange-bright); }
 .wr-next:disabled { background:var(--surface-3); color:var(--text-dim); cursor:not-allowed; }
 .wr-submit { background:linear-gradient(135deg,var(--orange-deep),var(--orange)); box-shadow:0 4px 16px var(--orange-glow); }
+ 
+/* ─── PHONE DEMO WRAP: 흰 배경 ─── */
+.phone-demo-wrap {
+  background: transparent;
+  padding: 0;
+  margin-top: 8px;
+}
+ 
+/* ─── WRITE REVIEW DEMO WRAP: 페이지 배경색 동일 ─── */
+.wr-demo-bg {
+  background: var(--bg);
+  padding: 0;
+  margin-top: 52px;
+}
+ 
+/* ─── WRITE REVIEW CARD: 흰 배경 ─── */
+.wr-card-white {
+  background: #fff !important;
+  border-color: #e8e8e8 !important;
+}
+.wr-card-white .wr-question { color: #111 !important; }
+.wr-card-white .wr-sub { color: #666 !important; }
+.wr-card-white .wr-cat {
+  background: #f5f5f5 !important;
+  border-color: #ddd !important;
+}
+.wr-card-white .wr-cat span { color: #555 !important; }
+.wr-card-white .wr-cat.active {
+  border-color: #e85f15 !important;
+  background: rgba(232,95,21,0.08) !important;
+}
+.wr-card-white .wr-cat.active span { color: #e85f15 !important; }
+.wr-card-white .wr-sub-item {
+  background: #f5f5f5 !important;
+  border-color: #ddd !important;
+  color: #555 !important;
+}
+.wr-card-white .wr-sub-item.active {
+  border-color: #e85f15 !important;
+  background: rgba(232,95,21,0.06) !important;
+  color: #111 !important;
+}
+.wr-card-white .wr-selected-item {
+  background: rgba(232,95,21,0.07) !important;
+  border-color: rgba(232,95,21,0.2) !important;
+  color: #c84e10 !important;
+}
+.wr-card-white .wr-textarea {
+  background: #f5f5f5 !important;
+  border-color: #ddd !important;
+  color: #111 !important;
+}
+.wr-card-white .wr-next:disabled { background: #e8e8e8 !important; color: #bbb !important; }
+.wr-card-white .wr-llm-note { color: #999 !important; }
+ 
 </style>
  
 <script>
