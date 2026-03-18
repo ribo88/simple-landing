@@ -36,7 +36,6 @@
  
 html { scroll-behavior: smooth; }
  
- 
 body {
   font-family: var(--font-body);
   background: var(--bg);
@@ -45,14 +44,12 @@ body {
   overflow-x: hidden;
 }
  
-/* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--orange-deep); border-radius: 2px; }
  
 a { color: inherit; text-decoration: none; }
  
-/* ─── NOISE OVERLAY ─── */
 body::before {
   content: '';
   position: fixed;
@@ -63,7 +60,6 @@ body::before {
   z-index: 9999;
 }
  
-/* ─── GRID BACKGROUND ─── */
 .grid-bg {
   position: absolute;
   inset: 0;
@@ -74,7 +70,6 @@ body::before {
   pointer-events: none;
 }
  
-/* ─── HELL FIRE PARTICLES ─── */
 .hell-particles {
   position: absolute;
   inset: 0;
@@ -101,7 +96,6 @@ body::before {
   100% { transform: translateY(-600px) translateX(var(--drift, 0px)) scale(0); opacity: 0; }
 }
  
-/* ─── FLOATING DEMONS ─── */
 .floating-demon {
   position: absolute;
   pointer-events: none;
@@ -118,7 +112,6 @@ body::before {
   to   { transform: translateY(-22px) rotate(var(--frot2, 4deg)); }
 }
  
-/* ─── DEMON SKULL SVG ELEMENT ─── */
 .demon-svg-wrap {
   position: absolute;
   pointer-events: none;
@@ -126,7 +119,6 @@ body::before {
   filter: drop-shadow(0 0 24px rgba(255,80,10,0.4));
 }
  
-/* ─── LAVA DRIP ─── */
 .lava-drip {
   position: absolute;
   top: 0;
@@ -143,7 +135,6 @@ body::before {
   100% { height: 80px; opacity: 0; top: 60px; }
 }
  
-/* ─── CRACK LINES ─── */
 .crack-overlay {
   position: absolute;
   inset: 0;
@@ -152,7 +143,6 @@ body::before {
   opacity: 0.07;
 }
  
-/* ─── HELL BADGE ON HERO ─── */
 .hell-badge {
   display: inline-flex;
   align-items: center;
@@ -214,7 +204,6 @@ body::before {
   100% { transform: translateX(-110vw) translateY(var(--gy2, -30px)); opacity: 0; }
 }
  
-/* ─── PROBLEM CARD HELL THEME ─── */
 .problem-card .hell-num {
   font-family: var(--font-display);
   font-size: 100px;
@@ -227,7 +216,6 @@ body::before {
   pointer-events: none;
 }
  
-/* ─── DEMON MASCOT ─── */
 .demon-mascot {
   display: flex;
   flex-direction: column;
@@ -275,7 +263,6 @@ body::before {
   to   { transform: scale(1.04); }
 }
  
-/* ─── HELL ZONE LABEL ─── */
 .hell-zone {
   display: inline-flex;
   align-items: center;
@@ -291,7 +278,6 @@ body::before {
   text-transform: uppercase;
 }
  
-/* ─── FIRE UNDERLINE on SECTION TITLE ─── */
 .fire-underline {
   position: relative;
   display: inline-block;
@@ -313,7 +299,6 @@ body::before {
   to   { opacity: 1;   transform: scaleX(1); }
 }
  
-/* ─── ROTATING SKULL ICON ─── */
 .skull-spin {
   display: inline-block;
   animation: skullSpin 8s linear infinite;
@@ -324,7 +309,6 @@ body::before {
   to   { transform: rotate(360deg); }
 }
  
-/* ─── LAVA BORDER ─── */
 .lava-border {
   position: relative;
 }
@@ -353,7 +337,6 @@ body::before {
   100% { background-position: 200% 200%; }
 }
  
-/* ─── WARNING TOAST ─── */
 .hell-toast {
   position: fixed;
   bottom: 28px;
@@ -405,7 +388,6 @@ body::before {
   cursor: pointer;
 }
  
-/* ─── REVIEW HELL SECTION ─── */
 .review-hell {
   position: relative;
   overflow: hidden;
@@ -506,13 +488,11 @@ body::before {
   border: 1px solid rgba(255,60,10,0.2);
 }
  
-/* ─── CONTAINER ─── */
 .container {
   width: min(375px, calc(100% - 32px));
   margin: 0 auto;
 }
  
-/* ─── TOPBAR ─── */
 .topbar {
   position: fixed;
   top: 0;
@@ -562,7 +542,6 @@ body::before {
  
 .topbar nav a:hover { color: var(--text); transition: color .2s; }
  
-/* ─── BUTTON ─── */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -604,7 +583,6 @@ body::before {
   transform: translateY(-1px);
 }
  
-/* ─── EYEBROW ─── */
 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -635,7 +613,6 @@ body::before {
   50% { opacity: 0.3; }
 }
  
-/* ─── HERO ─── */
 .hero {
   position: relative;
   padding: 0 0 100px;
@@ -673,18 +650,6 @@ body::before {
   align-items: center;
 }
  
-/* BIG number counter */
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-/* HERO HEADLINE */
 .hero-headline {
   font-family: var(--font-display);
   font-size: clamp(64px, 9vw, 128px);
@@ -756,7 +721,6 @@ body::before {
   text-align: center;
 }
  
-/* HERO CARD */
 .hero-card {
   background: var(--surface-2);
   border: 1px solid var(--line-strong);
@@ -907,13 +871,11 @@ body::before {
   border: 1px solid rgba(255,124,53,0.2);
 }
  
-/* ─── FADEUP ANIMATION ─── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 }
  
-/* ─── SECTION ─── */
 .section {
   padding: 80px 0;
   position: relative;
@@ -944,7 +906,6 @@ body::before {
   margin-top: 12px;
 }
  
-/* ─── PROBLEM SECTION ─── */
 .problem-section {
   background: var(--surface);
   border-top: 1px solid var(--line);
@@ -1004,7 +965,6 @@ body::before {
   margin-bottom: 8px;
 }
  
-/* ─── FEATURES SECTION ─── */
 .features-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1091,7 +1051,6 @@ body::before {
   flex-shrink: 0;
 }
  
-/* Feature mini-viz */
 .feature-viz {
   background: var(--surface-3);
   border: 1px solid var(--line);
@@ -1187,7 +1146,6 @@ body::before {
   border: 1px solid rgba(255,95,95,0.2);
 }
  
-/* ─── PREVIEW / APP SECTION ─── */
 .preview-section { padding-top: 0; }
  
 .preview-layout {
@@ -1245,7 +1203,6 @@ body::before {
   line-height: 1.5;
 }
  
-/* PHONE MOCKUP */
 .phone-wrap {
   perspective: 1200px;
 }
@@ -1408,7 +1365,6 @@ body::before {
   line-height: 1.5;
 }
  
-/* ─── FAQ ─── */
 .faq-section {
   background: var(--surface);
   border-top: 1px solid var(--line);
@@ -1488,7 +1444,6 @@ body::before {
   line-height: 1.6;
 }
  
-/* ─── CTA ─── */
 .cta-section {
   padding: 100px 0 120px;
 }
@@ -1574,7 +1529,6 @@ body::before {
   text-indent: -1em;
 }
  
-/* ─── FOOTER ─── */
 .footer {
   padding: 0 0 48px;
   border-top: 1px solid var(--line);
@@ -1591,7 +1545,6 @@ body::before {
   font-weight: 600;
 }
  
-/* ─── RESPONSIVE ─── */
 @media (max-width: 960px) {
   .preview-layout,
   .faq-layout {
@@ -1617,13 +1570,10 @@ body::before {
   .feature-big,
   .feature-small { padding: 30px 24px; }
   .section-title { font-size: clamp(24px, 7vw, 32px); }
-  
-  
   .footer-inner { flex-direction: column; align-items: flex-start; }
   .phone { transform: none; }
 }
  
-/* ─── HERO COMPARE ─── */
 .hero-compare {
   display: flex;
   align-items: center;
@@ -1695,7 +1645,6 @@ body::before {
   text-align: center;
 }
  
-/* ─── PROBLEM FLOW ─── */
 .problem-flow {
   display: flex;
   align-items: center;
@@ -1753,10 +1702,6 @@ body::before {
 }
 .pp strong { color: var(--orange); margin-left: 4px; }
  
-/* ─── SNAP SECTION HEIGHT ─── */
- 
- 
-/* ─── HERO SCROLL HINT ─── */
 .hero-scroll-hint {
   margin-top: 48px;
   font-size: 13px;
@@ -1770,7 +1715,6 @@ body::before {
   50%      { transform: translateY(6px); opacity: 1; }
 }
  
-/* ─── PROBLEM SPLIT ─── */
 .problem-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1841,22 +1785,21 @@ body::before {
   50% { opacity: 1; }
 }
 .feed-buried-overlay {
-  position: absolute;
-  bottom: -4px;
-  left: 0; right: 0;
+  position: relative;
+  bottom: auto;
+  left: auto; right: auto;
   text-align: center;
   font-size: 12px;
   font-weight: 700;
   color: var(--orange);
-  padding: 8px 0 0;
+  padding: 10px 0 4px;
+  margin-top: 4px;
 }
  
 @media (max-width:768px) {
   .problem-split { grid-template-columns:1fr; gap:32px; }
 }
  
- 
-/* ─── 상단 고정 CTA BAR ─── */
 .sticky-cta {
   position: fixed;
   top: 0;
@@ -1907,25 +1850,12 @@ body::before {
 }
 .sticky-cta-btn:hover { background: var(--orange-bright); }
  
-/* 히어로 상단 패딩 보정 */
 .hero { padding-top: 64px; }
- 
 </style>
 </head>
 <body>
  
- 
-<!-- 🔥 HELL TOAST NOTIFICATION -->
-<div class="hell-toast" id="hellToast" onclick="this.style.display='none'" role="alert">
-  <div class="toast-icon">😈</div>
-  <div class="toast-body">
-    <strong>악플 지옥에 오신 걸 환영합니다</strong>
-    <p>광고 리뷰 92%를 탐지하고 진짜 불만을 먼저 보여드립니다.</p>
-  </div>
-  <span class="toast-close">✕</span>
-</div>
- 
- 
+<!-- toast removed -->
  
 <!-- 상단 고정 사전신청 버튼 -->
 <div class="sticky-cta">
@@ -1957,13 +1887,13 @@ body::before {
     <div class="spark" style="left:93%; --dur:5.8s;--delay:0.3s; --drift:8px;"></div>
   </div>
  
-  <!-- 👻 FLOATING GHOST REVIEWS (악플들이 유령처럼 흘러다님) -->
+  <!-- 👻 GHOST REVIEWS — 음수 delay로 페이지 로드 즉시 모두 화면에 등장 -->
   <div class="ghost-reviews" aria-hidden="true">
-    <div class="ghost-review" style="right:-5%; top:18%; --gdur:22s; --gdelay:0s;   --gy:0px;   --gy2:-40px;">😤 응대가 너무 불친절해요...</div>
-    <div class="ghost-review" style="right:-5%; top:32%; --gdur:18s; --gdelay:3s;   --gy:0px;   --gy2:20px;">💀 완전 사기 맛집 ㅠㅠ</div>
-    <div class="ghost-review" style="right:-5%; top:55%; --gdur:25s; --gdelay:6s;   --gy:0px;   --gy2:-20px;">🔥 별점 4.9가 말이 되냐고요</div>
-    <div class="ghost-review" style="right:-5%; top:70%; --gdur:20s; --gdelay:1.5s; --gy:0px;   --gy2:15px;">☠️ 대기만 40분... 다시는 안 가요</div>
-    <div class="ghost-review" style="right:-5%; top:82%; --gdur:16s; --gdelay:9s;   --gy:0px;   --gy2:-10px;">👿 광고 리뷰에 낚였습니다</div>
+    <div class="ghost-review" style="right:-5%; top:18%; --gdur:22s; --gdelay:-4s;  --gy:0px; --gy2:-40px;">😤 응대가 너무 불친절해요...</div>
+    <div class="ghost-review" style="right:-5%; top:32%; --gdur:18s; --gdelay:-11s; --gy:0px; --gy2:20px;">💀 완전 사기 맛집 ㅠㅠ</div>
+    <div class="ghost-review" style="right:-5%; top:55%; --gdur:25s; --gdelay:-8s;  --gy:0px; --gy2:-20px;">🔥 별점 4.9가 말이 되냐고요</div>
+    <div class="ghost-review" style="right:-5%; top:70%; --gdur:20s; --gdelay:-15s; --gy:0px; --gy2:15px;">☠️ 대기만 40분... 다시는 안 가요</div>
+    <div class="ghost-review" style="right:-5%; top:82%; --gdur:16s; --gdelay:-6s;  --gy:0px; --gy2:-10px;">👿 광고 리뷰에 낚였습니다</div>
   </div>
  
   <!-- 😈 FLOATING DEMON EMOJI DECORATIONS -->
@@ -2006,16 +1936,14 @@ body::before {
   <div class="container">
     <div class="problem-split">
  
-      <!-- 왼쪽: 감정 카피 -->
       <div class="problem-copy">
         <div class="section-label">당신만의 문제가 아닙니다</div>
         <h2 class="section-title">리뷰를 읽는데<br>왜 이렇게<br>피곤할까요</h2>
         <p class="section-desc">광고 리뷰가 상단을 채우고,<br>진짜 불만은 수십 개 사이에 흩어져 있습니다.</p>
       </div>
  
-      <!-- 오른쪽: 리뷰 피드 시각화 (광고가 진짜를 덮는 모습) -->
       <div class="problem-feed">
-        <div class="pf-feed-label">📱 실제 리뷰 피드</div>
+        <div class="pf-feed-label">📱 타사 리뷰 피드</div>
         <div class="feed-item feed-ad">
           <span class="feed-stars">⭐⭐⭐⭐⭐</span>
           <span class="feed-text">강추강추!! 완전 맛집 💕💕</span>
@@ -2045,7 +1973,7 @@ body::before {
           <span class="feed-badge real">진짜 후기</span>
         </div>
         <div class="feed-buried-overlay">
-          <span>진짜 후기는 여기 묻혀있어요 👆</span>
+          <span>진짜 후기는 여기 숨어있어요 👆</span>
         </div>
       </div>
  
@@ -2072,58 +2000,43 @@ body::before {
         <p class="section-desc" style="margin-top:16px;">응대·대기·위생·광고 — 어떤 문제가 얼마나 반복되는지, 한눈에 보여드립니다.</p>
       </div>
  
-      <!-- DEMON MASCOT SVG -->
       <div class="demon-mascot">
         <svg width="140" height="160" viewBox="0 0 140 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Body -->
           <ellipse cx="70" cy="110" rx="38" ry="42" fill="#1a0a04"/>
           <ellipse cx="70" cy="108" rx="34" ry="38" fill="#2a1008"/>
-          <!-- Horns left -->
           <path d="M38 72 Q28 44 36 30 Q42 52 50 68Z" fill="#e85f15"/>
           <path d="M38 72 Q32 50 38 38 Q42 56 50 68Z" fill="#ff7c35"/>
-          <!-- Horns right -->
           <path d="M102 72 Q112 44 104 30 Q98 52 90 68Z" fill="#e85f15"/>
           <path d="M102 72 Q108 50 102 38 Q98 56 90 68Z" fill="#ff7c35"/>
-          <!-- Face -->
           <ellipse cx="70" cy="80" rx="32" ry="30" fill="#3a1a08"/>
           <ellipse cx="70" cy="78" rx="29" ry="27" fill="#4a2010"/>
-          <!-- Eyes -->
           <ellipse cx="57" cy="72" rx="9" ry="9" fill="#ff3010"/>
           <ellipse cx="83" cy="72" rx="9" ry="9" fill="#ff3010"/>
           <ellipse cx="57" cy="72" rx="5" ry="6" fill="#ff6030"/>
           <ellipse cx="83" cy="72" rx="5" ry="6" fill="#ff6030"/>
           <circle cx="58" cy="71" r="2" fill="#fff" opacity=".7"/>
           <circle cx="84" cy="71" r="2" fill="#fff" opacity=".7"/>
-          <!-- Pupils -->
           <ellipse cx="57" cy="73" rx="3" ry="4" fill="#1a0800"/>
           <ellipse cx="83" cy="73" rx="3" ry="4" fill="#1a0800"/>
-          <!-- Evil brows -->
           <path d="M48 62 Q57 57 66 61" stroke="#ff4010" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M74 61 Q83 57 92 62" stroke="#ff4010" stroke-width="2.5" stroke-linecap="round"/>
-          <!-- Mouth / evil grin -->
           <path d="M52 88 Q60 98 70 100 Q80 98 88 88" stroke="#ff5020" stroke-width="2.5" fill="none" stroke-linecap="round"/>
           <path d="M56 88 Q60 94 70 96 Q80 94 84 88" fill="#1a0400"/>
-          <!-- Fangs -->
           <path d="M62 95 L59 104 L65 97Z" fill="#f5ede4"/>
           <path d="M74 95 L71 104 L77 97Z" fill="#f5ede4"/>
-          <!-- Tail -->
           <path d="M104 130 Q130 110 122 90 Q116 75 108 88 Q102 98 110 105 Q118 112 106 128Z" fill="#e85f15"/>
           <path d="M110 122 L118 118 L114 130Z" fill="#e85f15"/>
-          <!-- Arms / claws -->
           <path d="M36 100 Q20 108 18 120" stroke="#3a1a08" stroke-width="10" stroke-linecap="round"/>
           <path d="M18 120 L12 116 M18 120 L14 126 M18 120 L22 127" stroke="#e85f15" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M104 100 Q120 108 122 120" stroke="#3a1a08" stroke-width="10" stroke-linecap="round"/>
           <path d="M122 120 L128 116 M122 120 L126 126 M122 120 L118 127" stroke="#e85f15" stroke-width="2.5" stroke-linecap="round"/>
-          <!-- Glow ring under -->
           <ellipse cx="70" cy="148" rx="30" ry="6" fill="#ff5010" opacity=".18"/>
         </svg>
         <div class="demon-speech">😈 "내 리뷰는 광고가 아니야!"</div>
       </div>
     </div>
  
-    <!-- HELL ZONE CARDS -->
     <div class="hell-map-visual">
-      <!-- Lava drips at top -->
       <div style="position:absolute; top:0; left:0; right:0; display:flex; gap:60px; padding:0 40px; pointer-events:none;">
         <div class="lava-drip" style="--ddur:3.2s; --ddelay:0s;   left:8%;"></div>
         <div class="lava-drip" style="--ddur:4s;   --ddelay:1.2s; left:22%;"></div>
@@ -2138,37 +2051,31 @@ body::before {
           <span class="hell-zone-emoji" style="--fdur:3s;">😤</span>
           <h4>응대 지옥</h4>
           <p>불친절, 무시, 주문 누락이 반복되는 뜨거운 구역</p>
-          <div class="hell-zone-temp">😤 불만 비중 72%</div>
         </div>
         <div class="hell-zone-card" style="--zone-color:#ff6010;">
           <span class="hell-zone-emoji" style="--fdur:4s; animation-delay:.5s;">⏳</span>
           <h4>대기 지옥</h4>
           <p>안내도 없이 30~40분 기다리는 지루한 연옥</p>
-          <div class="hell-zone-temp">⏱ 불만 비중 54%</div>
         </div>
         <div class="hell-zone-card" style="--zone-color:#ffaa20;">
           <span class="hell-zone-emoji" style="--fdur:5s; animation-delay:1s;">🪲</span>
           <h4>위생 지옥</h4>
           <p>테이블, 화장실, 식기에서 반복 발견되는 문제</p>
-          <div class="hell-zone-temp">🪲 불만 비중 36%</div>
         </div>
         <div class="hell-zone-card" style="--zone-color:#ff4040;">
           <span class="hell-zone-emoji" style="--fdur:3.5s; animation-delay:.3s;">💸</span>
           <h4>가격 지옥</h4>
           <p>광고 속 모습과 실제 가격표의 차이에서 오는 배신감</p>
-          <div class="hell-zone-temp">💸 불만 비중 28%</div>
         </div>
         <div class="hell-zone-card" style="--zone-color:#aa20ff;">
           <span class="hell-zone-emoji" style="--fdur:6s; animation-delay:.8s;">👻</span>
           <h4>광고 지옥</h4>
           <p>체험단·협찬 리뷰가 진짜를 덮어버리는 유령 구역</p>
-          <div class="hell-zone-temp">👻 광고 의심 92%</div>
         </div>
         <div class="hell-zone-card" style="--zone-color:#20aaff; background:linear-gradient(180deg, var(--surface-2), rgba(0,100,255,0.04));">
           <span class="hell-zone-emoji" style="--fdur:4.5s; animation-delay:1.2s;">😇</span>
           <h4>천국 (드물지만)</h4>
           <p>악플지도가 걷어낸 뒤 남는 진짜 좋은 곳들</p>
-          <div class="hell-zone-temp" style="color:#5cf890; background:rgba(92,248,144,0.08); border-color:rgba(92,248,144,0.2);">✨ 검증됨</div>
         </div>
       </div>
     </div>
@@ -2183,7 +2090,6 @@ body::before {
  
     <div class="feat-cards">
  
-      <!-- 기능 1 -->
       <div class="feat-card">
         <div class="feat-icon">🔥</div>
         <div class="feat-body">
@@ -2197,7 +2103,6 @@ body::before {
         </div>
       </div>
  
-      <!-- 기능 2 -->
       <div class="feat-card">
         <div class="feat-icon">🗂️</div>
         <div class="feat-body">
@@ -2212,21 +2117,8 @@ body::before {
         </div>
       </div>
  
-      <!-- 기능 3 -->
-      <div class="feat-card">
-        <div class="feat-icon">🛡️</div>
-        <div class="feat-body">
-          <div class="feat-title">신뢰 필터</div>
-          <div class="feat-desc">광고 리뷰를 걷어냅니다</div>
-          <div class="feat-reviews">
-            <div class="fr-row"><span class="fr-text">대기 40분... 안내도 없어요</span><span class="fr-badge ok">검증</span></div>
-            <div class="fr-row muted"><span class="fr-text">완전 강추!! 최고!!</span><span class="fr-badge warn">광고</span></div>
-            <div class="fr-row"><span class="fr-text">직원이 너무 불친절해요</span><span class="fr-badge ok">검증</span></div>
-          </div>
-        </div>
-      </div>
  
-      <!-- 기능 4: 악플 쓰기 -->
+ 
       <div class="feat-card">
         <div class="feat-icon">✍️</div>
         <div class="feat-body">
@@ -2282,14 +2174,12 @@ body::before {
 </style>
  
  
- 
 <!-- PREVIEW -->
 <section class="section preview-section" id="preview">
   <div class="container">
     <div class="preview-layout">
       <div class="preview-copy">
-        <div class="section-label">지금 체험해보세요</div>
-        <h2 class="section-title">핀을 눌러<br>직접 확인해보세요</h2>
+        <h2 class="section-title">지금 체험해보세요</h2>
         <p class="section-desc">실제 서비스와 동일한 방식입니다. 가고 싶은 동네 핀을 눌러보세요.</p>
       </div>
  
@@ -2298,12 +2188,10 @@ body::before {
         <div class="phone" id="appPhone">
           <div class="phone-screen" id="appScreen">
  
-            <!-- STATUS BAR -->
             <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 18px 6px;background:#f5f5f5;font-size:11px;font-weight:700;color:#111;">
               <span>9:41</span><span>▲▲▲ 🔋</span>
             </div>
  
-            <!-- SEARCH BAR -->
             <div style="padding:8px 12px;background:#f5f5f5;border-bottom:1px solid #e0e0e0;">
               <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #ddd;border-radius:10px;padding:8px 12px;">
                 <span style="font-size:13px;color:#aaa;">🔍</span>
@@ -2317,7 +2205,6 @@ body::before {
               </div>
             </div>
  
-            <!-- MAP AREA -->
             <div id="mapArea" style="position:relative;height:200px;overflow:hidden;background:#e8ede8;cursor:grab;">
               <div id="mapCanvas" style="position:absolute;inset:0;transition:transform .3s ease;transform-origin:center center;">
                 <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
@@ -2348,35 +2235,30 @@ body::before {
                   <text x="100" y="95"  font-size="7" fill="#aaa" font-family="sans-serif" font-weight="bold">성수 2가 3동</text>
                   <text x="170" y="100" font-size="6" fill="#aaa" font-family="sans-serif">서울숲</text>
                 </svg>
-                <!-- 핀 0: 루프루프 HOT -->
                 <div id="pin-0" onclick="selectPin(0)" style="position:absolute;top:62px;left:96px;cursor:pointer;z-index:10;transform:translate(-50%,-100%);">
                   <div style="display:flex;flex-direction:column;align-items:center;">
                     <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#e85f15,#ff7c35);border:2px solid #ff9a5a;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 0 14px rgba(255,80,10,0.7);animation:pinPulse 2s ease-in-out infinite;">😤</div>
                     <div style="width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:8px solid #e85f15;margin-top:-1px;"></div>
                   </div>
                 </div>
-                <!-- 핀 1: 어퍼컷커피 -->
                 <div id="pin-1" onclick="selectPin(1)" style="position:absolute;top:145px;left:108px;cursor:pointer;z-index:10;transform:translate(-50%,-100%);">
                   <div style="display:flex;flex-direction:column;align-items:center;">
                     <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#c45010,#ff6020);border:2px solid #ff8040;display:flex;align-items:center;justify-content:center;font-size:12px;box-shadow:0 0 10px rgba(200,80,10,0.5);">⏳</div>
                     <div style="width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:7px solid #c45010;margin-top:-1px;"></div>
                   </div>
                 </div>
-                <!-- 핀 2: ABC SEOUL 광고 -->
                 <div id="pin-2" onclick="selectPin(2)" style="position:absolute;top:48px;left:168px;cursor:pointer;z-index:10;transform:translate(-50%,-100%);">
                   <div style="display:flex;flex-direction:column;align-items:center;">
                     <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#7a10cc,#aa40ff);border:2px solid #cc70ff;display:flex;align-items:center;justify-content:center;font-size:11px;box-shadow:0 0 10px rgba(150,30,220,0.5);">👻</div>
                     <div style="width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:7px solid #7a10cc;margin-top:-1px;"></div>
                   </div>
                 </div>
-                <!-- 핀 3: 지우관 위생 -->
                 <div id="pin-3" onclick="selectPin(3)" style="position:absolute;top:110px;left:180px;cursor:pointer;z-index:10;transform:translate(-50%,-100%);">
                   <div style="display:flex;flex-direction:column;align-items:center;">
                     <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#10803a,#20c060);border:2px solid #40e080;display:flex;align-items:center;justify-content:center;font-size:11px;box-shadow:0 0 8px rgba(20,180,60,0.4);">🪲</div>
                     <div style="width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:7px solid #10803a;margin-top:-1px;"></div>
                   </div>
                 </div>
-                <!-- 핀 4: 바오서울 천국 -->
                 <div id="pin-4" onclick="selectPin(4)" style="position:absolute;top:85px;left:258px;cursor:pointer;z-index:10;transform:translate(-50%,-100%);">
                   <div style="display:flex;flex-direction:column;align-items:center;">
                     <div style="width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#0a60c0,#2090ff);border:2px solid #50b0ff;display:flex;align-items:center;justify-content:center;font-size:11px;box-shadow:0 0 8px rgba(20,120,255,0.4);">😊</div>
@@ -2384,12 +2266,10 @@ body::before {
                   </div>
                 </div>
               </div>
-              <!-- ZOOM -->
               <div style="position:absolute;right:10px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:3px;z-index:20;">
                 <button onclick="zoomIn()" style="width:26px;height:26px;background:#252018;border:1px solid rgba(255,120,50,0.3);border-radius:6px;color:#ff9a5a;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;">+</button>
                 <button onclick="zoomOut()" style="width:26px;height:26px;background:#252018;border:1px solid rgba(255,120,50,0.3);border-radius:6px;color:#ff9a5a;font-size:16px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;">−</button>
               </div>
-              <!-- LEGEND -->
               <div style="position:absolute;bottom:6px;left:8px;display:flex;gap:4px;z-index:20;">
                 <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(255,255,255,0.9);border:1px solid rgba(200,60,0,0.2);color:#c84e10;">😤 응대</span>
                 <span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(255,255,255,0.9);border:1px solid rgba(150,30,220,0.2);color:#9030cc;">👻 광고</span>
@@ -2397,7 +2277,6 @@ body::before {
               </div>
             </div>
  
-            <!-- BOTTOM PANEL -->
             <div id="storePanel" style="background:#f5f5f5;border-top:1px solid #e0e0e0;">
               <div id="defaultPanel" style="padding:14px;text-align:center;">
                 <span style="font-size:11px;color:#aaa;font-weight:600;">📍 핀을 눌러 리뷰를 확인하세요</span>
@@ -2481,7 +2360,6 @@ function closePanel(){
 </script>
     </div>
  
-      <!-- 핸드폰 아래: 악플 쓰기 위저드 (흰 배경) -->
       <div class="wr-demo-wrap wr-demo-bg">
         <div class="wr-demo-label" style="font-size:26px; font-weight:900; color:#e85f15; margin-bottom:8px; letter-spacing:-0.02em; line-height:1.15;">✍️ 직접 악플 써보기</div>
         <div class="wr-demo-sublabel" style="font-size:14px; font-weight:600; color:var(--text-muted); margin-bottom:24px; line-height:1.5;">카테고리만 골라도 불만이 등록됩니다. 지금 바로 해보세요!</div>
@@ -2563,21 +2441,18 @@ function closePanel(){
 .wr-next:disabled { background:var(--surface-3); color:var(--text-dim); cursor:not-allowed; }
 .wr-submit { background:linear-gradient(135deg,var(--orange-deep),var(--orange)); box-shadow:0 4px 16px var(--orange-glow); }
  
-/* ─── PHONE DEMO WRAP: 흰 배경 ─── */
 .phone-demo-wrap {
   background: transparent;
   padding: 0;
   margin-top: 8px;
 }
  
-/* ─── WRITE REVIEW DEMO WRAP: 페이지 배경색 동일 ─── */
 .wr-demo-bg {
   background: var(--bg);
   padding: 0;
   margin-top: 52px;
 }
  
-/* ─── WRITE REVIEW CARD: 흰 배경 ─── */
 .wr-card-white {
   background: #fff !important;
   border-color: #e8e8e8 !important;
@@ -2616,7 +2491,6 @@ function closePanel(){
 }
 .wr-card-white .wr-next:disabled { background: #e8e8e8 !important; color: #bbb !important; }
 .wr-card-white .wr-llm-note { color: #999 !important; }
- 
 </style>
  
 <script>
@@ -2681,9 +2555,6 @@ function resetReview(){
   });
 }
 </script>
-      </div>
-  </div>
-</section>
  
  
 <!-- FAQ -->
@@ -2760,13 +2631,10 @@ function resetReview(){
  
 <footer class="footer">
   <div class="container footer-inner">
-    <div>악플지도</div>
-    <div>진짜 불만을 먼저 보여주는 리뷰 지도 · 2025</div>
   </div>
 </footer>
  
 <script>
-// FAQ accordion
 document.querySelectorAll('.faq-q').forEach(q => {
   q.addEventListener('click', () => {
     const item = q.parentElement;
@@ -2776,10 +2644,8 @@ document.querySelectorAll('.faq-q').forEach(q => {
   });
 });
  
-// Make sure FAQ items start closed
 document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
  
-// Scroll reveal
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
@@ -2798,7 +2664,6 @@ document.querySelectorAll(
   el.style.transition = 'opacity .5s ease, transform .5s ease';
   observer.observe(el);
 });
-</script>
 </script>
 </body>
 </html>
